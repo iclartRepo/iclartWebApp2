@@ -1,0 +1,103 @@
+﻿<div id="clientForm">
+    <h3 class="clientForm-label">Add/Edit Client</h3>
+    <div class="clientForm-action-buttons">
+        <a class="btn btn-default" (click)="onBack()">Cancel</a>
+        <button class="btn btn-success">Save</button>
+    </div>
+
+    <div class="clientForm-group">  
+        <ul class="nav nav-tabs">
+            <li [class.active]="tabNum == 1"><a (click)="setTab(1)">Client Info</a></li>
+            <li [class.active]="tabNum == 2"><a (click)="setTab(2)">Financial Info</a></li>
+        </ul>
+        <div class="client-form">
+            <div [hidden]="tabNum == 2">
+                <div class="form-group client-name">
+                    <div class="name">
+                        <label for="clientName">Client Name</label>
+                        <input type="text" class="form-control" placeholder="Client Name" />
+                    </div>
+                    <div class="dealer">
+                        <label for="dealer">Dealer</label><br />
+                        <input type="checkbox" [(ngModel)]="client.Dealer" />
+                    </div>
+                    <div class="agent">
+                        <label for="agent">Agent</label><br />
+                        <input type="checkbox" [(ngModel)]="client.Agent" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="tin">TIN</label>
+                    <input type="text" class="form-control" placeholder="TIN" [(ngModel)]="client.TIN" />
+                </div>
+                <div class="form-group">
+                    <label for="officeAddress">Office Address</label>
+                    <textarea class="form-control" rows="2" placeholder="Office Address" [(ngModel)]="client.Office_Address"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="warehouseAddress">Warehouse Address</label>
+                    <textarea class="form-control" rows="2" placeholder="Warehouse Address" [(ngModel)]="client.Warehouse_Address"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="telNumber">Telephone Number</label>
+                    <input type="text" class="form-control" placeholder="Telephone Number" [(ngModel)]="client.Telephone_Number" />
+                </div>
+                <div class="form-group">
+                    <label for="faxNumber">Fax Number</label>
+                    <input type="text" class="form-control" placeholder="Fax Number" [(ngModel)]="client.Fax_Number" />
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" placeholder="Email" [(ngModel)]="client.Email" />
+                </div>
+                <div class="form-group">
+                    <label for="usualOrderedItem">Usual Ordered item</label>
+                    <input type="text" class="form-control" placeholder="Usual Ordered Item" [(ngModel)]="client.Usual_Ordered_Item" />
+                </div>
+                <div class="form-group">
+                    <label for="collectionPeriod">Collection Period</label>
+                    <input type="text" class="form-control" placeholder="Collection Period" [(ngModel)]="client.Collection_Period" />
+                </div>
+            </div>
+            <div [hidden]="tabNum == 1">
+                <div class="form-group">
+                    <label for="creditLimit">Credit Limit</label>
+                    <input type="number" class="form-control" placeholder="Credit Limit" [(ngModel)]="client.Credit_Limit" />
+                </div>
+                <div class="form-group">
+                    <label for="creditTerms">Credit Terms</label>
+                    <input type="text" class="form-control" placeholder="Credit Terms" [(ngModel)]="client.Credit_Terms" />
+                </div>
+                <div class="form-group">
+                    <label for="discountScheme">Discount Scheme</label>
+                    <input type="number" class="form-control" placeholder="Discount Scheme" [(ngModel)]="client.Discount_Scheme" />
+                </div>
+                <div class="form-group">
+                    <label for="contactsOrder">Contact Persons from Sales</label>
+                    <input type="text" class="form-control" placeholder="Contact Persons from Sales" [(ngModel)]="client.Contacts_Order" />
+                </div>
+                <div class="form-group">
+                    <label for="contactsAcctng">Contact Persons from Accounting</label>
+                    <input type="text" class="form-control" placeholder="Contact Persons from Accounting" [(ngModel)]="client.Contacts_Accounting" />
+                </div>
+
+                <div class="form-group">
+                    <label for="roundPayment">Round Off Payments</label>
+                    <input type="checkbox" [(ngModel)]="client.Rounded_Payment" />
+                </div>
+                <div class="form-group">
+                    <label for="witholdingTax">Witholding Tax (%)</label>
+                    <input type="number" class="form-control" placeholder="Witholding Tax (%)" [(ngModel)]="client.Witholding_Tax" />
+                </div>
+                <div class="form-group">
+                    <label for="vatExemption">VAT Exempted</label>
+                    <input type="checkbox" [(ngModel)]="client.Vat_Exemption" />
+                </div>
+                <div class="form-group">
+                    <label for="combineItems">Combine Items in Payment</label>
+                    <input type="checkbox" [(ngModel)]="client.Combine_Items" />
+                </div>
+            </div>
+        </div> 
+    </div>
+</div>

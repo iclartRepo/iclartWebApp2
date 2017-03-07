@@ -1,0 +1,17 @@
+﻿#clientList {
+    .add-client {
+        float: right;
+    }
+    .client-filter {
+        float: left;
+        width: 75%;
+        .client-filter-label {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .client-filter-input {
+            display: inline-block;
+            width: 75%;
+        }
+    }
+}

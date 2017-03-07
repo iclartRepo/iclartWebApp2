@@ -1,0 +1,64 @@
+﻿.navbar {
+  background-color: #142B3D !important;
+  border: none !important;
+  border-radius: 0px !important;
+  color: white !important; }
+  .navbar .navbar-brand, .navbar a {
+    color: white !important; }
+  .navbar .dropdown-menu li a {
+    color: #333 !important; }
+  .navbar .open a {
+    color: #333 !important; }
+
+.content {
+  padding-top: 65px; }
+
+body {
+  overflow-y: hidden; }
+
+#clientList .add-client {
+  float: right; }
+
+#clientList .client-filter {
+  float: left;
+  width: 75%; }
+  #clientList .client-filter .client-filter-label {
+    display: inline-block;
+    margin-right: 10px; }
+  #clientList .client-filter .client-filter-input {
+    display: inline-block;
+    width: 75%; }
+
+#clientForm {
+  margin-top: -20px; }
+  #clientForm .clientForm-action-buttons {
+    position: absolute;
+    right: 15px;
+    top: 95px; }
+  #clientForm .clientForm-group ul a {
+    cursor: pointer; }
+  #clientForm .clientForm-group .client-form {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 500px;
+    padding-top: 15px; }
+  #clientForm .client-name {
+    width: 100%; }
+    #clientForm .client-name .name {
+      width: 80%;
+      display: inline-block; }
+    #clientForm .client-name .dealer {
+      text-align: center;
+      width: 5%;
+      display: inline-block; }
+    #clientForm .client-name .agent {
+      text-align: center;
+      width: 5%;
+      display: inline-block; }
+  #clientForm .client-form-pagination {
+    text-align: center;
+    width: 100%; }
+    #clientForm .client-form-pagination a {
+      color: black;
+      cursor: pointer; }
+

@@ -1,0 +1,30 @@
+﻿import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { ClientService } from '../clientService.service';
+import { IClient } from '../../interfaces/client.interface';
+
+@Component({
+    selector: 'web-client-list',
+    templateUrl: 'wwwroot/src/clientLandingPage/clientList/clientList.component.html'
+})
+export class ClientListComponent implements OnInit {
+
+    clients: IClient[];
+    errorMessage: string;
+
+    constructor(private _route: Router,
+        private _clientService: ClientService) {
+    }
+
+    addClient(): void {
+        this._route.navigate(['/client-form']);
+    }
+
+    ngOnInit(): void {
+        this._clientService.getClients()
+            .subscribe(peoples => this.clients = peoples,
+            error => this.errorMessage = <any>error);
+       
+    }
+}

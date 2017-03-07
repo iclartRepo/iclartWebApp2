@@ -1,0 +1,28 @@
+﻿<div id="clientList">
+   
+    <div class="client-filter">
+        <div class="client-filter-label">
+            <label>Search:</label>
+        </div>
+        <div class="client-filter-input">
+            <input type="text" class="form-control" ng-model="vm.employeeName" />
+        </div>
+    </div>
+    <div class="add-client">
+        <a class="btn btn-primary" (click)="addClient()">Add Client</a>
+    </div>
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>TIN</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let client of clients">
+                <td>{{client.Name}}</td>
+                <td>{{client.TIN}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

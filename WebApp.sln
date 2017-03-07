@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 - Presentation", "01 - Presentation", "{E0F6D645-EB67-4AA6-A192-946102D094CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApp\WebApp.csproj", "{0922EEF0-6CC6-4088-8339-DFA51785FD60}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04 - Data Access Layer", "04 - Data Access Layer", "{6D62FE76-E936-40EC-92C9-501853948937}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.DAL", "..\..\..\WebApp\WebApp.DAL\WebApp.DAL.csproj", "{C9E2A443-4257-4C44-94E5-A14D89E13C23}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05 - Cross Cutting Libraries", "05 - Cross Cutting Libraries", "{887A6D83-F55C-4ACD-98F9-2833CB3E0928}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.Common", "..\..\..\WebApp\WebApp.Common\WebApp.Common.csproj", "{3792E255-E198-4E1C-BAD6-E842CCC7DB80}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02 - Business Logic Layer", "02 - Business Logic Layer", "{03EB115F-1A7F-40B6-B250-0AABF4FEA521}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.BLL", "..\..\..\WebApp\WebApp.BLL\WebApp.BLL.csproj", "{F12FA25C-2F1A-4970-86F1-76D8BFDEE241}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03 - Database", "03 - Database", "{47001C4C-06E7-457C-8946-3355257D91A8}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "..\..\..\WebApp\Database\Database.sqlproj", "{15DC5E60-760C-4F20-8871-91360A63724C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0922EEF0-6CC6-4088-8339-DFA51785FD60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0922EEF0-6CC6-4088-8339-DFA51785FD60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0922EEF0-6CC6-4088-8339-DFA51785FD60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0922EEF0-6CC6-4088-8339-DFA51785FD60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9E2A443-4257-4C44-94E5-A14D89E13C23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9E2A443-4257-4C44-94E5-A14D89E13C23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9E2A443-4257-4C44-94E5-A14D89E13C23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9E2A443-4257-4C44-94E5-A14D89E13C23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3792E255-E198-4E1C-BAD6-E842CCC7DB80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3792E255-E198-4E1C-BAD6-E842CCC7DB80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3792E255-E198-4E1C-BAD6-E842CCC7DB80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3792E255-E198-4E1C-BAD6-E842CCC7DB80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F12FA25C-2F1A-4970-86F1-76D8BFDEE241}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F12FA25C-2F1A-4970-86F1-76D8BFDEE241}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F12FA25C-2F1A-4970-86F1-76D8BFDEE241}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F12FA25C-2F1A-4970-86F1-76D8BFDEE241}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15DC5E60-760C-4F20-8871-91360A63724C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15DC5E60-760C-4F20-8871-91360A63724C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15DC5E60-760C-4F20-8871-91360A63724C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{15DC5E60-760C-4F20-8871-91360A63724C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15DC5E60-760C-4F20-8871-91360A63724C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15DC5E60-760C-4F20-8871-91360A63724C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0922EEF0-6CC6-4088-8339-DFA51785FD60} = {E0F6D645-EB67-4AA6-A192-946102D094CE}
+		{C9E2A443-4257-4C44-94E5-A14D89E13C23} = {6D62FE76-E936-40EC-92C9-501853948937}
+		{3792E255-E198-4E1C-BAD6-E842CCC7DB80} = {887A6D83-F55C-4ACD-98F9-2833CB3E0928}
+		{F12FA25C-2F1A-4970-86F1-76D8BFDEE241} = {03EB115F-1A7F-40B6-B250-0AABF4FEA521}
+		{15DC5E60-760C-4F20-8871-91360A63724C} = {47001C4C-06E7-457C-8946-3355257D91A8}
+	EndGlobalSection
+EndGlobal
