@@ -1,0 +1,49 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
+using WebApp.DAL.Interfaces;
+
+namespace WebApp.DAL
+{
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
+    {
+        private DBContext context = new DBContext();
+        private DbSet<TEntity> _dbSet;
+        
+        public GenericRepository()
+        {
+            _dbSet = context.Set<TEntity>();
+        }
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+        public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "")
+        {
+            IQueryable<TEntity> query = _dbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            query = includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
+
+            return orderBy?.Invoke(query).ToList() ?? query.ToList();
+        }     
+        public void Insert(TEntity entity)
+        {
+            _dbSet.Add(entity);
+        }
+
+        public void Update(TEntity entity)
+        {
+            _dbSet.Attach(entity);
+            context.Entry(entity).State = EntityState.Modified;
+        }
+    }
+}

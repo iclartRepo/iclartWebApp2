@@ -338,22 +338,22 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\WebApp\WebApp.Common\WebApp.Common.csproj">
-      <Project>{3792E255-E198-4E1C-BAD6-E842CCC7DB80}</Project>
-      <Name>WebApp.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\WebApp\WebApp.DAL\WebApp.DAL.csproj">
-      <Project>{C9E2A443-4257-4C44-94E5-A14D89E13C23}</Project>
-      <Name>WebApp.DAL</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Migrations\201703071357470_Test.resx">
       <DependentUpon>201703071357470_Test.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703071400299_AddBackIsDeleted.resx">
       <DependentUpon>201703071400299_AddBackIsDeleted.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebApp.Common\WebApp.Common.csproj">
+      <Project>{3792E255-E198-4E1C-BAD6-E842CCC7DB80}</Project>
+      <Name>WebApp.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebApp.DAL\WebApp.DAL.csproj">
+      <Project>{C69F8A4E-B49E-4A1E-BE94-2905C7A3CD1A}</Project>
+      <Name>WebApp.DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

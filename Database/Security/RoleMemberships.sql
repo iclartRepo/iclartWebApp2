@@ -1,0 +1,6 @@
+﻿ALTER ROLE [db_owner] ADD MEMBER [IIS APPPOOL\Test];
+
+
+GO
+ALTER ROLE [db_datawriter] ADD MEMBER [IIS APPPOOL\Test];
+
