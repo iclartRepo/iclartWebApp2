@@ -19,7 +19,7 @@ namespace WebApp
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             var context = new DBContext();
-            context.Database.Initialize(false);
+            context.Database.Initialize(true);
         }
     }
 }
