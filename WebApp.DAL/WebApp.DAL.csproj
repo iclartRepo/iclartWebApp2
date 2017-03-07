@@ -49,7 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientRepository.cs" />
     <Compile Include="DBContext.cs" />
     <Compile Include="GenericRepository.cs" />
     <Compile Include="Interfaces\IGenericRepository.cs" />
