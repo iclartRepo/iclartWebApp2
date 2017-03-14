@@ -1,0 +1,87 @@
+﻿<div id="viewClient">
+    <div class="panel panel-primary" *ngIf="result.Result != null">
+        <div class="panel-heading">
+            <div class="client-name">
+                {{result.Result.Name}}
+            </div>
+            <div class="edit-button">
+                <button class="btn btn-default btn-sm" (click)="editClient(result.Result.Id)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+            </div>
+        </div>
+        <div class="panel-body">
+            <ul class="nav nav-tabs">
+                <li [class.active]="tabNum == 1"><a (click)="setTab(1)"><i class="fa fa-info-circle" aria-hidden="true"></i> Client Info</a></li>
+                <li [class.active]="tabNum == 2"><a (click)="setTab(2)">Financial Info</a></li>
+            </ul>
+            <div [hidden]="tabNum==2">
+                <br />
+                <label>Dealer: </label>
+                {{result.Result.Dealer ? "Yes" : "No"}}
+                <br />
+                <label>Agent: </label>
+                {{result.Result.Agent ? "Yes" : "No"}}
+                <br />
+                <label>TIN: </label>
+                {{result.Result.TIN}}
+                <br />
+                <label>Office Address: </label>
+                {{result.Result.Office_Address}} 
+                <br />
+                <label>Warehouse Address:</label>
+                {{result.Result.Warehouse_Address}}
+                <br />
+                <label>Telephone Number: </label>
+                {{result.Result.Telephone_Number}}
+                <br />
+                <label>Fax Number: </label>
+                {{result.Result.Fax_Number}}
+                <br />
+                <label>Email: </label>
+                {{result.Result.Email}}
+                <br />
+                <label>Usual Ordered Item: </label>
+                {{result.Result.Usual_Ordered_Item}}
+                <br />          
+                <label>Collection Period: </label>
+                {{result.Result.Collection_Period}}
+                <br />                 
+            </div>
+            <div [hidden]="tabNum==1">
+                <br />
+                <label>Account Receivables: </label>
+                {{result.Result.Account_Receivables ? result.Result.Account_Receivables : 0}}
+                <br />
+                <label>Credit Limit: </label>
+                {{result.Result.Credit_Limit}}
+                <br />              
+                <label>Credit Terms: </label>
+                {{result.Result.Credit_Terms}}
+                <br />
+                <label>Discount Scheme: </label>
+                {{result.Result.Discount_Scheme}}%
+                <br />
+                <label>Contact Persons from Sales: </label>
+                {{result.Result.Contacts_Order}}
+                <br />
+                <label>Contact Persons from Accounting: </label>
+                {{result.Result.Contacts_Accounting}}
+                <br />
+                <label>Witholding Tax(%): </label>
+                {{result.Result.Witholding_Tax}}
+                <br />
+                <label>Round Off Payments: </label>
+                {{result.Result.Rounded_Payment ? "Yes" : "No"}}
+                <br />
+                <label>VAT Exempt: </label>
+                {{result.Result.Vat_Exemption ? "Yes" : "No"}}
+                <br />
+                <label>Combine Items in Invoice: </label>
+                {{result.Result.Combine_Items ? "Yes" : "No"}}
+                <br />
+            </div>
+        </div>
+    </div>
+    <div class="view-client-button">
+        <button class="btn btn-primary" (click)="back()">Back</button>
+    </div>
+</div>

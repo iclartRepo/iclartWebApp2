@@ -38,12 +38,14 @@ namespace WebApp.DAL
         public void Insert(TEntity entity)
         {
             _dbSet.Add(entity);
+            context.SaveChanges();
         }
 
         public void Update(TEntity entity)
         {
             _dbSet.Attach(entity);
             context.Entry(entity).State = EntityState.Modified;
+            context.SaveChanges();
         }
     }
 }

@@ -18,9 +18,30 @@ require('rxjs/add/observable/throw');
 var ClientService = (function () {
     function ClientService(_http) {
         this._http = _http;
+        this.baseUrl = "/Client/";
     }
     ClientService.prototype.getClients = function () {
-        return this._http.get("/Client/GetClientList")
+        return this._http.get(this.baseUrl + "GetClientList")
+            .map(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    ClientService.prototype.getClientInfo = function (id) {
+        return this._http.get(this.baseUrl + "GetClientInfo?id=" + id)
+            .map(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    ClientService.prototype.addClient = function (client) {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this._http.post("/Client/AddClient", { client: client }, options)
+            .map(function (response) { return response.json(); })
+            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
+            .catch(this.handleError);
+    };
+    ClientService.prototype.updateClient = function (client) {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this._http.put("/Client/UpdateClient", { client: client }, options)
             .map(function (response) { return response.json(); })
             .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
             .catch(this.handleError);

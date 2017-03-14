@@ -15,6 +15,12 @@ var ClientListComponent = (function () {
     function ClientListComponent(_route, _clientService) {
         this._route = _route;
         this._clientService = _clientService;
+        this.result = {
+            isError: false,
+            Result: null,
+            ResultList: null,
+            Message: ''
+        };
     }
     ClientListComponent.prototype.addClient = function () {
         this._route.navigate(['/client-form']);
@@ -22,7 +28,7 @@ var ClientListComponent = (function () {
     ClientListComponent.prototype.ngOnInit = function () {
         var _this = this;
         this._clientService.getClients()
-            .subscribe(function (peoples) { return _this.clients = peoples; }, function (error) { return _this.errorMessage = error; });
+            .subscribe(function (peoples) { return _this.result = peoples; }, function (error) { return _this.errorMessage = error; });
     };
     ClientListComponent = __decorate([
         core_1.Component({

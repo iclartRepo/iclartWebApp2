@@ -19,8 +19,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let client of clients">
-                <td>{{client.Name}}</td>
+            <tr *ngFor="let client of result.ResultList">
+                <td><a [routerLink]="['/client-info', client.Id]">{{client.Name}}</a></td>
                 <td>{{client.TIN}}</td>
             </tr>
         </tbody>

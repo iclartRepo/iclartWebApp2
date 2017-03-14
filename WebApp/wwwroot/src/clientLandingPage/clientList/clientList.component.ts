@@ -2,7 +2,7 @@
 import { Router } from '@angular/router';
 
 import { ClientService } from '../clientService.service';
-import { IClient } from '../../interfaces/client.interface';
+import { IMessageResult } from '../../interfaces/messageResult.interface';
 
 @Component({
     selector: 'web-client-list',
@@ -10,7 +10,12 @@ import { IClient } from '../../interfaces/client.interface';
 })
 export class ClientListComponent implements OnInit {
 
-    clients: IClient[];
+    result: IMessageResult = {
+        isError: false,
+        Result: null,
+        ResultList: null,
+        Message: ''
+    };
     errorMessage: string;
 
     constructor(private _route: Router,
@@ -23,7 +28,7 @@ export class ClientListComponent implements OnInit {
 
     ngOnInit(): void {
         this._clientService.getClients()
-            .subscribe(peoples => this.clients = peoples,
+            .subscribe(peoples => this.result = peoples,
             error => this.errorMessage = <any>error);
        
     }
