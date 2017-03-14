@@ -27,6 +27,9 @@ body {
 #clientList .add-client {
   float: right; }
 
+#clientList .show-columns {
+  float: left; }
+
 #clientList .client-filter {
   float: left;
   width: 75%; }
