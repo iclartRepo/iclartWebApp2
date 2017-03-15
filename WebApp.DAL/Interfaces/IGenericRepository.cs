@@ -10,7 +10,8 @@ namespace WebApp.DAL.Interfaces
     public interface IGenericRepository<TEntity> where TEntity : class
     {
         void Insert(TEntity entity);
-        void Delete(int id);
+        void SoftDelete(TEntity entity);
+        void HardDelete(TEntity entity);
         void Update(TEntity entity);
         IEnumerable<TEntity> Get(
             Expression<Func<TEntity, bool>> filter = null,

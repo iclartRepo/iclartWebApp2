@@ -1,7 +1,8 @@
 ﻿
 @import "wwwroot/src/header/header.component.scss";
 @import "body.scss";
-
+@import "universal.scss";
 
 @import "wwwroot/src/clientLandingPage/clientList/clientList.component.scss";
 @import "wwwroot/src/clientLandingPage/clientForm/clientForm.component.scss";
+@import "wwwroot/src/clientLandingPage/viewClient/viewClient.component.scss";
