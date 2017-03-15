@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import { Title } from '@angular/platform-browser';
 import { ClientService } from '../clientService.service';
 import { IMessageResult } from '../../interfaces/messageResult.interface';
 
@@ -24,7 +24,8 @@ export class ClientViewComponent implements OnInit {
 
     constructor(private _router: Router,
         private _route: ActivatedRoute,
-        private _clientService: ClientService) {
+        private _clientService: ClientService,
+        private titleService: Title) {
     }  
 
     /* Navigation Functions */
@@ -56,5 +57,6 @@ export class ClientViewComponent implements OnInit {
                 let id = +params['id'];
                 this.getClient(id);
             });
+        this.titleService.setTitle("Client Info");
     }
 }

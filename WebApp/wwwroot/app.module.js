@@ -18,6 +18,7 @@ var header_component_1 = require('./src/header/header.component');
 var mainLandingPage_component_1 = require('./src/mainLandingPage/mainLandingPage.component');
 /* Modules */
 var client_module_1 = require('./src/clientLandingPage/client.module');
+var product_module_1 = require('./src/productLandingPage/product.module');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -28,11 +29,13 @@ var AppModule = (function () {
                     { path: '', component: mainLandingPage_component_1.MainComponent }
                 ]),
                 http_1.HttpModule,
-                client_module_1.ClientModule],
+                client_module_1.ClientModule,
+                product_module_1.ProductModule],
             declarations: [app_component_1.AppComponent,
                 header_component_1.HeaderComponent,
                 mainLandingPage_component_1.MainComponent],
-            bootstrap: [app_component_1.AppComponent]
+            bootstrap: [app_component_1.AppComponent],
+            providers: [platform_browser_1.Title]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);

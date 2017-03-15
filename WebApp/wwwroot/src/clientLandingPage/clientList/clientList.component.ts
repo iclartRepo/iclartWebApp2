@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { Title } from '@angular/platform-browser';
 import { ClientService } from '../clientService.service';
 import { IMessageResult } from '../../interfaces/messageResult.interface';
 
@@ -26,7 +26,8 @@ export class ClientListComponent implements OnInit {
     errorMessage: string;
 
     constructor(private _route: Router,
-        private _clientService: ClientService) {
+        private _clientService: ClientService,
+        private titleService: Title) {
     }
 
     /* CRUD Functionalities */
@@ -60,6 +61,6 @@ export class ClientListComponent implements OnInit {
         this._clientService.getClients()
             .subscribe(peoples => this.result = peoples,
             error => this.errorMessage = <any>error);
-       
+        this.titleService.setTitle("Client List");
     }
 }

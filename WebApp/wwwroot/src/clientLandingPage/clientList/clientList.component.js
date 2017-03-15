@@ -10,11 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
+var platform_browser_1 = require('@angular/platform-browser');
 var clientService_service_1 = require('../clientService.service');
 var ClientListComponent = (function () {
-    function ClientListComponent(_route, _clientService) {
+    function ClientListComponent(_route, _clientService, titleService) {
         this._route = _route;
         this._clientService = _clientService;
+        this.titleService = titleService;
         this.clientName = "";
         this.result = {
             isError: false,
@@ -58,13 +60,14 @@ var ClientListComponent = (function () {
         var _this = this;
         this._clientService.getClients()
             .subscribe(function (peoples) { return _this.result = peoples; }, function (error) { return _this.errorMessage = error; });
+        this.titleService.setTitle("Client List");
     };
     ClientListComponent = __decorate([
         core_1.Component({
             selector: 'web-client-list',
             templateUrl: 'wwwroot/src/clientLandingPage/clientList/clientList.component.html'
         }), 
-        __metadata('design:paramtypes', [router_1.Router, clientService_service_1.ClientService])
+        __metadata('design:paramtypes', [router_1.Router, clientService_service_1.ClientService, platform_browser_1.Title])
     ], ClientListComponent);
     return ClientListComponent;
 }());

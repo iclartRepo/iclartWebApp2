@@ -2,6 +2,7 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
 import { ClientService } from "../clientService.service";
 
@@ -13,7 +14,7 @@ import { IMessageResult } from '../../interfaces/messageResult.interface';
 })
 export class ClientFormComponent implements OnInit {
 
-    constructor(private _router: Router, private _route: ActivatedRoute, private _service: ClientService, private _location: Location) {
+    constructor(private _router: Router, private _route: ActivatedRoute, private _service: ClientService, private _location: Location, private titleService:Title) {
        
     }   
 
@@ -157,6 +158,7 @@ export class ClientFormComponent implements OnInit {
                     this.getClient(this.clientId);
                 }
             });
+        this.titleService.setTitle("Add/Edit Client");
     }
 
     /* Function to Get Client Info */

@@ -16,6 +16,7 @@ namespace WebApp.DAL
             Database.SetInitializer(new IclartDBInitializer());
         }
         public DbSet<ClientEntity> Clients { get; set; }
+        public DbSet<ProductEntity> Products { get; set; }
     }
     public class IclartDBInitializer : CreateDatabaseIfNotExists<DBContext>
     {

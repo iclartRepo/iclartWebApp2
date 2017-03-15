@@ -1,5 +1,5 @@
 ﻿import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 /* Main Components */
@@ -9,6 +9,7 @@ import { MainComponent } from './src/mainLandingPage/mainLandingPage.component';
 
 /* Modules */
 import { ClientModule } from './src/clientLandingPage/client.module';
+import { ProductModule } from './src/productLandingPage/product.module';
 
 @NgModule({
     imports: [BrowserModule,
@@ -16,10 +17,12 @@ import { ClientModule } from './src/clientLandingPage/client.module';
             { path: '', component: MainComponent }
         ]),
         HttpModule,
-        ClientModule],
+        ClientModule,
+        ProductModule],
     declarations: [AppComponent,
         HeaderComponent,
         MainComponent],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    providers: [Title]
 })
 export class AppModule { }
