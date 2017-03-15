@@ -1,4 +1,4 @@
-namespace WebApp.Migrations
+namespace WebApp.DAL.Migrations
 {
     using System;
     using System.Data.Entity;

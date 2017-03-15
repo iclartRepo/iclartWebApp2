@@ -8,7 +8,7 @@
     Dealer: boolean,
     Accounts_Receivables: number,
     Credit_Terms: string,
-    Discount_Scheme: string,
+    Discount_Scheme: number,
     Agent: boolean,
     Contacts_Order: string,
     Contacts_Accounting: string,

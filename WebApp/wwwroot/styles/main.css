@@ -14,23 +14,41 @@
   padding-top: 65px; }
 
 body {
-  overflow-y: hidden; }
+  overflow-y: hidden;
+  font-family: 'Lato-Regular'; }
+
+.table-borderless,
+.table-borderless tr,
+.table-borderless tbody td,
+.table-borderless thead th,
+.table-borderless tfoot th {
+  border: none !important; }
 
 #clientList .add-client {
   float: right; }
 
+#clientList .show-columns {
+  float: left; }
+
 #clientList .client-filter {
   float: left;
-  width: 75%; }
-  #clientList .client-filter .client-filter-label {
-    display: inline-block;
-    margin-right: 10px; }
-  #clientList .client-filter .client-filter-input {
-    display: inline-block;
-    width: 75%; }
+  width: 50%; }
+
+#clientList table .thead-name {
+  width: 40%; }
 
 #clientForm {
   margin-top: -20px; }
+  #clientForm sup {
+    color: red; }
+  #clientForm small {
+    color: red; }
+  #clientForm .alert {
+    width: 15%;
+    text-align: center;
+    position: absolute;
+    left: 45%;
+    top: 55px; }
   #clientForm .clientForm-action-buttons {
     position: absolute;
     right: 15px;
@@ -61,4 +79,20 @@ body {
     #clientForm .client-form-pagination a {
       color: black;
       cursor: pointer; }
+
+#viewClient ul a {
+  cursor: pointer; }
+
+#viewClient .client-name {
+  display: inline-block;
+  padding-right: 10px; }
+
+#viewClient .edit-button {
+  display: inline-block; }
+
+#viewClient .panel-body table {
+  width: 55%; }
+
+#viewClient .panel-body .fin-table {
+  width: 32%; }
 
