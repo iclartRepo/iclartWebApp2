@@ -32,13 +32,10 @@ body {
 
 #clientList .client-filter {
   float: left;
-  width: 75%; }
-  #clientList .client-filter .client-filter-label {
-    display: inline-block;
-    margin-right: 10px; }
-  #clientList .client-filter .client-filter-input {
-    display: inline-block;
-    width: 75%; }
+  width: 50%; }
+
+#clientList table .thead-name {
+  width: 40%; }
 
 #clientForm {
   margin-top: -20px; }
@@ -92,4 +89,10 @@ body {
 
 #viewClient .edit-button {
   display: inline-block; }
+
+#viewClient .panel-body table {
+  width: 55%; }
+
+#viewClient .panel-body .fin-table {
+  width: 32%; }
 

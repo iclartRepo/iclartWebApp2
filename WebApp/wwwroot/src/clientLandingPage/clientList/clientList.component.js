@@ -15,16 +15,45 @@ var ClientListComponent = (function () {
     function ClientListComponent(_route, _clientService) {
         this._route = _route;
         this._clientService = _clientService;
+        this.clientName = "";
         this.result = {
             isError: false,
             Result: null,
             ResultList: null,
             Message: ''
         };
+        this.resultDeletion = {
+            isError: false,
+            Result: null,
+            ResultList: null,
+            Message: ''
+        };
     }
+    /* CRUD Functionalities */
     ClientListComponent.prototype.addClient = function () {
         this._route.navigate(['/client-form']);
     };
+    ClientListComponent.prototype.deleteClient = function (id) {
+        var _this = this;
+        this._clientService.deleteClient(id)
+            .subscribe(function (deleteResponse) {
+            _this.resultDeletion = deleteResponse;
+            if (_this.resultDeletion.isError == false) {
+                _this.getListClients();
+            }
+        }, function (error) { return _this.errorMessage = error; });
+    };
+    ClientListComponent.prototype.getListClients = function () {
+        var _this = this;
+        this._clientService.getClients()
+            .subscribe(function (peoples) { return _this.result = peoples; }, function (error) { return _this.errorMessage = error; });
+    };
+    ClientListComponent.prototype.searchClient = function () {
+        var _this = this;
+        this._clientService.searchClients(this.clientName)
+            .subscribe(function (peoples) { return _this.result = peoples; }, function (error) { return _this.errorMessage = error; });
+    };
+    /* Initialize Functions */
     ClientListComponent.prototype.ngOnInit = function () {
         var _this = this;
         this._clientService.getClients()

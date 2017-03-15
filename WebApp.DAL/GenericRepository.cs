@@ -18,10 +18,7 @@ namespace WebApp.DAL
         {
             _dbSet = context.Set<TEntity>();
         }
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
+      
         public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "")
         {
             IQueryable<TEntity> query = _dbSet;
@@ -34,10 +31,23 @@ namespace WebApp.DAL
             query = includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
 
             return orderBy?.Invoke(query).ToList() ?? query.ToList();
-        }     
+        }
+
+        public void HardDelete(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Insert(TEntity entity)
         {
             _dbSet.Add(entity);
+            context.SaveChanges();
+        }
+
+        public void SoftDelete(TEntity entity)
+        {
+            _dbSet.Attach(entity);
+            context.Entry(entity).State = EntityState.Modified;
             context.SaveChanges();
         }
 

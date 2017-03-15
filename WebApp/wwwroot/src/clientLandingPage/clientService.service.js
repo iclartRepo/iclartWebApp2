@@ -25,6 +25,11 @@ var ClientService = (function () {
             .map(function (response) { return response.json(); })
             .catch(this.handleError);
     };
+    ClientService.prototype.searchClients = function (name) {
+        return this._http.get(this.baseUrl + "SearchClient?clientName=" + name)
+            .map(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
     ClientService.prototype.getClientInfo = function (id) {
         return this._http.get(this.baseUrl + "GetClientInfo?id=" + id)
             .map(function (response) { return response.json(); })
@@ -33,7 +38,7 @@ var ClientService = (function () {
     ClientService.prototype.addClient = function (client) {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
-        return this._http.post("/Client/AddClient", { client: client }, options)
+        return this._http.post(this.baseUrl + "AddClient", { client: client }, options)
             .map(function (response) { return response.json(); })
             .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
             .catch(this.handleError);
@@ -41,7 +46,13 @@ var ClientService = (function () {
     ClientService.prototype.updateClient = function (client) {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
-        return this._http.put("/Client/UpdateClient", { client: client }, options)
+        return this._http.put(this.baseUrl + "UpdateClient", { client: client }, options)
+            .map(function (response) { return response.json(); })
+            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
+            .catch(this.handleError);
+    };
+    ClientService.prototype.deleteClient = function (id) {
+        return this._http.delete(this.baseUrl + "DeleteClient?id=" + id)
             .map(function (response) { return response.json(); })
             .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
             .catch(this.handleError);

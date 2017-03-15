@@ -14,70 +14,96 @@
                 <li [class.active]="tabNum == 2"><a (click)="setTab(2)">Financial Info</a></li>
             </ul>
             <div [hidden]="tabNum==2">
-                <br />
-                <label>Dealer: </label>
-                {{result.Result.Dealer ? "Yes" : "No"}}
-                <br />
-                <label>Agent: </label>
-                {{result.Result.Agent ? "Yes" : "No"}}
-                <br />
-                <label>TIN: </label>
-                {{result.Result.TIN}}
-                <br />
-                <label>Office Address: </label>
-                {{result.Result.Office_Address}} 
-                <br />
-                <label>Warehouse Address:</label>
-                {{result.Result.Warehouse_Address}}
-                <br />
-                <label>Telephone Number: </label>
-                {{result.Result.Telephone_Number}}
-                <br />
-                <label>Fax Number: </label>
-                {{result.Result.Fax_Number}}
-                <br />
-                <label>Email: </label>
-                {{result.Result.Email}}
-                <br />
-                <label>Usual Ordered Item: </label>
-                {{result.Result.Usual_Ordered_Item}}
-                <br />          
-                <label>Collection Period: </label>
-                {{result.Result.Collection_Period}}
-                <br />                 
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <td>Dealer:</td>
+                            <td>{{result.Result.Dealer ? "Yes" : "No"}}</td>
+                        </tr>
+                        <tr>
+                            <td>Agent:</td>
+                            <td>{{result.Result.Agent ? "Yes" : "No"}}</td>
+                        </tr>
+                        <tr>
+                            <td>TIN:</td>
+                            <td>{{result.Result.TIN}}</td>
+                        </tr>
+                        <tr>
+                            <td>Office Address:</td>
+                            <td>{{result.Result.Office_Address}} </td>
+                        </tr>
+                        <tr>
+                            <td>Warehouse Address:</td>
+                            <td>{{result.Result.Warehouse_Address}}</td>
+                        </tr>
+                        <tr>
+                            <td>Telephone Number:</td>
+                            <td>{{result.Result.Telephone_Number}}</td>
+                        </tr>
+                        <tr>
+                            <td>Fax Number:</td>
+                            <td>{{result.Result.Fax_Number}}</td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td>{{result.Result.Email}}</td>
+                        </tr>
+                        <tr>
+                            <td>Usual Ordered Item:</td>
+                            <td>{{result.Result.Usual_Ordered_Item}}</td>
+                        </tr>
+                        <tr>
+                            <td>Collection Period:</td>
+                            <td>{{result.Result.Collection_Period}}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div [hidden]="tabNum==1">
-                <br />
-                <label>Account Receivables: </label>
-                {{result.Result.Account_Receivables ? result.Result.Account_Receivables : 0}}
-                <br />
-                <label>Credit Limit: </label>
-                {{result.Result.Credit_Limit}}
-                <br />              
-                <label>Credit Terms: </label>
-                {{result.Result.Credit_Terms}}
-                <br />
-                <label>Discount Scheme: </label>
-                {{result.Result.Discount_Scheme}}%
-                <br />
-                <label>Contact Persons from Sales: </label>
-                {{result.Result.Contacts_Order}}
-                <br />
-                <label>Contact Persons from Accounting: </label>
-                {{result.Result.Contacts_Accounting}}
-                <br />
-                <label>Witholding Tax(%): </label>
-                {{result.Result.Witholding_Tax}}
-                <br />
-                <label>Round Off Payments: </label>
-                {{result.Result.Rounded_Payment ? "Yes" : "No"}}
-                <br />
-                <label>VAT Exempt: </label>
-                {{result.Result.Vat_Exemption ? "Yes" : "No"}}
-                <br />
-                <label>Combine Items in Invoice: </label>
-                {{result.Result.Combine_Items ? "Yes" : "No"}}
-                <br />
+                <table class="table table-borderless fin-table">
+                    <tbody>
+                        <tr>
+                            <td>Accounts Receivables:</td>
+                            <td>{{result.Result.Account_Receivables ? result.Result.Account_Receivables : 0 | number: '1.2-2'}}</td>
+                        </tr>
+                        <tr>
+                            <td>Credit Limit:</td>
+                            <td>{{result.Result.Credit_Limit | number: '1.2-2'}}</td>
+                        </tr>
+                        <tr>
+                            <td>Credit Terms:</td>
+                            <td>{{result.Result.Credit_Terms}}</td>
+                        </tr>
+                        <tr>
+                            <td>Discount Scheme (%):</td>
+                            <td>{{result.Result.Discount_Scheme}}% </td>
+                        </tr>
+                        <tr>
+                            <td>Contact Persons from Sales:</td>
+                            <td>{{result.Result.Contacts_Order}}</td>
+                        </tr>
+                        <tr>
+                            <td>Contact Persons from Accounting:</td>
+                            <td>{{result.Result.Contacts_Accounting}}</td>
+                        </tr>
+                        <tr>
+                            <td>Witholding Tax (%):</td>
+                            <td>{{result.Result.Witholding_Tax}}</td>
+                        </tr>
+                        <tr>
+                            <td>Round Off Payments:</td>
+                            <td>{{result.Result.Rounded_Payment ? "Yes" : "No"}}</td>
+                        </tr>
+                        <tr>
+                            <td>VAT Exempt:</td>
+                            <td>{{result.Result.Vat_Exemption ? "Yes" : "No"}}</td>
+                        </tr>
+                        <tr>
+                            <td>Combine Items in Invoice:</td>
+                            <td>{{result.Result.Combine_Items ? "Yes" : "No"}}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

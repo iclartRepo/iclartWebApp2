@@ -21,7 +21,11 @@ export class ClientService {
             .map((response: Response) => <IMessageResult>response.json())
             .catch(this.handleError);
     }
-
+    searchClients(name:string): Observable<IMessageResult> {
+        return this._http.get(this.baseUrl + "SearchClient?clientName=" + name)
+            .map((response: Response) => <IMessageResult>response.json())
+            .catch(this.handleError);
+    }
     getClientInfo(id: number): Observable<IMessageResult> {
         return this._http.get(this.baseUrl + "GetClientInfo?id=" + id)
             .map((response: Response) => <IMessageResult>response.json())
@@ -31,7 +35,7 @@ export class ClientService {
     addClient(client: IClient): Observable<IMessageResult> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        return this._http.post("/Client/AddClient", { client }, options)
+        return this._http.post(this.baseUrl + "AddClient", { client }, options)
             .map((response: Response) => <IMessageResult>response.json())
             .do(data => console.log('All: ' + JSON.stringify(data)))
             .catch(this.handleError);
@@ -40,7 +44,14 @@ export class ClientService {
     updateClient(client: IClient): Observable<IMessageResult> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        return this._http.put("/Client/UpdateClient", { client }, options)
+        return this._http.put(this.baseUrl + "UpdateClient", { client }, options)
+            .map((response: Response) => <IMessageResult>response.json())
+            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+
+    deleteClient(id: number): Observable<IMessageResult> {
+        return this._http.delete(this.baseUrl + "DeleteClient?id=" + id)
             .map((response: Response) => <IMessageResult>response.json())
             .do(data => console.log('All: ' + JSON.stringify(data)))
             .catch(this.handleError);

@@ -69,6 +69,17 @@ namespace WebApp.BLL
             }
         }
         /// <summary>
+        /// Soft Delete a Client
+        /// </summary>
+        /// <param name="id"></param>
+        public void DeleteClient(int id)
+        {
+            var clientEntity = _repository.Get(i => i.Id == id).First();
+            clientEntity.IsDeleted = !clientEntity.IsDeleted;
+            clientEntity.Modified_Date = DateTime.Now;
+            _repository.SoftDelete(clientEntity);
+        }
+        /// <summary>
         /// Add Validation Function for incomplete fields
         /// </summary>
         /// <param name="client"></param>

@@ -23,7 +23,7 @@ namespace WebApp.Controllers
             {
                 var clientRepository = new GenericRepository<ClientEntity>();
 
-                var clients = clientRepository.Get();
+                var clients = clientRepository.Get(i=>i.IsDeleted == false).ToList();
 
                 TinyMapper.Bind<List<ClientEntity>, List<ClientModel>>();
                 var clientsModel = TinyMapper.Map<List<ClientModel>>(clients);
@@ -34,6 +34,83 @@ namespace WebApp.Controllers
                     ResultList = clientsModel,
                     Message = "Success",
                     Result = null
+                };
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                var message = new MessageResult<ClientModel>
+                {
+                    isError = true,
+                    ResultList = null,
+                    Message = "Some error occured. Please contact the administrator.",
+                    Result = null
+                };
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+        }
+        /// <summary>
+        /// Search for Clients
+        /// </summary>
+        /// <param name="clientName"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult SearchClient(string clientName)
+        {
+            try
+            {
+                var clientRepository = new GenericRepository<ClientEntity>();
+                
+
+                var clients = clientRepository.Get(i => i.IsDeleted == false && i.Name.Contains(clientName)).ToList();
+
+                TinyMapper.Bind<List<ClientEntity>, List<ClientModel>>();
+                var clientsModel = TinyMapper.Map<List<ClientModel>>(clients);
+
+                var message = new MessageResult<ClientModel>
+                {
+                    isError = false,
+                    ResultList = clientsModel,
+                    Message = "Success",
+                    Result = null
+                };
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                var message = new MessageResult<ClientModel>
+                {
+                    isError = true,
+                    ResultList = null,
+                    Message = "Some error occured. Please contact the administrator.",
+                    Result = null
+                };
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+        }
+        /// <summary>
+        /// Get single client from database based on Id 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult GetClientInfo(int id)
+        {
+            try
+            {
+                var clientRepository = new GenericRepository<ClientEntity>();
+
+                var client = clientRepository.Get(y => y.Id == id).FirstOrDefault();
+
+                TinyMapper.Bind<ClientEntity, ClientModel>();
+                var clientModel = TinyMapper.Map<ClientModel>(client);
+
+                var message = new MessageResult<ClientModel>
+                {
+                    isError = false,
+                    ResultList = null,
+                    Message = "Success",
+                    Result = clientModel
                 };
                 return Json(message, JsonRequestBehavior.AllowGet);
             }
@@ -81,46 +158,7 @@ namespace WebApp.Controllers
                 };
                 return Json(message, JsonRequestBehavior.AllowGet);
             }
-        }
-
-        /// <summary>
-        /// Get single client from database based on Id 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult GetClientInfo(int id)
-        {
-            try
-            {
-                var clientRepository = new GenericRepository<ClientEntity>();
-
-                var client = clientRepository.Get(y => y.Id == id).FirstOrDefault();
-
-                TinyMapper.Bind<ClientEntity, ClientModel>();
-                var clientModel = TinyMapper.Map<ClientModel>(client);
-
-                var message = new MessageResult<ClientModel>
-                {
-                    isError = false,
-                    ResultList = null,
-                    Message = "Success",
-                    Result = clientModel
-                };
-                return Json(message, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                var message = new MessageResult<ClientModel>
-                {
-                    isError = true,
-                    ResultList = null,
-                    Message = "Some error occured. Please contact the administrator.",
-                    Result = null
-                };
-                return Json(message, JsonRequestBehavior.AllowGet);
-            }
-        }
+        }        
         /// <summary>
         /// Update Client in DB
         /// </summary>
@@ -133,6 +171,39 @@ namespace WebApp.Controllers
             {
                 var clientBll = new ClientBLL();
                 clientBll.UpdateClient(client);
+                var message = new MessageResult<ClientModel>
+                {
+                    isError = false,
+                    ResultList = null,
+                    Message = "Client updated successfully!",
+                    Result = null
+                };
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                var message = new MessageResult<ClientModel>
+                {
+                    isError = true,
+                    ResultList = null,
+                    Message = ex.Message,
+                    Result = null
+                };
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+        }
+        /// <summary>
+        /// Soft Delete a client using its ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        public ActionResult DeleteClient(int id)
+        {
+            try
+            {
+                var clientBll = new ClientBLL();
+                clientBll.DeleteClient(id);
                 var message = new MessageResult<ClientModel>
                 {
                     isError = false,
