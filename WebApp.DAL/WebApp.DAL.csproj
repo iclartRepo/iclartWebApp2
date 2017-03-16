@@ -56,6 +56,10 @@
     <Compile Include="Migrations\201703091117085_Initial.Designer.cs">
       <DependentUpon>201703091117085_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703160954586_AddCompetitorTable.cs" />
+    <Compile Include="Migrations\201703160954586_AddCompetitorTable.Designer.cs">
+      <DependentUpon>201703160954586_AddCompetitorTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -72,6 +76,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201703091117085_Initial.resx">
       <DependentUpon>201703091117085_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703160954586_AddCompetitorTable.resx">
+      <DependentUpon>201703160954586_AddCompetitorTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

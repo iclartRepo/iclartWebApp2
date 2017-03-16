@@ -96,3 +96,11 @@ body {
 #viewClient .panel-body .fin-table {
   width: 32%; }
 
+#competitorAdmin .alert {
+  text-align: center;
+  width: 15%;
+  margin: 0 auto; }
+
+#competitorAdmin .competitorAdmin-display {
+  display: inline-block; }
+

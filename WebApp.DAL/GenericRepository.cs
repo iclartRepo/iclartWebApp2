@@ -35,7 +35,8 @@ namespace WebApp.DAL
 
         public void HardDelete(TEntity entity)
         {
-            throw new NotImplementedException();
+            _dbSet.Remove(entity);
+            context.SaveChanges();
         }
 
         public void Insert(TEntity entity)
