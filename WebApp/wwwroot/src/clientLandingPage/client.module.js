@@ -17,6 +17,7 @@ var clientForm_component_1 = require('./clientForm/clientForm.component');
 var viewClient_component_1 = require('./viewClient/viewClient.component');
 //Services
 var clientService_service_1 = require('./clientService.service');
+var adminService_service_1 = require('../adminLandingPage/adminService.service');
 var ClientModule = (function () {
     function ClientModule() {
     }
@@ -31,7 +32,7 @@ var ClientModule = (function () {
             declarations: [clientList_component_1.ClientListComponent,
                 clientForm_component_1.ClientFormComponent,
                 viewClient_component_1.ClientViewComponent],
-            providers: [clientService_service_1.ClientService]
+            providers: [clientService_service_1.ClientService, adminService_service_1.AdminService]
         }), 
         __metadata('design:paramtypes', [])
     ], ClientModule);

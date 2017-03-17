@@ -44,6 +44,7 @@
     <Compile Include="Entities\ClientEntity.cs" />
     <Compile Include="Entities\CompetitorDiscountSchemesEntity.cs" />
     <Compile Include="Entities\CompetitorEntity.cs" />
+    <Compile Include="Models\ClientFormModel.cs" />
     <Compile Include="Models\ClientModel.cs" />
     <Compile Include="Models\CompetitorDiscountSchemesModel.cs" />
     <Compile Include="Models\CompetitorModel.cs" />

@@ -14,24 +14,37 @@ namespace WebApp.BLL
     public class ClientBLL
     {
         private GenericRepository<ClientEntity> _repository;
+        private GenericRepository<CompetitorEntity> _competitorRepository;
 
         public ClientBLL()
         {
             _repository = new GenericRepository<ClientEntity>();
+            _competitorRepository = new GenericRepository<CompetitorEntity>();
         }
         /// <summary>
         /// Adding new Client into Database
         /// </summary>
         /// <param name="client"></param>
-        public void AddClient(ClientModel client)
+        public void AddClient(ClientFormModel client)
         {
-            var exists = ValidateIfExists(client);
-            var complete = ValidateCompleteFields(client);
+            var exists = ValidateIfExists(client.Client);
+            var complete = ValidateCompleteFields(client.Client);
             if (exists && complete)
             {
                 TinyMapper.Bind<ClientModel, ClientEntity>();
-                var clientEntity = TinyMapper.Map<ClientEntity>(client);
+                var clientEntity = TinyMapper.Map<ClientEntity>(client.Client);
                 clientEntity.Created_Date = DateTime.Now;
+
+                TinyMapper.Bind<CompetitorDiscountSchemesModel, CompetitorDiscountSchemesEntity>();
+                for (int i=0; i<client.CompetitorDiscountSchemes.Count; i++)
+                {
+                    var competitorDS = client.CompetitorDiscountSchemes[i];
+                    var competitorDSEntity = TinyMapper.Map<CompetitorDiscountSchemesEntity>(competitorDS);
+                    var competitor = _competitorRepository.Get(y => y.Id == competitorDS.CompetitorId).First();
+                    competitorDSEntity.CompetitorEntity = competitor;
+                    clientEntity.CompetitorDiscountSchemes.Add(competitorDSEntity);
+                }
+
                 _repository.Insert(clientEntity);
             }
             else if (complete == false)

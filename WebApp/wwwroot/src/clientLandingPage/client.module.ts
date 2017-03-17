@@ -10,6 +10,7 @@ import { ClientViewComponent } from './viewClient/viewClient.component';
 
 //Services
 import { ClientService } from './clientService.service';
+import { AdminService } from '../adminLandingPage/adminService.service';
 
 @NgModule({
     imports: [RouterModule.forChild([
@@ -21,6 +22,6 @@ import { ClientService } from './clientService.service';
     declarations: [ClientListComponent,
         ClientFormComponent,
         ClientViewComponent],
-    providers: [ClientService]
+    providers: [ClientService, AdminService]
 })
 export class ClientModule { }

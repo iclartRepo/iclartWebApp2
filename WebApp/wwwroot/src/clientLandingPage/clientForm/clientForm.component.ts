@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
 
 import { ClientService } from "../clientService.service";
+import { AdminService } from "../../adminLandingPage/adminService.service";
 
 import { IClient } from '../../interfaces/client.interface';
 import { IMessageResult } from '../../interfaces/messageResult.interface';
@@ -13,14 +14,23 @@ import { IMessageResult } from '../../interfaces/messageResult.interface';
 })
 export class ClientFormComponent implements OnInit {
 
-    constructor(private _router: Router, private _route: ActivatedRoute, private _service: ClientService, private _location: Location) {
+    constructor(private _router: Router, private _route: ActivatedRoute, private _service: ClientService, private _location: Location, private _adminService: AdminService) {
        
     }   
 
-    previousUrl: string;
+    competitorDiscountSchemes: any[] = [];
+    competitorDs: any = {};
+    selectedCompetitor: any;
+    selectedDs: number;
     clientId: number;
     tabNum: number = 1;
     result: IMessageResult = {
+        isError: false,
+        Result: null,
+        ResultList: null,
+        Message: ''
+    };
+    resultCompetitors: IMessageResult = {
         isError: false,
         Result: null,
         ResultList: null,
@@ -119,7 +129,7 @@ export class ClientFormComponent implements OnInit {
         this.tabNum = tabNumber;
     }
 
-    /* Save Functions */
+    /* CRUD Functions */
     addClient(): void {
         if (this.clientId > 0) {
             this._service.updateClient(this.client)
@@ -142,6 +152,16 @@ export class ClientFormComponent implements OnInit {
         }
        
     }
+    addCompetitorDS(): void {
+        this.competitorDs = {
+            "CompetitorId": this.selectedCompetitor.Id,
+            "Name": this.selectedCompetitor.Name,
+            "DiscountScheme": this.selectedDs
+        };
+        this.competitorDiscountSchemes.push(this.competitorDs);
+        this.selectedCompetitor = null;
+        this.selectedDs = null;
+    }
 
     /* Navigation Functions */
     onBack(): void {
@@ -157,6 +177,10 @@ export class ClientFormComponent implements OnInit {
                     this.getClient(this.clientId);
                 }
             });
+        this._adminService.getCompetitors()
+            .subscribe(
+            result => { this.resultCompetitors = result;  },
+            error => this.errorMessage = <any>error);
     }
 
     /* Function to Get Client Info */

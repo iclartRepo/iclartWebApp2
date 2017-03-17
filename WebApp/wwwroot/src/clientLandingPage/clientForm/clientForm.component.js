@@ -13,14 +13,24 @@ var router_1 = require('@angular/router');
 var common_1 = require('@angular/common');
 var forms_1 = require('@angular/forms');
 var clientService_service_1 = require("../clientService.service");
+var adminService_service_1 = require("../../adminLandingPage/adminService.service");
 var ClientFormComponent = (function () {
-    function ClientFormComponent(_router, _route, _service, _location) {
+    function ClientFormComponent(_router, _route, _service, _location, _adminService) {
         this._router = _router;
         this._route = _route;
         this._service = _service;
         this._location = _location;
+        this._adminService = _adminService;
+        this.competitorDiscountSchemes = [];
+        this.competitorDs = {};
         this.tabNum = 1;
         this.result = {
+            isError: false,
+            Result: null,
+            ResultList: null,
+            Message: ''
+        };
+        this.resultCompetitors = {
             isError: false,
             Result: null,
             ResultList: null,
@@ -111,7 +121,7 @@ var ClientFormComponent = (function () {
     ClientFormComponent.prototype.setTab = function (tabNumber) {
         this.tabNum = tabNumber;
     };
-    /* Save Functions */
+    /* CRUD Functions */
     ClientFormComponent.prototype.addClient = function () {
         var _this = this;
         if (this.clientId > 0) {
@@ -133,6 +143,16 @@ var ClientFormComponent = (function () {
             }, function (error) { return _this.errorMessage = error; });
         }
     };
+    ClientFormComponent.prototype.addCompetitorDS = function () {
+        this.competitorDs = {
+            "CompetitorId": this.selectedCompetitor.Id,
+            "Name": this.selectedCompetitor.Name,
+            "DiscountScheme": this.selectedDs
+        };
+        this.competitorDiscountSchemes.push(this.competitorDs);
+        this.selectedCompetitor = null;
+        this.selectedDs = null;
+    };
     /* Navigation Functions */
     ClientFormComponent.prototype.onBack = function () {
         this._location.back();
@@ -146,6 +166,8 @@ var ClientFormComponent = (function () {
                 _this.getClient(_this.clientId);
             }
         });
+        this._adminService.getCompetitors()
+            .subscribe(function (result) { _this.resultCompetitors = result; }, function (error) { return _this.errorMessage = error; });
     };
     /* Function to Get Client Info */
     ClientFormComponent.prototype.getClient = function (id) {
@@ -160,7 +182,7 @@ var ClientFormComponent = (function () {
         core_1.Component({
             templateUrl: 'wwwroot/src/clientLandingPage/clientForm/clientForm.component.html'
         }), 
-        __metadata('design:paramtypes', [router_1.Router, router_1.ActivatedRoute, clientService_service_1.ClientService, common_1.Location])
+        __metadata('design:paramtypes', [router_1.Router, router_1.ActivatedRoute, clientService_service_1.ClientService, common_1.Location, adminService_service_1.AdminService])
     ], ClientFormComponent);
     return ClientFormComponent;
 }());
