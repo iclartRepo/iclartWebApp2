@@ -12,5 +12,6 @@ namespace WebApp.Common.Entities
         public string Name { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
+        public virtual ICollection<CompetitorDiscountSchemesEntity> CompetitorDiscountSchemes { get; set; }
     }
 }

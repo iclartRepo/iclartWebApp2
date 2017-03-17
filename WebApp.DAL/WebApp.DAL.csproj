@@ -60,6 +60,10 @@
     <Compile Include="Migrations\201703160954586_AddCompetitorTable.Designer.cs">
       <DependentUpon>201703160954586_AddCompetitorTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703161407153_AddDiscountSchemesTable.cs" />
+    <Compile Include="Migrations\201703161407153_AddDiscountSchemesTable.Designer.cs">
+      <DependentUpon>201703161407153_AddDiscountSchemesTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -79,6 +83,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703160954586_AddCompetitorTable.resx">
       <DependentUpon>201703160954586_AddCompetitorTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703161407153_AddDiscountSchemesTable.resx">
+      <DependentUpon>201703161407153_AddDiscountSchemesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

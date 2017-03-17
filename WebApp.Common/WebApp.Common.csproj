@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,8 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\ClientEntity.cs" />
+    <Compile Include="Entities\CompetitorDiscountSchemesEntity.cs" />
     <Compile Include="Entities\CompetitorEntity.cs" />
     <Compile Include="Models\ClientModel.cs" />
+    <Compile Include="Models\CompetitorDiscountSchemesModel.cs" />
     <Compile Include="Models\CompetitorModel.cs" />
     <Compile Include="Models\MessageResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
