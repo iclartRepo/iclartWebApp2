@@ -37,5 +37,7 @@ namespace WebApp.Common.Entities
         public DateTime? Modified_Date { get; set; }
         public bool IsDeleted { get; set; }
 
+        public virtual ICollection<CompetitorDiscountSchemesEntity> CompetitorDiscountSchemes { get; set; }
+
     }
 }

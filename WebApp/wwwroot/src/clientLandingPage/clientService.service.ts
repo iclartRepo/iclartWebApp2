@@ -32,7 +32,7 @@ export class ClientService {
             .catch(this.handleError);
     }
 
-    addClient(client: IClient): Observable<IMessageResult> {
+    addClient(client: any): Observable<IMessageResult> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         return this._http.post(this.baseUrl + "AddClient", { client }, options)

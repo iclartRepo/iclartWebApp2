@@ -12,8 +12,9 @@
             <ul class="nav nav-tabs">
                 <li [class.active]="tabNum == 1"><a (click)="setTab(1)"><i class="fa fa-info-circle" aria-hidden="true"></i> Client Info</a></li>
                 <li [class.active]="tabNum == 2"><a (click)="setTab(2)">Financial Info</a></li>
+                <li [class.active]="tabNum == 3"><a (click)="setTab(3)">Discount Schemes</a></li>
             </ul>
-            <div [hidden]="tabNum==2">
+            <div [hidden]="tabNum != 1">
                 <table class="table table-borderless">
                     <tbody>
                         <tr>
@@ -59,7 +60,7 @@
                     </tbody>
                 </table>
             </div>
-            <div [hidden]="tabNum==1">
+            <div [hidden]="tabNum != 2">
                 <table class="table table-borderless fin-table">
                     <tbody>
                         <tr>
@@ -101,6 +102,20 @@
                         <tr>
                             <td>Combine Items in Invoice:</td>
                             <td>{{result.Result.Combine_Items ? "Yes" : "No"}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div [hidden]="tabNum != 3">
+                <table class="table table-borderless fin-table">
+                    <tbody>
+                        <tr>
+                            <td>Company Discount Scheme (%):</td>
+                            <td>{{result.Result.Discount_Scheme}}% </td>
+                        </tr>
+                        <tr *ngFor="let discountScheme of result.Result.CompetitorDiscountSchemes">
+                            <td>{{discountScheme.CompetitorEntity.Name}}'s Discount Scheme (%):</td>
+                            <td>{{discountScheme.DiscountScheme}}%</td>
                         </tr>
                     </tbody>
                 </table>

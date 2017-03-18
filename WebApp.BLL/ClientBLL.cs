@@ -14,24 +14,46 @@ namespace WebApp.BLL
     public class ClientBLL
     {
         private GenericRepository<ClientEntity> _repository;
+        private GenericRepository<CompetitorEntity> _competitorRepository;
+        private GenericRepository<CompetitorDiscountSchemesEntity> _dsSchemesRepository;
+        private DBContext context;
 
         public ClientBLL()
         {
             _repository = new GenericRepository<ClientEntity>();
+            context = _repository.GetContext();
+            _competitorRepository = new GenericRepository<CompetitorEntity>(context);
+            _dsSchemesRepository = new GenericRepository<CompetitorDiscountSchemesEntity>(context);
         }
         /// <summary>
         /// Adding new Client into Database
         /// </summary>
         /// <param name="client"></param>
-        public void AddClient(ClientModel client)
+        public void AddClient(ClientFormModel client)
         {
-            var exists = ValidateIfExists(client);
-            var complete = ValidateCompleteFields(client);
+            var exists = ValidateIfExists(client.Client);
+            var complete = ValidateCompleteFields(client.Client);
             if (exists && complete)
             {
                 TinyMapper.Bind<ClientModel, ClientEntity>();
-                var clientEntity = TinyMapper.Map<ClientEntity>(client);
+                var clientEntity = TinyMapper.Map<ClientEntity>(client.Client);
                 clientEntity.Created_Date = DateTime.Now;
+                clientEntity.CompetitorDiscountSchemes = new List<CompetitorDiscountSchemesEntity>();
+
+                TinyMapper.Bind<CompetitorDiscountSchemesModel, CompetitorDiscountSchemesEntity>();
+                if (client.CompetitorDiscountSchemes != null)
+                {
+                    for (int i = 0; i < client.CompetitorDiscountSchemes.Count; i++)
+                    {
+                        var competitorDS = client.CompetitorDiscountSchemes[i];
+                        var competitorDSEntity = TinyMapper.Map<CompetitorDiscountSchemesEntity>(competitorDS);
+                        var competitor = _competitorRepository.Get(y => y.Id == competitorDS.CompetitorId).First();
+                        competitorDSEntity.CompetitorEntity = competitor;
+                        competitor.CompetitorDiscountSchemes.Add(competitorDSEntity);
+                        clientEntity.CompetitorDiscountSchemes.Add(competitorDSEntity);
+                    }
+                }           
+
                 _repository.Insert(clientEntity);
             }
             else if (complete == false)
@@ -47,16 +69,38 @@ namespace WebApp.BLL
         /// Updating Client Info
         /// </summary>
         /// <param name="client"></param>
-        public void UpdateClient(ClientModel client)
+        public void UpdateClient(ClientFormModel client)
         {
-            var exists = ValidateIfExists(client);
-            var complete = ValidateCompleteFields(client);
+            var exists = ValidateIfExists(client.Client);
+            var complete = ValidateCompleteFields(client.Client);
             if (exists && complete)
             {
-                Mapper.Initialize(cfg => cfg.CreateMap<ClientModel, ClientEntity>().ForMember(x=> x.Created_Date, opt => opt.Ignore()));
-                var clientEntity = _repository.Get(i => i.Id == client.Id).First();
-                Mapper.Map(client, clientEntity);
+                
+                var clientEntity = _repository.Get(i => i.Id == client.Client.Id).First();
+                for (int i=0; i<clientEntity.CompetitorDiscountSchemes.Count; i++)
+                {
+                    var competitorDS = clientEntity.CompetitorDiscountSchemes.ToList()[i];
+                    clientEntity.CompetitorDiscountSchemes.Remove(competitorDS);
+                    _dsSchemesRepository.HardDelete(competitorDS);
+                }
+                Mapper.Initialize(cfg => cfg.CreateMap<ClientModel, ClientEntity>().ForMember(x => x.Created_Date, opt => opt.Ignore()).ForMember(x => x.CompetitorDiscountSchemes, opt => opt.Ignore()));
+                Mapper.Map(client.Client, clientEntity);
                 clientEntity.Modified_Date = DateTime.Now;
+
+                TinyMapper.Bind<CompetitorDiscountSchemesModel, CompetitorDiscountSchemesEntity>();
+                if (client.CompetitorDiscountSchemes != null)
+                {
+                    for (int i = 0; i < client.CompetitorDiscountSchemes.Count; i++)
+                    {
+                        var competitorDS = client.CompetitorDiscountSchemes[i];
+                        var competitorDSEntity = TinyMapper.Map<CompetitorDiscountSchemesEntity>(competitorDS);
+                        var competitor = _competitorRepository.Get(y => y.Id == competitorDS.CompetitorId).First();
+                        competitorDSEntity.CompetitorEntity = competitor;
+                        competitor.CompetitorDiscountSchemes.Add(competitorDSEntity);
+                        clientEntity.CompetitorDiscountSchemes.Add(competitorDSEntity);
+                    }
+                }              
+
                 _repository.Update(clientEntity);
             }
             else if (complete == false)

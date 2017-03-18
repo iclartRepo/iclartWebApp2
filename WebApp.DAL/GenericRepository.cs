@@ -18,6 +18,15 @@ namespace WebApp.DAL
         {
             _dbSet = context.Set<TEntity>();
         }
+        public GenericRepository(DBContext contextInitial)
+        {
+            _dbSet = contextInitial.Set<TEntity>();
+        }
+        
+        public DBContext GetContext()
+        {
+            return context;
+        }
       
         public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "")
         {

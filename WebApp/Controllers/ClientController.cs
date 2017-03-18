@@ -132,7 +132,7 @@ namespace WebApp.Controllers
         /// <param name="client"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult AddClient(ClientModel client)
+        public ActionResult AddClient(ClientFormModel client)
         {
             try
             {
@@ -165,7 +165,7 @@ namespace WebApp.Controllers
         /// <param name="client"></param>
         /// <returns></returns>
         [HttpPut]
-        public ActionResult UpdateClient(ClientModel client)
+        public ActionResult UpdateClient(ClientFormModel client)
         {
             try
             {

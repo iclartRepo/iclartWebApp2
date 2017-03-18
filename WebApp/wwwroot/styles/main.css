@@ -39,6 +39,11 @@ body {
 
 #clientForm {
   margin-top: -20px; }
+  #clientForm .form-inline .form-group {
+    padding-right: 10px; }
+  #clientForm .table input {
+    width: 10%;
+    text-align: right; }
   #clientForm sup {
     color: red; }
   #clientForm small {

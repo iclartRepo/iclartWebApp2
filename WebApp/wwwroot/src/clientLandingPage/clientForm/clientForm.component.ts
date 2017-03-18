@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
 
 import { ClientService } from "../clientService.service";
+import { AdminService } from "../../adminLandingPage/adminService.service";
 
 import { IClient } from '../../interfaces/client.interface';
 import { IMessageResult } from '../../interfaces/messageResult.interface';
@@ -13,11 +14,24 @@ import { IMessageResult } from '../../interfaces/messageResult.interface';
 })
 export class ClientFormComponent implements OnInit {
 
-    constructor(private _router: Router, private _route: ActivatedRoute, private _service: ClientService, private _location: Location) {
+    constructor(private _router: Router, private _route: ActivatedRoute, private _service: ClientService, private _location: Location, private _adminService: AdminService) {
        
     }   
+    /* Competitor Discount Schemes Variables */
+    competitorDiscountSchemes: any[] = [];
+    competitorDs: any = {};
+    selectedCompetitor: any;
+    selectedDs: number;
+    resultCompetitors: IMessageResult = {
+        isError: false,
+        Result: null,
+        ResultList: null,
+        Message: ''
+    };
+    realListCompetitors: any[];
+    editForm: any = {};
+    editFormData: any = {};
 
-    previousUrl: string;
     clientId: number;
     tabNum: number = 1;
     result: IMessageResult = {
@@ -26,6 +40,7 @@ export class ClientFormComponent implements OnInit {
         ResultList: null,
         Message: ''
     };
+   
     errorMessage: string;
     client: IClient = {
         Id: 0,
@@ -119,10 +134,14 @@ export class ClientFormComponent implements OnInit {
         this.tabNum = tabNumber;
     }
 
-    /* Save Functions */
+    /* CRUD Functions */
     addClient(): void {
         if (this.clientId > 0) {
-            this._service.updateClient(this.client)
+            var clientForm: any = {
+                "Client": this.client,
+                "CompetitorDiscountSchemes": this.competitorDiscountSchemes
+            };
+            this._service.updateClient(clientForm)
                 .subscribe(client => {
                     this.result = client;
                     if (this.result.isError == false) {
@@ -131,7 +150,11 @@ export class ClientFormComponent implements OnInit {
                 },
                 error => this.errorMessage = <any>error);
         } else {
-            this._service.addClient(this.client)
+            var clientForm: any = {
+                "Client": this.client,
+                "CompetitorDiscountSchemes": this.competitorDiscountSchemes
+            };
+            this._service.addClient(clientForm)
                 .subscribe(client => {
                     this.result = client;
                     if (this.result.isError == false) {
@@ -142,7 +165,47 @@ export class ClientFormComponent implements OnInit {
         }
        
     }
-
+    edit(id: number): void {
+        this.editForm[id] = true;
+    }
+    addCompetitorDS(): void {        
+        this.competitorDs = {
+            "CompetitorId": this.selectedCompetitor.Id,
+            "Name": this.selectedCompetitor.Name,
+            "DiscountScheme": this.selectedDs,
+            "Competitor": this.selectedCompetitor
+        };
+        this.editForm[this.selectedCompetitor.Id] = false;
+        this.editFormData[this.selectedCompetitor.Id] = this.selectedDs;
+        this.removeFromCompetitorList(this.selectedCompetitor.Id);
+        this.competitorDiscountSchemes.push(this.competitorDs);
+        this.selectedCompetitor = null;
+        this.selectedDs = null;        
+    }
+    updateDs(id: number): void {
+        this.competitorDiscountSchemes.forEach((item, index) => {
+            if (item.CompetitorId == id) {
+                item.DiscountScheme = this.editFormData[id];
+            }
+        });
+        this.editForm[id] = false;
+        console.log(this.competitorDiscountSchemes);
+    }
+    removeFromCompetitorList(id: number): void {
+        this.resultCompetitors.ResultList.forEach((item, index) => {
+            if (item.Id == id) {
+                this.resultCompetitors.ResultList.splice(index, 1);
+            }
+        });
+    }
+    deleteCompetitorDS(id: number, competitor:any): void {
+        this.competitorDiscountSchemes.forEach((item, index) => {
+            if (item.CompetitorId == id) {
+                this.competitorDiscountSchemes.splice(index, 1);
+            }
+        });
+        this.resultCompetitors.ResultList.push(competitor);
+    }
     /* Navigation Functions */
     onBack(): void {
         this._location.back();
@@ -157,12 +220,35 @@ export class ClientFormComponent implements OnInit {
                     this.getClient(this.clientId);
                 }
             });
+        this._adminService.getCompetitors()
+            .subscribe(
+            result => {
+                this.resultCompetitors = result;
+                this.realListCompetitors = result.ResultList;
+            },
+            error => this.errorMessage = <any>error);
     }
 
     /* Function to Get Client Info */
     getClient(id: number) {
         this._service.getClientInfo(id).subscribe(
-            result => { this.result = result; this.client = this.result.Result; },
+            result => {
+                this.result = result;
+                this.client = this.result.Result;
+                var dsSchemes: any[] = this.result.Result.CompetitorDiscountSchemes;
+                for (let entry of dsSchemes) {
+                    this.editForm[entry.CompetitorId] = false;
+                    this.editFormData[entry.CompetitorId] = entry.DiscountScheme;
+                    var ds: any = {
+                        "CompetitorId": entry.CompetitorId,
+                        "Name": entry.CompetitorEntity.Name,
+                        "DiscountScheme": entry.DiscountScheme,
+                        "Competitor": entry.CompetitorEntity
+                    }
+                    this.competitorDiscountSchemes.push(ds);
+                    this.removeFromCompetitorList(entry.CompetitorId);
+                }
+            },
             error => this.errorMessage = <any>error);
     }
 }

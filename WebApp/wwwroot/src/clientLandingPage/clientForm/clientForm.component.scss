@@ -1,4 +1,15 @@
 ﻿#clientForm {
+    .form-inline {
+        .form-group {
+            padding-right: 10px;
+        }
+    }
+    .table {
+        input {
+            width:10%;
+            text-align:right;
+        }
+    }
     sup {
         color:red;
     }
