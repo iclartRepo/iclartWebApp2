@@ -29,6 +29,8 @@ export class ClientFormComponent implements OnInit {
         Message: ''
     };
     realListCompetitors: any[];
+    editForm: any = {};
+    editFormData: any = {};
 
     clientId: number;
     tabNum: number = 1;
@@ -135,7 +137,11 @@ export class ClientFormComponent implements OnInit {
     /* CRUD Functions */
     addClient(): void {
         if (this.clientId > 0) {
-            this._service.updateClient(this.client)
+            var clientForm: any = {
+                "Client": this.client,
+                "CompetitorDiscountSchemes": this.competitorDiscountSchemes
+            };
+            this._service.updateClient(clientForm)
                 .subscribe(client => {
                     this.result = client;
                     if (this.result.isError == false) {
@@ -159,19 +165,31 @@ export class ClientFormComponent implements OnInit {
         }
        
     }
-    addCompetitorDS(): void {
-        
+    edit(id: number): void {
+        this.editForm[id] = true;
+    }
+    addCompetitorDS(): void {        
         this.competitorDs = {
             "CompetitorId": this.selectedCompetitor.Id,
             "Name": this.selectedCompetitor.Name,
             "DiscountScheme": this.selectedDs,
             "Competitor": this.selectedCompetitor
         };
+        this.editForm[this.selectedCompetitor.Id] = false;
+        this.editFormData[this.selectedCompetitor.Id] = this.selectedDs;
         this.removeFromCompetitorList(this.selectedCompetitor.Id);
         this.competitorDiscountSchemes.push(this.competitorDs);
         this.selectedCompetitor = null;
-        this.selectedDs = null;
-        
+        this.selectedDs = null;        
+    }
+    updateDs(id: number): void {
+        this.competitorDiscountSchemes.forEach((item, index) => {
+            if (item.CompetitorId == id) {
+                item.DiscountScheme = this.editFormData[id];
+            }
+        });
+        this.editForm[id] = false;
+        console.log(this.competitorDiscountSchemes);
     }
     removeFromCompetitorList(id: number): void {
         this.resultCompetitors.ResultList.forEach((item, index) => {
@@ -204,14 +222,33 @@ export class ClientFormComponent implements OnInit {
             });
         this._adminService.getCompetitors()
             .subscribe(
-            result => { this.resultCompetitors = result; this.realListCompetitors = result.ResultList; },
+            result => {
+                this.resultCompetitors = result;
+                this.realListCompetitors = result.ResultList;
+            },
             error => this.errorMessage = <any>error);
     }
 
     /* Function to Get Client Info */
     getClient(id: number) {
         this._service.getClientInfo(id).subscribe(
-            result => { this.result = result; this.client = this.result.Result; },
+            result => {
+                this.result = result;
+                this.client = this.result.Result;
+                var dsSchemes: any[] = this.result.Result.CompetitorDiscountSchemes;
+                for (let entry of dsSchemes) {
+                    this.editForm[entry.CompetitorId] = false;
+                    this.editFormData[entry.CompetitorId] = entry.DiscountScheme;
+                    var ds: any = {
+                        "CompetitorId": entry.CompetitorId,
+                        "Name": entry.CompetitorEntity.Name,
+                        "DiscountScheme": entry.DiscountScheme,
+                        "Competitor": entry.CompetitorEntity
+                    }
+                    this.competitorDiscountSchemes.push(ds);
+                    this.removeFromCompetitorList(entry.CompetitorId);
+                }
+            },
             error => this.errorMessage = <any>error);
     }
 }

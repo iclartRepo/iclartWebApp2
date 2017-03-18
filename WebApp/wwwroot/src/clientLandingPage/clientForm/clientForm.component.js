@@ -30,6 +30,8 @@ var ClientFormComponent = (function () {
             ResultList: null,
             Message: ''
         };
+        this.editForm = {};
+        this.editFormData = {};
         this.tabNum = 1;
         this.result = {
             isError: false,
@@ -126,7 +128,11 @@ var ClientFormComponent = (function () {
     ClientFormComponent.prototype.addClient = function () {
         var _this = this;
         if (this.clientId > 0) {
-            this._service.updateClient(this.client)
+            var clientForm = {
+                "Client": this.client,
+                "CompetitorDiscountSchemes": this.competitorDiscountSchemes
+            };
+            this._service.updateClient(clientForm)
                 .subscribe(function (client) {
                 _this.result = client;
                 if (_this.result.isError == false) {
@@ -148,6 +154,9 @@ var ClientFormComponent = (function () {
             }, function (error) { return _this.errorMessage = error; });
         }
     };
+    ClientFormComponent.prototype.edit = function (id) {
+        this.editForm[id] = true;
+    };
     ClientFormComponent.prototype.addCompetitorDS = function () {
         this.competitorDs = {
             "CompetitorId": this.selectedCompetitor.Id,
@@ -155,10 +164,22 @@ var ClientFormComponent = (function () {
             "DiscountScheme": this.selectedDs,
             "Competitor": this.selectedCompetitor
         };
+        this.editForm[this.selectedCompetitor.Id] = false;
+        this.editFormData[this.selectedCompetitor.Id] = this.selectedDs;
         this.removeFromCompetitorList(this.selectedCompetitor.Id);
         this.competitorDiscountSchemes.push(this.competitorDs);
         this.selectedCompetitor = null;
         this.selectedDs = null;
+    };
+    ClientFormComponent.prototype.updateDs = function (id) {
+        var _this = this;
+        this.competitorDiscountSchemes.forEach(function (item, index) {
+            if (item.CompetitorId == id) {
+                item.DiscountScheme = _this.editFormData[id];
+            }
+        });
+        this.editForm[id] = false;
+        console.log(this.competitorDiscountSchemes);
     };
     ClientFormComponent.prototype.removeFromCompetitorList = function (id) {
         var _this = this;
@@ -191,12 +212,32 @@ var ClientFormComponent = (function () {
             }
         });
         this._adminService.getCompetitors()
-            .subscribe(function (result) { _this.resultCompetitors = result; _this.realListCompetitors = result.ResultList; }, function (error) { return _this.errorMessage = error; });
+            .subscribe(function (result) {
+            _this.resultCompetitors = result;
+            _this.realListCompetitors = result.ResultList;
+        }, function (error) { return _this.errorMessage = error; });
     };
     /* Function to Get Client Info */
     ClientFormComponent.prototype.getClient = function (id) {
         var _this = this;
-        this._service.getClientInfo(id).subscribe(function (result) { _this.result = result; _this.client = _this.result.Result; }, function (error) { return _this.errorMessage = error; });
+        this._service.getClientInfo(id).subscribe(function (result) {
+            _this.result = result;
+            _this.client = _this.result.Result;
+            var dsSchemes = _this.result.Result.CompetitorDiscountSchemes;
+            for (var _i = 0, dsSchemes_1 = dsSchemes; _i < dsSchemes_1.length; _i++) {
+                var entry = dsSchemes_1[_i];
+                _this.editForm[entry.CompetitorId] = false;
+                _this.editFormData[entry.CompetitorId] = entry.DiscountScheme;
+                var ds = {
+                    "CompetitorId": entry.CompetitorId,
+                    "Name": entry.CompetitorEntity.Name,
+                    "DiscountScheme": entry.DiscountScheme,
+                    "Competitor": entry.CompetitorEntity
+                };
+                _this.competitorDiscountSchemes.push(ds);
+                _this.removeFromCompetitorList(entry.CompetitorId);
+            }
+        }, function (error) { return _this.errorMessage = error; });
     };
     __decorate([
         core_1.ViewChild('clientForm'), 

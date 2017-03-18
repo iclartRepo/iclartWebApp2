@@ -165,7 +165,7 @@ namespace WebApp.Controllers
         /// <param name="client"></param>
         /// <returns></returns>
         [HttpPut]
-        public ActionResult UpdateClient(ClientModel client)
+        public ActionResult UpdateClient(ClientFormModel client)
         {
             try
             {

@@ -5,7 +5,7 @@
         <ul class="nav nav-tabs">
             <li [class.active]="tabNum == 1"><a (click)="setTab(1)"><i class="fa fa-info-circle" aria-hidden="true"></i> <span class="hidden-xs">Client Info</span></a></li>
             <li [class.active]="tabNum == 2"><a (click)="setTab(2)"><i class="fa fa-money" aria-hidden="true"></i> <span class="hidden-xs">Financial Info</span></a></li>
-            <li [class.active]="tabNum == 3"><a (click)="setTab(3)">Discount Schemes</a></li>
+            <li [class.active]="tabNum == 3"><a (click)="setTab(3)"><i class="fa fa-arrow-down" aria-hidden="true"></i> <span class="hidden-xs">Discount Schemes</span></a></li>
         </ul>
         <div class="client-form">
           <form #clientForm="ngForm"  novalidate>
@@ -132,7 +132,7 @@
                           <label for="exampleInputEmail2">Discount Scheme: </label>
                           <input type="number" name="dsCompetitor" [(ngModel)]="selectedDs" class="form-control" id="exampleInputEmail2" placeholder="Discount Scheme">
                       </div>
-                      <button class="btn btn-primary" (click)="addCompetitorDS()">Add Discount Scheme</button>
+                      <button class="btn btn-primary" (click)="addCompetitorDS()" [disabled]="this.selectedCompetitor == null || this.selectedDs == null">Add Discount Scheme</button>
                   </div>
                   <table class="table">
                       <thead>
@@ -146,8 +146,22 @@
                       <tbody>
                           <tr *ngFor="let ds of competitorDiscountSchemes">
                               <td>{{ds.Name}}</td>
-                              <td>{{ds.DiscountScheme}}%</td>
-                              <td></td>
+                              <td>
+                                  <div *ngIf="editForm[ds.CompetitorId] == false">
+                                      {{editFormData[ds.CompetitorId]}}%
+                                  </div>
+                                  <div *ngIf="editForm[ds.CompetitorId] == true">
+                                      <input type="text" class="form-control" [(ngModel)]="editFormData[ds.CompetitorId]" name="editForm" />
+                                  </div>  
+                              </td>
+                              <td>
+                                  <div *ngIf="editForm[ds.CompetitorId] == false">
+                                      <button class="btn btn-success btn-sm" (click)="edit(ds.CompetitorId)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                  </div>
+                                  <div *ngIf="editForm[ds.CompetitorId] == true">
+                                      <button class="btn btn-success btn-sm" (click)="updateDs(ds.CompetitorId)" [disabled]="editFormData[ds.CompetitorId] == null"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                  </div> 
+                              </td>
                               <td><button class="btn btn-danger btn-sm" (click)="deleteCompetitorDS(ds.CompetitorId, ds.Competitor)"><i class="fa fa-times" aria-hidden="true"></i></button></td>
                           </tr>
                       </tbody>
