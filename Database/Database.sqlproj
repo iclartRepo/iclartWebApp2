@@ -7,7 +7,7 @@
     <Name>Database</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{15dc5e60-760c-4f20-8871-91360a63724c}</ProjectGuid>
+    <ProjectGuid>{d7812d3f-4621-4d89-8f42-0b8e24e67cd7}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
@@ -57,14 +57,5 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
-    <Folder Include="dbo\" />
-    <Folder Include="dbo\Tables\" />
-    <Folder Include="Security\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Build Include="dbo\Tables\ClientEntities.sql" />
-    <Build Include="dbo\Tables\__MigrationHistory.sql" />
-    <Build Include="Security\IIS APPPOOL_Test.sql" />
-    <Build Include="Security\RoleMemberships.sql" />
   </ItemGroup>
 </Project>

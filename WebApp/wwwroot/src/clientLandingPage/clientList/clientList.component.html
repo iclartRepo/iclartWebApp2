@@ -1,27 +1,33 @@
 ﻿<div id="clientList">
    
     <div class="client-filter">
-        <div class="client-filter-label">
-            <label>Search:</label>
-        </div>
-        <div class="client-filter-input">
-            <input type="text" class="form-control" ng-model="vm.employeeName" />
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for client..." [(ngModel)]="clientName" (keyup.enter)="searchClient()">   
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="button" (click)="searchClient()" ><i class="fa fa-search" aria-hidden="true"></i></button>
+            </span>     
         </div>
     </div>
     <div class="add-client">
         <a class="btn btn-primary" (click)="addClient()">Add Client</a>
-    </div>
+    </div> 
     <table class="table table-responsive">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>TIN</th>
+                <th class="thead-name">Name</th>
+                <th>Telephone Number</th>
+                <th>Email</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let client of clients">
-                <td>{{client.Name}}</td>
-                <td>{{client.TIN}}</td>
+            <tr *ngFor="let client of result.ResultList">
+                <td><a [routerLink]="['/client-info', client.Id]">{{client.Name}}</a></td>
+                <td>{{client.Telephone_Number}}</td>
+                <td>{{client.Email}}</td>
+                <td><a class="btn btn-success btn-sm" [routerLink]="['/client-form', client.Id]"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                <td><button class="btn btn-danger btn-sm" (click)="deleteClient(client.Id)"><i class="fa fa-times" aria-hidden="true"></i></button></td>
             </tr>
         </tbody>
     </table>

@@ -2,16 +2,17 @@
     .add-client {
         float: right;
     }
+    .show-columns {        
+        float: left;
+       
+    }
     .client-filter {
         float: left;
-        width: 75%;
-        .client-filter-label {
-            display: inline-block;
-            margin-right: 10px;
-        }
-        .client-filter-input {
-            display: inline-block;
-            width: 75%;
+        width: 50%;
+    }
+    table {
+        .thead-name {
+            width:40%;
         }
     }
 }
