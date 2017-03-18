@@ -21,16 +21,17 @@ var ClientFormComponent = (function () {
         this._service = _service;
         this._location = _location;
         this._adminService = _adminService;
+        /* Competitor Discount Schemes Variables */
         this.competitorDiscountSchemes = [];
         this.competitorDs = {};
-        this.tabNum = 1;
-        this.result = {
+        this.resultCompetitors = {
             isError: false,
             Result: null,
             ResultList: null,
             Message: ''
         };
-        this.resultCompetitors = {
+        this.tabNum = 1;
+        this.result = {
             isError: false,
             Result: null,
             ResultList: null,
@@ -134,7 +135,11 @@ var ClientFormComponent = (function () {
             }, function (error) { return _this.errorMessage = error; });
         }
         else {
-            this._service.addClient(this.client)
+            var clientForm = {
+                "Client": this.client,
+                "CompetitorDiscountSchemes": this.competitorDiscountSchemes
+            };
+            this._service.addClient(clientForm)
                 .subscribe(function (client) {
                 _this.result = client;
                 if (_this.result.isError == false) {
@@ -147,11 +152,30 @@ var ClientFormComponent = (function () {
         this.competitorDs = {
             "CompetitorId": this.selectedCompetitor.Id,
             "Name": this.selectedCompetitor.Name,
-            "DiscountScheme": this.selectedDs
+            "DiscountScheme": this.selectedDs,
+            "Competitor": this.selectedCompetitor
         };
+        this.removeFromCompetitorList(this.selectedCompetitor.Id);
         this.competitorDiscountSchemes.push(this.competitorDs);
         this.selectedCompetitor = null;
         this.selectedDs = null;
+    };
+    ClientFormComponent.prototype.removeFromCompetitorList = function (id) {
+        var _this = this;
+        this.resultCompetitors.ResultList.forEach(function (item, index) {
+            if (item.Id == id) {
+                _this.resultCompetitors.ResultList.splice(index, 1);
+            }
+        });
+    };
+    ClientFormComponent.prototype.deleteCompetitorDS = function (id, competitor) {
+        var _this = this;
+        this.competitorDiscountSchemes.forEach(function (item, index) {
+            if (item.CompetitorId == id) {
+                _this.competitorDiscountSchemes.splice(index, 1);
+            }
+        });
+        this.resultCompetitors.ResultList.push(competitor);
     };
     /* Navigation Functions */
     ClientFormComponent.prototype.onBack = function () {
@@ -167,7 +191,7 @@ var ClientFormComponent = (function () {
             }
         });
         this._adminService.getCompetitors()
-            .subscribe(function (result) { _this.resultCompetitors = result; }, function (error) { return _this.errorMessage = error; });
+            .subscribe(function (result) { _this.resultCompetitors = result; _this.realListCompetitors = result.ResultList; }, function (error) { return _this.errorMessage = error; });
     };
     /* Function to Get Client Info */
     ClientFormComponent.prototype.getClient = function (id) {

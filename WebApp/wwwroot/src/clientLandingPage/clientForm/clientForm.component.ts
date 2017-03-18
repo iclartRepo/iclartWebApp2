@@ -17,11 +17,19 @@ export class ClientFormComponent implements OnInit {
     constructor(private _router: Router, private _route: ActivatedRoute, private _service: ClientService, private _location: Location, private _adminService: AdminService) {
        
     }   
-
+    /* Competitor Discount Schemes Variables */
     competitorDiscountSchemes: any[] = [];
     competitorDs: any = {};
     selectedCompetitor: any;
     selectedDs: number;
+    resultCompetitors: IMessageResult = {
+        isError: false,
+        Result: null,
+        ResultList: null,
+        Message: ''
+    };
+    realListCompetitors: any[];
+
     clientId: number;
     tabNum: number = 1;
     result: IMessageResult = {
@@ -30,12 +38,7 @@ export class ClientFormComponent implements OnInit {
         ResultList: null,
         Message: ''
     };
-    resultCompetitors: IMessageResult = {
-        isError: false,
-        Result: null,
-        ResultList: null,
-        Message: ''
-    };
+   
     errorMessage: string;
     client: IClient = {
         Id: 0,
@@ -141,7 +144,11 @@ export class ClientFormComponent implements OnInit {
                 },
                 error => this.errorMessage = <any>error);
         } else {
-            this._service.addClient(this.client)
+            var clientForm: any = {
+                "Client": this.client,
+                "CompetitorDiscountSchemes": this.competitorDiscountSchemes
+            };
+            this._service.addClient(clientForm)
                 .subscribe(client => {
                     this.result = client;
                     if (this.result.isError == false) {
@@ -153,16 +160,34 @@ export class ClientFormComponent implements OnInit {
        
     }
     addCompetitorDS(): void {
+        
         this.competitorDs = {
             "CompetitorId": this.selectedCompetitor.Id,
             "Name": this.selectedCompetitor.Name,
-            "DiscountScheme": this.selectedDs
+            "DiscountScheme": this.selectedDs,
+            "Competitor": this.selectedCompetitor
         };
+        this.removeFromCompetitorList(this.selectedCompetitor.Id);
         this.competitorDiscountSchemes.push(this.competitorDs);
         this.selectedCompetitor = null;
         this.selectedDs = null;
+        
     }
-
+    removeFromCompetitorList(id: number): void {
+        this.resultCompetitors.ResultList.forEach((item, index) => {
+            if (item.Id == id) {
+                this.resultCompetitors.ResultList.splice(index, 1);
+            }
+        });
+    }
+    deleteCompetitorDS(id: number, competitor:any): void {
+        this.competitorDiscountSchemes.forEach((item, index) => {
+            if (item.CompetitorId == id) {
+                this.competitorDiscountSchemes.splice(index, 1);
+            }
+        });
+        this.resultCompetitors.ResultList.push(competitor);
+    }
     /* Navigation Functions */
     onBack(): void {
         this._location.back();
@@ -179,7 +204,7 @@ export class ClientFormComponent implements OnInit {
             });
         this._adminService.getCompetitors()
             .subscribe(
-            result => { this.resultCompetitors = result;  },
+            result => { this.resultCompetitors = result; this.realListCompetitors = result.ResultList; },
             error => this.errorMessage = <any>error);
     }
 

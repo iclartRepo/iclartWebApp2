@@ -139,12 +139,16 @@
                           <tr>
                               <th>Competitor Name</th>
                               <th>Discount Scheme</th>
+                              <th>Edit</th>
+                              <th>Delete</th>
                           </tr>
                       </thead>
                       <tbody>
                           <tr *ngFor="let ds of competitorDiscountSchemes">
                               <td>{{ds.Name}}</td>
                               <td>{{ds.DiscountScheme}}%</td>
+                              <td></td>
+                              <td><button class="btn btn-danger btn-sm" (click)="deleteCompetitorDS(ds.CompetitorId, ds.Competitor)"><i class="fa fa-times" aria-hidden="true"></i></button></td>
                           </tr>
                       </tbody>
                   </table>
