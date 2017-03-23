@@ -9,7 +9,7 @@ import { IMessageResult } from '../../interfaces/messageResult.interface';
     templateUrl: 'wwwroot/src/clientLandingPage/clientList/clientList.component.html'
 })
 export class ClientListComponent implements OnInit {
-
+    clientToDelete: number;
     clientName: string = "";
     result: IMessageResult = {
         isError: false,
@@ -33,8 +33,8 @@ export class ClientListComponent implements OnInit {
     addClient(): void {
         this._route.navigate(['/client-form']);
     }
-    deleteClient(id: number): void {
-        this._clientService.deleteClient(id)
+    deleteClient(): void {
+        this._clientService.deleteClient(this.clientToDelete)
             .subscribe(deleteResponse => {
                 this.resultDeletion = deleteResponse;
                 if (this.resultDeletion.isError == false) 
@@ -54,7 +54,9 @@ export class ClientListComponent implements OnInit {
             .subscribe(peoples => this.result = peoples,
             error => this.errorMessage = <any>error);
     }
-
+    setClient(id: number): void {
+        this.clientToDelete = id;
+    }
     /* Initialize Functions */
     ngOnInit(): void {
         this._clientService.getClients()

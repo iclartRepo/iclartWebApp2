@@ -33,9 +33,9 @@ var ClientListComponent = (function () {
     ClientListComponent.prototype.addClient = function () {
         this._route.navigate(['/client-form']);
     };
-    ClientListComponent.prototype.deleteClient = function (id) {
+    ClientListComponent.prototype.deleteClient = function () {
         var _this = this;
-        this._clientService.deleteClient(id)
+        this._clientService.deleteClient(this.clientToDelete)
             .subscribe(function (deleteResponse) {
             _this.resultDeletion = deleteResponse;
             if (_this.resultDeletion.isError == false) {
@@ -52,6 +52,9 @@ var ClientListComponent = (function () {
         var _this = this;
         this._clientService.searchClients(this.clientName)
             .subscribe(function (peoples) { return _this.result = peoples; }, function (error) { return _this.errorMessage = error; });
+    };
+    ClientListComponent.prototype.setClient = function (id) {
+        this.clientToDelete = id;
     };
     /* Initialize Functions */
     ClientListComponent.prototype.ngOnInit = function () {
