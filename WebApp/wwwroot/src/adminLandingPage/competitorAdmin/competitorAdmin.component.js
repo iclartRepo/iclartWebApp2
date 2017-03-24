@@ -58,9 +58,9 @@ var CompetitorAdminComponent = (function () {
             }
         }, function (error) { return _this.errorMessage = error; });
     };
-    CompetitorAdminComponent.prototype.deleteCompetitor = function (id) {
+    CompetitorAdminComponent.prototype.deleteCompetitor = function () {
         var _this = this;
-        this._service.deleteCompetitor(id)
+        this._service.deleteCompetitor(this.competitorToDelete)
             .subscribe(function (deleteResponse) {
             _this.resultForm = deleteResponse;
             if (_this.resultForm.isError == false) {
@@ -77,6 +77,9 @@ var CompetitorAdminComponent = (function () {
     };
     CompetitorAdminComponent.prototype.edit = function (id) {
         this.editForm[id] = true;
+    };
+    CompetitorAdminComponent.prototype.setCompetitor = function (id) {
+        this.competitorToDelete = id;
     };
     /* Validation */
     CompetitorAdminComponent.prototype.checkIfExist = function (name, id) {

@@ -9,7 +9,7 @@ import { IMessageResult } from '../../interfaces/messageResult.interface';
     templateUrl: 'wwwroot/src/adminLandingPage/competitorAdmin/competitorAdmin.component.html'
 })
 export class CompetitorAdminComponent implements OnInit {
-
+    competitorToDelete: number;
     newCompetitor: string = "";
     editForm: any = {};
     editFormData: any = {};
@@ -59,8 +59,8 @@ export class CompetitorAdminComponent implements OnInit {
             },
             error => this.errorMessage = <any>error);
     }
-    deleteCompetitor(id: number): void {
-        this._service.deleteCompetitor(id)
+    deleteCompetitor(): void {
+        this._service.deleteCompetitor(this.competitorToDelete)
             .subscribe(deleteResponse => {
                 this.resultForm = deleteResponse;
                 if (this.resultForm.isError == false) {
@@ -79,7 +79,9 @@ export class CompetitorAdminComponent implements OnInit {
     edit(id: number): void {
         this.editForm[id] = true;
     }
-
+    setCompetitor(id: number): void {
+        this.competitorToDelete = id;
+    }
     /* Validation */
     checkIfExist(name: string, id:number): boolean {         
         for (let entry of this.result.ResultList) {
