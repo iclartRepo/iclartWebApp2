@@ -13,6 +13,7 @@ var router_1 = require('@angular/router');
 var shared_module_1 = require('../shared/shared.module');
 var productService_service_1 = require('./productService.service');
 var mainProductPage_component_1 = require('./mainProductPage/mainProductPage.component');
+var productCategory_component_1 = require('./productCategory/productCategory.component');
 var ProductModule = (function () {
     function ProductModule() {
     }
@@ -21,7 +22,7 @@ var ProductModule = (function () {
             imports: [router_1.RouterModule.forChild([
                     { path: 'products', component: mainProductPage_component_1.MainProductPageComponent }
                 ]), shared_module_1.SharedModule],
-            declarations: [mainProductPage_component_1.MainProductPageComponent],
+            declarations: [mainProductPage_component_1.MainProductPageComponent, productCategory_component_1.ProductCategoryComponent],
             providers: [productService_service_1.ProductService]
         }), 
         __metadata('design:paramtypes', [])

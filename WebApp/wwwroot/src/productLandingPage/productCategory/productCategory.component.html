@@ -1,0 +1,12 @@
+﻿<div id="productCategory">
+    <div class="productCategory-display">
+        <label>New Product Category:</label>
+    </div>
+    <div class="productCategory-display">
+        <input type="text" class="form-control" name="category" [(ngModel)]="newCategory" />
+    </div>
+    <div class="productCategory-display">
+        <button class="btn btn-primary"  [disabled]="newCategory == ''">Add Product Category</button>
+    </div>   
+
+</div>
