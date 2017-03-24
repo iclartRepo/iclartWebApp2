@@ -19,6 +19,7 @@ var mainLandingPage_component_1 = require('./src/mainLandingPage/mainLandingPage
 /* Modules */
 var client_module_1 = require('./src/clientLandingPage/client.module');
 var admin_module_1 = require('./src/adminLandingPage/admin.module');
+var product_module_1 = require('./src/productLandingPage/product.module');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -30,7 +31,8 @@ var AppModule = (function () {
                 ]),
                 http_1.HttpModule,
                 client_module_1.ClientModule,
-                admin_module_1.AdminModule],
+                admin_module_1.AdminModule,
+                product_module_1.ProductModule],
             declarations: [app_component_1.AppComponent,
                 header_component_1.HeaderComponent,
                 mainLandingPage_component_1.MainComponent],

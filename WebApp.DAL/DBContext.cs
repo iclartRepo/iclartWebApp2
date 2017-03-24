@@ -18,6 +18,7 @@ namespace WebApp.DAL
         public DbSet<ClientEntity> Clients { get; set; }
         public DbSet<CompetitorEntity> Competitors { get; set; }
         public DbSet<CompetitorDiscountSchemesEntity> CompetitorDiscountSchemes { get; set; }
+        public DbSet<ProductCategoryEntity> ProductCategories { get; set; }
     }
     public class IclartDBInitializer : CreateDatabaseIfNotExists<DBContext>
     {

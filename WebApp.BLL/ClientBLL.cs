@@ -154,9 +154,9 @@ namespace WebApp.BLL
         {
             var clients = _repository.Get();
             var clientCheck = (from c in clients
-                               where c.Name.Trim(' ').ToLower() == client.Name.Trim(' ').ToLower()
+                               where c.Name.Trim(' ').ToLower() == client.Name.Trim(' ').ToLower() && c.IsDeleted == false
                                select c).ToList();
-            if (clientCheck.Count == 0 || client.Name == clientCheck[0].Name)
+            if (clientCheck.Count == 0 || client.Id == clientCheck[0].Id)
             {
                 return true;
             }

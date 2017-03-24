@@ -109,3 +109,6 @@ body {
 #competitorAdmin .competitorAdmin-display {
   display: inline-block; }
 
+#mainProductPage ul a {
+  cursor: pointer; }
+
