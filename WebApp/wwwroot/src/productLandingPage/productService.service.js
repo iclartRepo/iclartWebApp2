@@ -20,6 +20,23 @@ var ProductService = (function () {
         this._http = _http;
         this.baseUrl = "/Product/";
     }
+    ProductService.prototype.getProductCategories = function () {
+        return this._http.get(this.baseUrl + "GetProductCategories")
+            .map(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    ProductService.prototype.addProductCategory = function (name) {
+        return this._http.post(this.baseUrl + "AddProductCategory", { name: name })
+            .map(function (response) { return response.json(); })
+            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
+            .catch(this.handleError);
+    };
+    ProductService.prototype.deleteProductCategory = function (id) {
+        return this._http.delete(this.baseUrl + "DeleteProductCategory?id=" + id)
+            .map(function (response) { return response.json(); })
+            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
+            .catch(this.handleError);
+    };
     ProductService.prototype.handleError = function (error) {
         // in a real world app, we may send the server to some remote logging infrastructure
         // instead of just logging it to the console

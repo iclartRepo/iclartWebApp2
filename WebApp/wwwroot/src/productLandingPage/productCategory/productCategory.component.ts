@@ -9,7 +9,7 @@ import { IMessageResult } from '../../interfaces/messageResult.interface';
     templateUrl: 'wwwroot/src/productLandingPage/productCategory/productCategory.component.html'
 })
 export class ProductCategoryComponent implements OnInit {
-
+    categoryToDelete: number;
     newCategory: string = "";
     editForm: any = {};
     editFormData: any = {};
@@ -33,9 +33,51 @@ export class ProductCategoryComponent implements OnInit {
         private _route: ActivatedRoute,
         private _service: ProductService) {
     }
-
+    /* CRUD Functionalities */
+    addCategory(): void {
+        this._service.addProductCategory(this.newCategory)
+            .subscribe(addResponse => {
+                this.resultForm = addResponse;
+                if (this.resultForm.isError == false) {
+                    this.getCategories();
+                    this.newCategory = "";
+                }
+            },
+            error => this.errorMessage = <any>error);
+    }
+    deleteProductCategory(): void {
+        this._service.deleteProductCategory(this.categoryToDelete)
+            .subscribe(deleteResponse => {
+                this.resultForm = deleteResponse;
+                if (this.resultForm.isError == false) {
+                    this.getCategories();
+                }
+            },
+            error => this.errorMessage = <any>error);
+    }
+    setCategoryToDelete(id: number): void {
+        this.categoryToDelete = id;
+    }
+    getCategories(): void {
+        this._service.getProductCategories()
+            .subscribe(categories => {
+                this.result = categories;
+            },
+            error => this.errorMessage = <any>error);
+    }
+    edit(id: number): void {
+        this.editForm[id] = true;
+    }
     /* Initializer and Native Functions */
     ngOnInit(): void {
-    
+        this._service.getProductCategories()
+            .subscribe(categories => {
+                this.result = categories; 
+                for (let entry of this.result.ResultList) {
+                    this.editForm[entry.Id] = false;
+                    this.editFormData[entry.Id] = entry.Name;
+                }            
+            },
+            error => this.errorMessage = <any>error);
     }
 }

@@ -32,8 +32,53 @@ var ProductCategoryComponent = (function () {
             Message: ''
         };
     }
+    /* CRUD Functionalities */
+    ProductCategoryComponent.prototype.addCategory = function () {
+        var _this = this;
+        this._service.addProductCategory(this.newCategory)
+            .subscribe(function (addResponse) {
+            _this.resultForm = addResponse;
+            if (_this.resultForm.isError == false) {
+                _this.getCategories();
+                _this.newCategory = "";
+            }
+        }, function (error) { return _this.errorMessage = error; });
+    };
+    ProductCategoryComponent.prototype.deleteProductCategory = function () {
+        var _this = this;
+        this._service.deleteProductCategory(this.categoryToDelete)
+            .subscribe(function (deleteResponse) {
+            _this.resultForm = deleteResponse;
+            if (_this.resultForm.isError == false) {
+                _this.getCategories();
+            }
+        }, function (error) { return _this.errorMessage = error; });
+    };
+    ProductCategoryComponent.prototype.setCategoryToDelete = function (id) {
+        this.categoryToDelete = id;
+    };
+    ProductCategoryComponent.prototype.getCategories = function () {
+        var _this = this;
+        this._service.getProductCategories()
+            .subscribe(function (categories) {
+            _this.result = categories;
+        }, function (error) { return _this.errorMessage = error; });
+    };
+    ProductCategoryComponent.prototype.edit = function (id) {
+        this.editForm[id] = true;
+    };
     /* Initializer and Native Functions */
     ProductCategoryComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._service.getProductCategories()
+            .subscribe(function (categories) {
+            _this.result = categories;
+            for (var _i = 0, _a = _this.result.ResultList; _i < _a.length; _i++) {
+                var entry = _a[_i];
+                _this.editForm[entry.Id] = false;
+                _this.editFormData[entry.Id] = entry.Name;
+            }
+        }, function (error) { return _this.errorMessage = error; });
     };
     ProductCategoryComponent = __decorate([
         core_1.Component({
