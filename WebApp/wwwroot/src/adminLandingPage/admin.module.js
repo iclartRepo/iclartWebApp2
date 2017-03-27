@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
+var angular2_highcharts_1 = require('angular2-highcharts');
 var shared_module_1 = require('../shared/shared.module');
 var adminService_service_1 = require('./adminService.service');
 var competitorAdmin_component_1 = require('./competitorAdmin/competitorAdmin.component');
@@ -20,7 +21,7 @@ var AdminModule = (function () {
         core_1.NgModule({
             imports: [router_1.RouterModule.forChild([
                     { path: 'competitors', component: competitorAdmin_component_1.CompetitorAdminComponent }
-                ]), shared_module_1.SharedModule],
+                ]), shared_module_1.SharedModule, angular2_highcharts_1.ChartModule.forRoot(require('highcharts'))],
             declarations: [competitorAdmin_component_1.CompetitorAdminComponent],
             providers: [adminService_service_1.AdminService]
         }), 

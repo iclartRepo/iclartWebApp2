@@ -24,7 +24,9 @@
             '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
 
             // other libraries
-            'rxjs': 'npm:rxjs'
+            'rxjs': 'npm:rxjs',
+            'angular2-highcharts': 'node_modules/angular2-highcharts',
+            'highcharts': 'node_modules/highcharts',
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
@@ -33,6 +35,14 @@
                 defaultExtension: 'js'
             },
             rxjs: {
+                defaultExtension: 'js'
+            },
+            highcharts: {
+                main: './highcharts.js',
+                defaultExtension: 'js'
+            },
+            'angular2-highcharts': {
+                main: './index.js',
                 defaultExtension: 'js'
             }
         }

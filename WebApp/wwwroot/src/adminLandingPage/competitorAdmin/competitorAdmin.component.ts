@@ -27,13 +27,25 @@ export class CompetitorAdminComponent implements OnInit {
     };
     errorMessage: string;
 
-
-
+    options: Object;
+   
+    seriesName: any;
     constructor(private _router: Router,
         private _route: ActivatedRoute,
         private _service: AdminService) {
-    }
 
+        this.options = {
+            title: { text: 'mouseOver series events example' },
+            chart: { zoomType: 'x' },
+            series: [
+                { name: 'serie 1', data: [29.9, 71.5, 106.4, 129.2, 45, 13, 120], },
+                { name: 'serie 2', data: [-29.9, 4, -106.4, 0, 10, -100, 120] }
+            ]
+        };
+    }
+    onSeriesMouseOver(e:any) {
+        this.seriesName = e.context.name;
+    }
     /* CRUD Functionalities  */
     addCompetitor(): void {
         this._service.addCompetitor(this.newCompetitor)

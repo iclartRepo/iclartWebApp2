@@ -31,7 +31,18 @@ var CompetitorAdminComponent = (function () {
             ResultList: null,
             Message: ''
         };
+        this.options = {
+            title: { text: 'mouseOver series events example' },
+            chart: { zoomType: 'x' },
+            series: [
+                { name: 'serie 1', data: [29.9, 71.5, 106.4, 129.2, 45, 13, 120], },
+                { name: 'serie 2', data: [-29.9, 4, -106.4, 0, 10, -100, 120] }
+            ]
+        };
     }
+    CompetitorAdminComponent.prototype.onSeriesMouseOver = function (e) {
+        this.seriesName = e.context.name;
+    };
     /* CRUD Functionalities  */
     CompetitorAdminComponent.prototype.addCompetitor = function () {
         var _this = this;
