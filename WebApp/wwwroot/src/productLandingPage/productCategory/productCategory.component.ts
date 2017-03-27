@@ -1,16 +1,16 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { AdminService } from '../adminService.service';
+import { ProductService } from '../productService.service';
 import { IMessageResult } from '../../interfaces/messageResult.interface';
 
 @Component({
-    selector: 'web-view-client',
-    templateUrl: 'wwwroot/src/adminLandingPage/competitorAdmin/competitorAdmin.component.html'
+    selector: 'web-view-product-category',
+    templateUrl: 'wwwroot/src/productLandingPage/productCategory/productCategory.component.html'
 })
-export class CompetitorAdminComponent implements OnInit {
-    competitorToDelete: number;
-    newCompetitor: string = "";
+export class ProductCategoryComponent implements OnInit {
+    categoryToDelete: number;
+    newCategory: string = "";
     editForm: any = {};
     editFormData: any = {};
     result: IMessageResult = {
@@ -31,76 +31,73 @@ export class CompetitorAdminComponent implements OnInit {
 
     constructor(private _router: Router,
         private _route: ActivatedRoute,
-        private _service: AdminService) {
+        private _service: ProductService) {
     }
-
-    /* CRUD Functionalities  */
-    addCompetitor(): void {
-        this._service.addCompetitor(this.newCompetitor)
+    /* CRUD Functionalities */
+    addCategory(): void {
+        this._service.addProductCategory(this.newCategory)
             .subscribe(addResponse => {
                 this.resultForm = addResponse;
                 if (this.resultForm.isError == false) {
-                    this.getCompetitors();
-                    this.newCompetitor = "";
+                    this.getCategories();
+                    this.newCategory = "";
                 }
             },
             error => this.errorMessage = <any>error);
     }
-    getCompetitors(): void {
-        this._service.getCompetitors()
-            .subscribe(competitors => {
-                this.result = competitors;
-                this.editForm = {};
-                this.editFormData = {};
-                for (let entry of this.result.ResultList) {
-                    this.editForm[entry.Id] = false;
-                    this.editFormData[entry.Id] = entry.Name;
-                }
-            },
-            error => this.errorMessage = <any>error);
-    }
-    deleteCompetitor(): void {
-        this._service.deleteCompetitor(this.competitorToDelete)
+    deleteProductCategory(): void {
+        this._service.deleteProductCategory(this.categoryToDelete)
             .subscribe(deleteResponse => {
                 this.resultForm = deleteResponse;
                 if (this.resultForm.isError == false) {
-                    this.getCompetitors();
+                    this.getCategories();
                 }
             },
             error => this.errorMessage = <any>error);
     }
-    updateCompetitor(id: number): void {
-        this._service.updateCompetitor(id, this.editFormData[id])
-            .subscribe(competitor => {
-                this.editForm[id] = false;
+    setCategoryToDelete(id: number): void {
+        this.categoryToDelete = id;
+    }
+    getCategories(): void {
+        this._service.getProductCategories()
+            .subscribe(categories => {
+                this.result = categories;
+                for (let entry of this.result.ResultList) {
+                    this.editForm[entry.Id] = false;
+                    this.editFormData[entry.Id] = entry.Name;
+                }     
             },
             error => this.errorMessage = <any>error);
     }
     edit(id: number): void {
         this.editForm[id] = true;
     }
-    setCompetitor(id: number): void {
-        this.competitorToDelete = id;
+    updateCategory(id: number): void {
+        this._service.updateProductCategory(id, this.editFormData[id])
+            .subscribe(category => {
+                this.editForm[id] = false;
+            },
+            error => this.errorMessage = <any>error);
     }
     /* Validation */
-    checkIfExist(name: string, id:number): boolean {         
+    checkIfExist(name: string, id: number): boolean {
         for (let entry of this.result.ResultList) {
             if (entry.Name == name && entry.Id != id) {
                 return true;
             }
-         }
+        }
         return false;
     }
     /* Initializer and Native Functions */
     ngOnInit(): void {
-        this._service.getCompetitors()
-            .subscribe(competitors => {
-                this.result = competitors;
+        this._service.getProductCategories()
+            .subscribe(categories => {
+                this.result = categories; 
                 for (let entry of this.result.ResultList) {
                     this.editForm[entry.Id] = false;
                     this.editFormData[entry.Id] = entry.Name;
-                }
-             },
+                }            
+            },
             error => this.errorMessage = <any>error);
     }
 }

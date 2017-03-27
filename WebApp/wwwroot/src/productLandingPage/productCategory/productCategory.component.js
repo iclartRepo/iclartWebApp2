@@ -10,13 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var adminService_service_1 = require('../adminService.service');
-var CompetitorAdminComponent = (function () {
-    function CompetitorAdminComponent(_router, _route, _service) {
+var productService_service_1 = require('../productService.service');
+var ProductCategoryComponent = (function () {
+    function ProductCategoryComponent(_router, _route, _service) {
         this._router = _router;
         this._route = _route;
         this._service = _service;
-        this.newCompetitor = "";
+        this.newCategory = "";
         this.editForm = {};
         this.editFormData = {};
         this.result = {
@@ -32,25 +32,36 @@ var CompetitorAdminComponent = (function () {
             Message: ''
         };
     }
-    /* CRUD Functionalities  */
-    CompetitorAdminComponent.prototype.addCompetitor = function () {
+    /* CRUD Functionalities */
+    ProductCategoryComponent.prototype.addCategory = function () {
         var _this = this;
-        this._service.addCompetitor(this.newCompetitor)
+        this._service.addProductCategory(this.newCategory)
             .subscribe(function (addResponse) {
             _this.resultForm = addResponse;
             if (_this.resultForm.isError == false) {
-                _this.getCompetitors();
-                _this.newCompetitor = "";
+                _this.getCategories();
+                _this.newCategory = "";
             }
         }, function (error) { return _this.errorMessage = error; });
     };
-    CompetitorAdminComponent.prototype.getCompetitors = function () {
+    ProductCategoryComponent.prototype.deleteProductCategory = function () {
         var _this = this;
-        this._service.getCompetitors()
-            .subscribe(function (competitors) {
-            _this.result = competitors;
-            _this.editForm = {};
-            _this.editFormData = {};
+        this._service.deleteProductCategory(this.categoryToDelete)
+            .subscribe(function (deleteResponse) {
+            _this.resultForm = deleteResponse;
+            if (_this.resultForm.isError == false) {
+                _this.getCategories();
+            }
+        }, function (error) { return _this.errorMessage = error; });
+    };
+    ProductCategoryComponent.prototype.setCategoryToDelete = function (id) {
+        this.categoryToDelete = id;
+    };
+    ProductCategoryComponent.prototype.getCategories = function () {
+        var _this = this;
+        this._service.getProductCategories()
+            .subscribe(function (categories) {
+            _this.result = categories;
             for (var _i = 0, _a = _this.result.ResultList; _i < _a.length; _i++) {
                 var entry = _a[_i];
                 _this.editForm[entry.Id] = false;
@@ -58,31 +69,18 @@ var CompetitorAdminComponent = (function () {
             }
         }, function (error) { return _this.errorMessage = error; });
     };
-    CompetitorAdminComponent.prototype.deleteCompetitor = function () {
-        var _this = this;
-        this._service.deleteCompetitor(this.competitorToDelete)
-            .subscribe(function (deleteResponse) {
-            _this.resultForm = deleteResponse;
-            if (_this.resultForm.isError == false) {
-                _this.getCompetitors();
-            }
-        }, function (error) { return _this.errorMessage = error; });
+    ProductCategoryComponent.prototype.edit = function (id) {
+        this.editForm[id] = true;
     };
-    CompetitorAdminComponent.prototype.updateCompetitor = function (id) {
+    ProductCategoryComponent.prototype.updateCategory = function (id) {
         var _this = this;
-        this._service.updateCompetitor(id, this.editFormData[id])
-            .subscribe(function (competitor) {
+        this._service.updateProductCategory(id, this.editFormData[id])
+            .subscribe(function (category) {
             _this.editForm[id] = false;
         }, function (error) { return _this.errorMessage = error; });
     };
-    CompetitorAdminComponent.prototype.edit = function (id) {
-        this.editForm[id] = true;
-    };
-    CompetitorAdminComponent.prototype.setCompetitor = function (id) {
-        this.competitorToDelete = id;
-    };
     /* Validation */
-    CompetitorAdminComponent.prototype.checkIfExist = function (name, id) {
+    ProductCategoryComponent.prototype.checkIfExist = function (name, id) {
         for (var _i = 0, _a = this.result.ResultList; _i < _a.length; _i++) {
             var entry = _a[_i];
             if (entry.Name == name && entry.Id != id) {
@@ -92,11 +90,11 @@ var CompetitorAdminComponent = (function () {
         return false;
     };
     /* Initializer and Native Functions */
-    CompetitorAdminComponent.prototype.ngOnInit = function () {
+    ProductCategoryComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this._service.getCompetitors()
-            .subscribe(function (competitors) {
-            _this.result = competitors;
+        this._service.getProductCategories()
+            .subscribe(function (categories) {
+            _this.result = categories;
             for (var _i = 0, _a = _this.result.ResultList; _i < _a.length; _i++) {
                 var entry = _a[_i];
                 _this.editForm[entry.Id] = false;
@@ -104,14 +102,14 @@ var CompetitorAdminComponent = (function () {
             }
         }, function (error) { return _this.errorMessage = error; });
     };
-    CompetitorAdminComponent = __decorate([
+    ProductCategoryComponent = __decorate([
         core_1.Component({
-            selector: 'web-view-client',
-            templateUrl: 'wwwroot/src/adminLandingPage/competitorAdmin/competitorAdmin.component.html'
+            selector: 'web-view-product-category',
+            templateUrl: 'wwwroot/src/productLandingPage/productCategory/productCategory.component.html'
         }), 
-        __metadata('design:paramtypes', [router_1.Router, router_1.ActivatedRoute, adminService_service_1.AdminService])
-    ], CompetitorAdminComponent);
-    return CompetitorAdminComponent;
+        __metadata('design:paramtypes', [router_1.Router, router_1.ActivatedRoute, productService_service_1.ProductService])
+    ], ProductCategoryComponent);
+    return ProductCategoryComponent;
 }());
-exports.CompetitorAdminComponent = CompetitorAdminComponent;
-//# sourceMappingURL=competitorAdmin.component.js.map
+exports.ProductCategoryComponent = ProductCategoryComponent;
+//# sourceMappingURL=productCategory.component.js.map

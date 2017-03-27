@@ -109,3 +109,11 @@ body {
 #competitorAdmin .competitorAdmin-display {
   display: inline-block; }
 
+#mainProductPage ul {
+  margin-bottom: 15px; }
+  #mainProductPage ul a {
+    cursor: pointer; }
+
+#productCategory .productCategory-display {
+  display: inline-block; }
+
