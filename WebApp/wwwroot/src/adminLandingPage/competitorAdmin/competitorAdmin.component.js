@@ -71,7 +71,7 @@ var CompetitorAdminComponent = (function () {
     CompetitorAdminComponent.prototype.updateCompetitor = function (id) {
         var _this = this;
         this._service.updateCompetitor(id, this.editFormData[id])
-            .subscribe(function (client) {
+            .subscribe(function (competitor) {
             _this.editForm[id] = false;
         }, function (error) { return _this.errorMessage = error; });
     };

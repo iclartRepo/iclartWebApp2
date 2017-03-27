@@ -85,6 +85,38 @@ namespace WebApp.Controllers
         }
 
         #endregion
+
+        #region PUT METHODS
+        [HttpPut]
+        public ActionResult UpdateProductCategory(int id, string name)
+        {
+            try
+            {
+                var productBLL = new ProductBLL();
+                productBLL.UpdateProductCategory(id, name);
+                var message = new MessageResult<ProductCategoryModel>
+                {
+                    isError = false,
+                    ResultList = null,
+                    Message = "Product Category updated successfully!",
+                    Result = null
+                };
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                var message = new MessageResult<ProductCategoryModel>
+                {
+                    isError = true,
+                    ResultList = null,
+                    Message = ex.Message,
+                    Result = null
+                };
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+        }
+        #endregion
+
         #region DELETE METHODS
         [HttpDelete]
         public ActionResult DeleteProductCategory(int id)

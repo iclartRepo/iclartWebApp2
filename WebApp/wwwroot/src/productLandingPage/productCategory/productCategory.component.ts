@@ -62,11 +62,31 @@ export class ProductCategoryComponent implements OnInit {
         this._service.getProductCategories()
             .subscribe(categories => {
                 this.result = categories;
+                for (let entry of this.result.ResultList) {
+                    this.editForm[entry.Id] = false;
+                    this.editFormData[entry.Id] = entry.Name;
+                }     
             },
             error => this.errorMessage = <any>error);
     }
     edit(id: number): void {
         this.editForm[id] = true;
+    }
+    updateCategory(id: number): void {
+        this._service.updateProductCategory(id, this.editFormData[id])
+            .subscribe(category => {
+                this.editForm[id] = false;
+            },
+            error => this.errorMessage = <any>error);
+    }
+    /* Validation */
+    checkIfExist(name: string, id: number): boolean {
+        for (let entry of this.result.ResultList) {
+            if (entry.Name == name && entry.Id != id) {
+                return true;
+            }
+        }
+        return false;
     }
     /* Initializer and Native Functions */
     ngOnInit(): void {

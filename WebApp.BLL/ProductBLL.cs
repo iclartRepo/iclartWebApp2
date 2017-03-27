@@ -21,12 +21,29 @@ namespace WebApp.BLL
         #region Product Category
         public void AddProductCategory(string name)
         {
-            var newCategory = new ProductCategoryEntity
+            if (ValidateIfCategoryExists(name, 0))
             {
-                Name = name,
-                CreatedDate = DateTime.Now
-            };
-            _categoryRepository.Insert(newCategory);
+                var newCategory = new ProductCategoryEntity
+                {
+                    Name = name,
+                    CreatedDate = DateTime.Now
+                };
+                _categoryRepository.Insert(newCategory);
+            }
+            else
+            {
+                throw new Exception("Product Category already exists!");
+            }          
+        }
+        public void UpdateProductCategory(int id, string name)
+        {
+            var categoryToUpdate = _categoryRepository.Get(i => i.Id == id).FirstOrDefault();
+            if (categoryToUpdate != null)
+            {
+                categoryToUpdate.Name = name;
+                categoryToUpdate.ModifiedDate = DateTime.Now;
+                _categoryRepository.Update(categoryToUpdate);
+            }
         }
         public void DeleteProductCategory(int id)
         {
@@ -44,5 +61,26 @@ namespace WebApp.BLL
         }
         #endregion
 
+        #region Validations
+        private bool ValidateIfCategoryExists(string name, int id)
+        {
+            var categories = _categoryRepository.Get();
+            var categoryCheck = (from c in categories
+                                 where c.Name.Trim(' ').ToLower() == name.Trim(' ').ToLower() && c.IsDeleted == false
+                               select c).ToList();
+            if (categoryCheck.Count == 0)
+            {
+                return true;
+            }
+            else if (id != 0 && id == categoryCheck[0].Id)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        #endregion
     }
 }

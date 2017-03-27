@@ -71,7 +71,7 @@ export class CompetitorAdminComponent implements OnInit {
     }
     updateCompetitor(id: number): void {
         this._service.updateCompetitor(id, this.editFormData[id])
-            .subscribe(client => {
+            .subscribe(competitor => {
                 this.editForm[id] = false;
             },
             error => this.errorMessage = <any>error);

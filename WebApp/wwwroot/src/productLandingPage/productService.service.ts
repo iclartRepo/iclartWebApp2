@@ -26,6 +26,12 @@ export class ProductService {
             .do(data => console.log('All: ' + JSON.stringify(data)))
             .catch(this.handleError);
     }
+    updateProductCategory(id: number, name: string): Observable<IMessageResult> {
+        return this._http.put(this.baseUrl + "UpdateProductCategory", { id: id, name: name })
+            .map((response: Response) => <IMessageResult>response.json())
+            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
     deleteProductCategory(id: number): Observable<IMessageResult> {
         return this._http.delete(this.baseUrl + "DeleteProductCategory?id=" + id)
             .map((response: Response) => <IMessageResult>response.json())

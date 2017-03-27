@@ -31,6 +31,12 @@ var ProductService = (function () {
             .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
             .catch(this.handleError);
     };
+    ProductService.prototype.updateProductCategory = function (id, name) {
+        return this._http.put(this.baseUrl + "UpdateProductCategory", { id: id, name: name })
+            .map(function (response) { return response.json(); })
+            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
+            .catch(this.handleError);
+    };
     ProductService.prototype.deleteProductCategory = function (id) {
         return this._http.delete(this.baseUrl + "DeleteProductCategory?id=" + id)
             .map(function (response) { return response.json(); })

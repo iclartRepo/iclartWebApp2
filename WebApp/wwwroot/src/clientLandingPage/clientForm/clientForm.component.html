@@ -1,6 +1,6 @@
 ﻿<div id="clientForm">
     <h3 class="clientForm-label">Add/Edit Client</h3>
-    <div class="alert alert-danger" *ngIf="result.isError">Client already exists!</div>  
+    <div class="alert alert-danger" *ngIf="result.isError">{{result.Message}}</div>  
     <div class="clientForm-group">  
         <ul class="nav nav-tabs">
             <li [class.active]="tabNum == 1"><a (click)="setTab(1)"><i class="fa fa-info-circle" aria-hidden="true"></i> <span class="hidden-xs">Client Info</span></a></li>

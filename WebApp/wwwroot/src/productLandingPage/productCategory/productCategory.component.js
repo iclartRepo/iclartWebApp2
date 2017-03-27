@@ -62,10 +62,32 @@ var ProductCategoryComponent = (function () {
         this._service.getProductCategories()
             .subscribe(function (categories) {
             _this.result = categories;
+            for (var _i = 0, _a = _this.result.ResultList; _i < _a.length; _i++) {
+                var entry = _a[_i];
+                _this.editForm[entry.Id] = false;
+                _this.editFormData[entry.Id] = entry.Name;
+            }
         }, function (error) { return _this.errorMessage = error; });
     };
     ProductCategoryComponent.prototype.edit = function (id) {
         this.editForm[id] = true;
+    };
+    ProductCategoryComponent.prototype.updateCategory = function (id) {
+        var _this = this;
+        this._service.updateProductCategory(id, this.editFormData[id])
+            .subscribe(function (category) {
+            _this.editForm[id] = false;
+        }, function (error) { return _this.errorMessage = error; });
+    };
+    /* Validation */
+    ProductCategoryComponent.prototype.checkIfExist = function (name, id) {
+        for (var _i = 0, _a = this.result.ResultList; _i < _a.length; _i++) {
+            var entry = _a[_i];
+            if (entry.Name == name && entry.Id != id) {
+                return true;
+            }
+        }
+        return false;
     };
     /* Initializer and Native Functions */
     ProductCategoryComponent.prototype.ngOnInit = function () {
