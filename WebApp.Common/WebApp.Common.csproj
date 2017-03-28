@@ -44,13 +44,17 @@
     <Compile Include="Entities\ClientEntity.cs" />
     <Compile Include="Entities\CompetitorDiscountSchemesEntity.cs" />
     <Compile Include="Entities\CompetitorEntity.cs" />
+    <Compile Include="Entities\CompetitorPricesEntity.cs" />
     <Compile Include="Entities\ProductCategoryEntity.cs" />
+    <Compile Include="Entities\ProductEntity.cs" />
     <Compile Include="Models\ClientFormModel.cs" />
     <Compile Include="Models\ClientModel.cs" />
     <Compile Include="Models\CompetitorDiscountSchemesModel.cs" />
     <Compile Include="Models\CompetitorModel.cs" />
+    <Compile Include="Models\CompetitorPricesModel.cs" />
     <Compile Include="Models\MessageResult.cs" />
     <Compile Include="Models\ProductCategoryModel.cs" />
+    <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

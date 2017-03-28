@@ -72,6 +72,22 @@
     <Compile Include="Migrations\201703241338030_AddProductCategoryTable.Designer.cs">
       <DependentUpon>201703241338030_AddProductCategoryTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703281019062_AddedProductTable.cs" />
+    <Compile Include="Migrations\201703281019062_AddedProductTable.Designer.cs">
+      <DependentUpon>201703281019062_AddedProductTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703281024191_AddedCompetitorPricesTable.cs" />
+    <Compile Include="Migrations\201703281024191_AddedCompetitorPricesTable.Designer.cs">
+      <DependentUpon>201703281024191_AddedCompetitorPricesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703281025483_AddedSoftDeleteBooleaninProduct.cs" />
+    <Compile Include="Migrations\201703281025483_AddedSoftDeleteBooleaninProduct.Designer.cs">
+      <DependentUpon>201703281025483_AddedSoftDeleteBooleaninProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703281036235_UpdatedProductTableConnecttoCompetitorPrices.cs" />
+    <Compile Include="Migrations\201703281036235_UpdatedProductTableConnecttoCompetitorPrices.Designer.cs">
+      <DependentUpon>201703281036235_UpdatedProductTableConnecttoCompetitorPrices.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -100,6 +116,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703241338030_AddProductCategoryTable.resx">
       <DependentUpon>201703241338030_AddProductCategoryTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703281019062_AddedProductTable.resx">
+      <DependentUpon>201703281019062_AddedProductTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703281024191_AddedCompetitorPricesTable.resx">
+      <DependentUpon>201703281024191_AddedCompetitorPricesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703281025483_AddedSoftDeleteBooleaninProduct.resx">
+      <DependentUpon>201703281025483_AddedSoftDeleteBooleaninProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703281036235_UpdatedProductTableConnecttoCompetitorPrices.resx">
+      <DependentUpon>201703281036235_UpdatedProductTableConnecttoCompetitorPrices.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

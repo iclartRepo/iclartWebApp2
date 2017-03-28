@@ -23,7 +23,7 @@ namespace WebApp.Controllers
                 {
                     var repository = new GenericRepository<ProductCategoryEntity>(context);
 
-                    var categories = repository.Get(i => i.IsDeleted == false).ToList();
+                    var categories = repository.Get(i => i.IsDeleted == false).OrderBy(i => i.Name).ToList();
 
                     TinyMapper.Bind<List<ProductCategoryEntity>, List<ProductCategoryModel>>();
 
@@ -51,6 +51,74 @@ namespace WebApp.Controllers
                 return Json(message, JsonRequestBehavior.AllowGet);
             }
            
+        }
+
+        [HttpGet]
+        public ActionResult GetProducts()
+        {
+            try
+            {
+                var productRepository = new GenericRepository<ProductEntity>();
+
+                var productEntities = productRepository.Get(i => i.IsDeleted == false).OrderBy(i => i.Name).ToList();
+
+                TinyMapper.Bind<List<ProductEntity>, List<ProductModel>>();
+                var productsModel = TinyMapper.Map<List<ProductModel>>(productEntities);
+
+                var message = new MessageResult<ProductModel>
+                {
+                    isError = false,
+                    ResultList = productsModel,
+                    Message = "Success",
+                    Result = null
+                };
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                var message = new MessageResult<ProductModel>
+                {
+                    isError = true,
+                    ResultList = null,
+                    Message = "Some error occured. Please contact the administrator.",
+                    Result = null
+                };
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult SearchProduct(string name)
+        {
+            try
+            {
+                var productRepository = new GenericRepository<ProductEntity>();
+
+                var productEntities = productRepository.Get(i => i.IsDeleted == false && i.Name.Contains(name)).OrderBy(i => i.Name).ToList();
+
+                TinyMapper.Bind<List<ProductEntity>, List<ProductModel>>();
+                var productsModel = TinyMapper.Map<List<ProductModel>>(productEntities);
+
+                var message = new MessageResult<ProductModel>
+                {
+                    isError = false,
+                    ResultList = productsModel,
+                    Message = "Success",
+                    Result = null
+                };
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                var message = new MessageResult<ProductModel>
+                {
+                    isError = true,
+                    ResultList = null,
+                    Message = "Some error occured. Please contact the administrator.",
+                    Result = null
+                };
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
         }
         #endregion
 

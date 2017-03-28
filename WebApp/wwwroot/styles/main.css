@@ -117,3 +117,10 @@ body {
 #productCategory .productCategory-display {
   display: inline-block; }
 
+#productList .add-product {
+  float: right; }
+
+#productList .product-filter {
+  float: left;
+  width: 50%; }
+

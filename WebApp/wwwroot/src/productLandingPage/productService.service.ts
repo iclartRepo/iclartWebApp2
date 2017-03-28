@@ -38,6 +38,17 @@ export class ProductService {
             .do(data => console.log('All: ' + JSON.stringify(data)))
             .catch(this.handleError);
     }
+
+    getProducts(): Observable<IMessageResult> {
+        return this._http.get(this.baseUrl + "GetProducts")
+            .map((response: Response) => <IMessageResult>response.json())
+            .catch(this.handleError);
+    }
+    searchProduct(name:string): Observable<IMessageResult> {
+        return this._http.get(this.baseUrl + "SearchProduct?name=" + name)
+            .map((response: Response) => <IMessageResult>response.json())
+            .catch(this.handleError);
+    }
     private handleError(error: Response) {
         // in a real world app, we may send the server to some remote logging infrastructure
         // instead of just logging it to the console

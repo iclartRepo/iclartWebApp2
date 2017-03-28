@@ -23,7 +23,7 @@ namespace WebApp.Controllers
             {
                 var clientRepository = new GenericRepository<ClientEntity>();
 
-                var clients = clientRepository.Get(i=>i.IsDeleted == false).ToList();
+                var clients = clientRepository.Get(i=>i.IsDeleted == false).OrderBy(i => i.Name).ToList();
 
                 TinyMapper.Bind<List<ClientEntity>, List<ClientModel>>();
                 var clientsModel = TinyMapper.Map<List<ClientModel>>(clients);

@@ -20,7 +20,7 @@ namespace WebApp.Controllers
             {
                 var competitorRepository = new GenericRepository<CompetitorEntity>();
 
-                var competitors = competitorRepository.Get().ToList();
+                var competitors = competitorRepository.Get().OrderBy(i => i.Name).ToList();
 
                 TinyMapper.Bind<List<CompetitorEntity>, List<CompetitorModel>>();
                 var competitorsModel = TinyMapper.Map<List<CompetitorModel>>(competitors);

@@ -11,12 +11,16 @@ namespace WebApp.BLL
     public class ProductBLL
     {
         private GenericRepository<ProductCategoryEntity> _categoryRepository;
+        private GenericRepository<ProductEntity> _productRepository;
+        private GenericRepository<CompetitorPricesEntity> _competitorPricesRepository;
         private DBContext context;
 
         public ProductBLL()
         {
             _categoryRepository = new GenericRepository<ProductCategoryEntity>();
             context = _categoryRepository.GetContext();
+            _productRepository = new GenericRepository<ProductEntity>(context);
+            _competitorPricesRepository = new GenericRepository<CompetitorPricesEntity>(context);
         }
         #region Product Category
         public void AddProductCategory(string name)
