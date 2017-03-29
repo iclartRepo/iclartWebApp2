@@ -60,7 +60,7 @@ namespace WebApp.Controllers
             {
                 var productRepository = new GenericRepository<ProductEntity>();
 
-                var productEntities = productRepository.Get(i => i.IsDeleted == false).OrderBy(i => i.Name).ToList();
+                var productEntities = productRepository.Get(i => i.IsDeleted == false).OrderBy(i => i.ProductCategory.Name).ThenBy(i => i.Name).ToList();
 
                 TinyMapper.Bind<List<ProductEntity>, List<ProductModel>>();
                 var productsModel = TinyMapper.Map<List<ProductModel>>(productEntities);

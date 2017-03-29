@@ -33,7 +33,10 @@ var ProductListComponent = (function () {
     ProductListComponent.prototype.searchProduct = function () {
         var _this = this;
         this._service.searchProduct(this.productName)
-            .subscribe(function (product) { return _this.result = product; }, function (error) { return _this.errorMessage = error; });
+            .subscribe(function (product) {
+            _this.result = product;
+            _this.productName = "";
+        }, function (error) { return _this.errorMessage = error; });
     };
     /* Initialize Functions */
     ProductListComponent.prototype.ngOnInit = function () {

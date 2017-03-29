@@ -51,7 +51,10 @@ var ClientListComponent = (function () {
     ClientListComponent.prototype.searchClient = function () {
         var _this = this;
         this._clientService.searchClients(this.clientName)
-            .subscribe(function (peoples) { return _this.result = peoples; }, function (error) { return _this.errorMessage = error; });
+            .subscribe(function (peoples) {
+            _this.result = peoples;
+            _this.clientName = "";
+        }, function (error) { return _this.errorMessage = error; });
     };
     ClientListComponent.prototype.setClient = function (id) {
         this.clientToDelete = id;

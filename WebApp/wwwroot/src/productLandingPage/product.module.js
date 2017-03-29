@@ -15,15 +15,17 @@ var productService_service_1 = require('./productService.service');
 var mainProductPage_component_1 = require('./mainProductPage/mainProductPage.component');
 var productCategory_component_1 = require('./productCategory/productCategory.component');
 var productList_component_1 = require('./productList/productList.component');
+var productForm_component_1 = require('./productForm/productForm.component');
 var ProductModule = (function () {
     function ProductModule() {
     }
     ProductModule = __decorate([
         core_1.NgModule({
             imports: [router_1.RouterModule.forChild([
-                    { path: 'products', component: mainProductPage_component_1.MainProductPageComponent }
+                    { path: 'products', component: mainProductPage_component_1.MainProductPageComponent },
+                    { path: 'productForm', component: productForm_component_1.ProductFormComponent }
                 ]), shared_module_1.SharedModule],
-            declarations: [mainProductPage_component_1.MainProductPageComponent, productCategory_component_1.ProductCategoryComponent, productList_component_1.ProductListComponent],
+            declarations: [mainProductPage_component_1.MainProductPageComponent, productCategory_component_1.ProductCategoryComponent, productList_component_1.ProductListComponent, productForm_component_1.ProductFormComponent],
             providers: [productService_service_1.ProductService]
         }), 
         __metadata('design:paramtypes', [])

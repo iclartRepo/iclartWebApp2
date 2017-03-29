@@ -1,0 +1,22 @@
+﻿#productForm {
+    margin-top:-20px;
+    .productForm-group {
+        .productForm-action-buttons {
+            position:absolute;
+            right:15px;
+            top: 65px;
+        }
+        sup {
+            color:red;
+        }
+        small {
+            color: red;
+        }
+        .form-inline {
+            .form-group {
+                padding-right: 10px;
+            }
+        }
+    }
+   
+}

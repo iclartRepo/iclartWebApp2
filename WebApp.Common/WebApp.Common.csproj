@@ -54,6 +54,7 @@
     <Compile Include="Models\CompetitorPricesModel.cs" />
     <Compile Include="Models\MessageResult.cs" />
     <Compile Include="Models\ProductCategoryModel.cs" />
+    <Compile Include="Models\ProductFormModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

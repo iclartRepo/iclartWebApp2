@@ -63,7 +63,7 @@ body {
   #clientForm .clientForm-group .client-form {
     overflow-x: hidden;
     overflow-y: scroll;
-    height: 500px;
+    height: 75vh;
     padding-top: 15px; }
   #clientForm .client-name {
     width: 100%; }
@@ -123,4 +123,17 @@ body {
 #productList .product-filter {
   float: left;
   width: 50%; }
+
+#productForm {
+  margin-top: -20px; }
+  #productForm .productForm-group .productForm-action-buttons {
+    position: absolute;
+    right: 15px;
+    top: 65px; }
+  #productForm .productForm-group sup {
+    color: red; }
+  #productForm .productForm-group small {
+    color: red; }
+  #productForm .productForm-group .form-inline .form-group {
+    padding-right: 10px; }
 
