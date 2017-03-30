@@ -144,7 +144,7 @@ export class ProductFormComponent implements OnInit {
             .subscribe(product => {
                 this.result = product;
                 if (this.result.isError == false) {
-                    this._location.back();
+                    this._router.navigate(['/products', 2]);
                 }
             },
             error => this.errorMessage = <any>error);

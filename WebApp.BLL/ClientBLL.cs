@@ -20,8 +20,8 @@ namespace WebApp.BLL
 
         public ClientBLL()
         {
-            _repository = new GenericRepository<ClientEntity>();
-            context = _repository.GetContext();
+            context = new DBContext();
+            _repository = new GenericRepository<ClientEntity>(context);
             _competitorRepository = new GenericRepository<CompetitorEntity>(context);
             _dsSchemesRepository = new GenericRepository<CompetitorDiscountSchemesEntity>(context);
         }

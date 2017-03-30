@@ -14,10 +14,12 @@ namespace WebApp.BLL
     public class CompetitorBLL
     {
         private GenericRepository<CompetitorEntity> _repository;
+        private DBContext context;
 
         public CompetitorBLL()
         {
-            _repository = new GenericRepository<CompetitorEntity>();
+            context = new DBContext();
+            _repository = new GenericRepository<CompetitorEntity>(context);
         }
         public void AddCompetitor(CompetitorModel competitor)
         {

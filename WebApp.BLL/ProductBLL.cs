@@ -16,12 +16,12 @@ namespace WebApp.BLL
         private GenericRepository<ProductEntity> _productRepository;
         private GenericRepository<CompetitorEntity> _competitorRepository;
         private GenericRepository<CompetitorPricesEntity> _competitorPricesRepository;
-        private DBContext context = new DBContext();
+        private DBContext context;
 
         public ProductBLL()
         {
-            _categoryRepository = new GenericRepository<ProductCategoryEntity>();
-            context = _categoryRepository.GetContext();
+            context = new DBContext();
+            _categoryRepository = new GenericRepository<ProductCategoryEntity>(context);
             _productRepository = new GenericRepository<ProductEntity>(context);
             _competitorPricesRepository = new GenericRepository<CompetitorPricesEntity>(context);
             _competitorRepository = new GenericRepository<CompetitorEntity>(context);
@@ -83,7 +83,7 @@ namespace WebApp.BLL
                 var productCategory = _categoryRepository.Get(i => i.Id == newProduct.ProductCategory.Id).First();                
                 productEntity.ProductCategory = productCategory;
 
-                if (newProduct.CompetitorPrices.Count != 0)
+                if (newProduct.CompetitorPrices != null)
                 {
                     TinyMapper.Bind<CompetitorPricesModel, CompetitorPricesEntity>();
                     for (int i = 0; i < newProduct.CompetitorPrices.Count; i++)

@@ -58,21 +58,25 @@ namespace WebApp.Controllers
         {
             try
             {
-                var productRepository = new GenericRepository<ProductEntity>();
-
-                var productEntities = productRepository.Get(i => i.IsDeleted == false).OrderBy(i => i.ProductCategory.Name).ThenBy(i => i.Name).ToList();
-
-                TinyMapper.Bind<List<ProductEntity>, List<ProductModel>>();
-                var productsModel = TinyMapper.Map<List<ProductModel>>(productEntities);
-
-                var message = new MessageResult<ProductModel>
+                using (var context = new DBContext())
                 {
-                    isError = false,
-                    ResultList = productsModel,
-                    Message = "Success",
-                    Result = null
-                };
-                return Json(message, JsonRequestBehavior.AllowGet);
+                    var productRepository = new GenericRepository<ProductEntity>(context);
+
+                    var productEntities = productRepository.Get(i => i.IsDeleted == false).OrderBy(i => i.ProductCategory.Name).ThenBy(i => i.Name).ToList();
+
+                    TinyMapper.Bind<List<ProductEntity>, List<ProductModel>>();
+                    var productsModel = TinyMapper.Map<List<ProductModel>>(productEntities);
+
+                    var message = new MessageResult<ProductModel>
+                    {
+                        isError = false,
+                        ResultList = productsModel,
+                        Message = "Success",
+                        Result = null
+                    };
+                    return Json(message, JsonRequestBehavior.AllowGet);
+                }
+               
             }
             catch (Exception ex)
             {
@@ -92,21 +96,25 @@ namespace WebApp.Controllers
         {
             try
             {
-                var productRepository = new GenericRepository<ProductEntity>();
-
-                var productEntities = productRepository.Get(i => i.IsDeleted == false && i.Name.Contains(name)).OrderBy(i => i.Name).ToList();
-
-                TinyMapper.Bind<List<ProductEntity>, List<ProductModel>>();
-                var productsModel = TinyMapper.Map<List<ProductModel>>(productEntities);
-
-                var message = new MessageResult<ProductModel>
+                using (var context = new DBContext())
                 {
-                    isError = false,
-                    ResultList = productsModel,
-                    Message = "Success",
-                    Result = null
-                };
-                return Json(message, JsonRequestBehavior.AllowGet);
+                    var productRepository = new GenericRepository<ProductEntity>(context);
+
+                    var productEntities = productRepository.Get(i => i.IsDeleted == false && i.Name.Contains(name)).OrderBy(i => i.Name).ToList();
+
+                    TinyMapper.Bind<List<ProductEntity>, List<ProductModel>>();
+                    var productsModel = TinyMapper.Map<List<ProductModel>>(productEntities);
+
+                    var message = new MessageResult<ProductModel>
+                    {
+                        isError = false,
+                        ResultList = productsModel,
+                        Message = "Success",
+                        Result = null
+                    };
+                    return Json(message, JsonRequestBehavior.AllowGet);
+                }
+                  
             }
             catch (Exception ex)
             {

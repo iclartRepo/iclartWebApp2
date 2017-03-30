@@ -134,7 +134,7 @@ var ProductFormComponent = (function () {
             .subscribe(function (product) {
             _this.result = product;
             if (_this.result.isError == false) {
-                _this._location.back();
+                _this._router.navigate(['/products', 2]);
             }
         }, function (error) { return _this.errorMessage = error; });
     };

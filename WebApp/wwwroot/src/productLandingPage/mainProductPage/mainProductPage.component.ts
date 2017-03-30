@@ -12,7 +12,7 @@ export class MainProductPageComponent implements OnInit {
     tabNum: number = 1;
 
 
-    constructor(private _router: Router) {
+    constructor(private _router: Router, private _route: ActivatedRoute) {
     }
 
     /* Navigation */
@@ -22,6 +22,18 @@ export class MainProductPageComponent implements OnInit {
     }
     /* Initializer and Native Functions */
     ngOnInit(): void {
-       
+        this._route.params.subscribe(
+            params => {
+                var tab: number = +params['tabNum'];
+                console.log(tab);
+                if (!isNaN(tab))
+                {
+                    this.tabNum = 2;
+                }
+                else
+                {
+                    this.tabNum = 1;
+                }
+            });
     }
 }

@@ -13,6 +13,7 @@ import { ProductFormComponent } from './productForm/productForm.component';
 @NgModule({
     imports: [RouterModule.forChild([
         { path: 'products', component: MainProductPageComponent },
+        { path: 'products/:tabNum', component: MainProductPageComponent },
         { path: 'productForm', component: ProductFormComponent }
     ]), SharedModule],
     declarations: [MainProductPageComponent, ProductCategoryComponent, ProductListComponent, ProductFormComponent],

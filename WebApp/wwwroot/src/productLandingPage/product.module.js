@@ -23,6 +23,7 @@ var ProductModule = (function () {
         core_1.NgModule({
             imports: [router_1.RouterModule.forChild([
                     { path: 'products', component: mainProductPage_component_1.MainProductPageComponent },
+                    { path: 'products/:tabNum', component: mainProductPage_component_1.MainProductPageComponent },
                     { path: 'productForm', component: productForm_component_1.ProductFormComponent }
                 ]), shared_module_1.SharedModule],
             declarations: [mainProductPage_component_1.MainProductPageComponent, productCategory_component_1.ProductCategoryComponent, productList_component_1.ProductListComponent, productForm_component_1.ProductFormComponent],
