@@ -122,6 +122,22 @@ var ProductFormComponent = (function () {
         });
         this.editForm[id] = false;
     };
+    ProductFormComponent.prototype.saveProduct = function () {
+        var _this = this;
+        var productForm = {
+            "Product": this.product,
+            "ProductCategory": this.selectedCategory,
+            "CompetitorPrices": this.competitorPrices
+        };
+        console.log(productForm);
+        this._service.addProduct(productForm)
+            .subscribe(function (product) {
+            _this.result = product;
+            if (_this.result.isError == false) {
+                _this._location.back();
+            }
+        }, function (error) { return _this.errorMessage = error; });
+    };
     ProductFormComponent.prototype.removeFromCompetitorList = function (id) {
         var _this = this;
         this.resultCompetitors.ResultList.forEach(function (item, index) {

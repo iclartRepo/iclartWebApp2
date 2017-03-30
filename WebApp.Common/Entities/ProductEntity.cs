@@ -14,6 +14,8 @@ namespace WebApp.Common.Entities
         public string Name { get; set; }
         public double CompanyPrice { get; set; }
         public bool IsDeleted { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
         [ForeignKey("ProductCategoryId")]
         public virtual ProductCategoryEntity ProductCategory { get; set; }
         public virtual ICollection<CompetitorPricesEntity> CompetitorPrices { get; set; }

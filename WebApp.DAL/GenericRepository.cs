@@ -20,6 +20,7 @@ namespace WebApp.DAL
         }
         public GenericRepository(DBContext contextInitial)
         {
+            context = contextInitial;
             _dbSet = contextInitial.Set<TEntity>();
         }
         

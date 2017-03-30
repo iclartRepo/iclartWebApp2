@@ -132,6 +132,23 @@ export class ProductFormComponent implements OnInit {
         });
         this.editForm[id] = false;
     }
+    saveProduct(): void {
+       
+        var productForm: any = {
+            "Product": this.product,
+            "ProductCategory": this.selectedCategory,
+            "CompetitorPrices": this.competitorPrices
+        };
+        console.log(productForm);
+        this._service.addProduct(productForm)
+            .subscribe(product => {
+                this.result = product;
+                if (this.result.isError == false) {
+                    this._location.back();
+                }
+            },
+            error => this.errorMessage = <any>error);
+    }
     removeFromCompetitorList(id: number): void {
         this.resultCompetitors.ResultList.forEach((item, index) => {
             if (item.Id == id) {

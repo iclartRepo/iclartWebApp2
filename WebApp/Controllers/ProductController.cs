@@ -151,6 +151,34 @@ namespace WebApp.Controllers
                 return Json(message, JsonRequestBehavior.AllowGet);
             }
         }
+        [HttpPost]
+        public ActionResult AddProduct(ProductFormModel newProduct)
+        {
+            try
+            {
+                var productBLL = new ProductBLL();
+                productBLL.AddProduct(newProduct);
+                var message = new MessageResult<ProductFormModel>
+                {
+                    isError = false,
+                    ResultList = null,
+                    Message = "Product added successfully!",
+                    Result = null
+                };
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                var message = new MessageResult<ProductFormModel>
+                {
+                    isError = true,
+                    ResultList = null,
+                    Message = ex.Message,
+                    Result = null
+                };
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+        }
 
         #endregion
 
