@@ -1,4 +1,5 @@
-﻿using Nelibur.ObjectMapper;
+﻿using AutoMapper;
+using Nelibur.ObjectMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -103,7 +104,56 @@ namespace WebApp.BLL
                 throw new Exception("Product already exists!");
             }
         }
+        public void UpdateProduct(int id, ProductFormModel product)
+        {
+            var exists = ValidateIfProductExists(product.Product);
+            if (exists)
+            {
+                var productEntity = _productRepository.Get(i => i.Id == product.Product.Id).First();
+                for (int i=0; i<productEntity.CompetitorPrices.Count; i++)
+                {
+                    var competitorPrice = productEntity.CompetitorPrices.ToList()[i];
+                    productEntity.CompetitorPrices.Remove(competitorPrice);
+                    _competitorPricesRepository.HardDelete(competitorPrice);
+                }
 
+                Mapper.Initialize(cfg => cfg.CreateMap<ProductModel, ProductEntity>().ForMember(x => x.CreatedDate, opt => opt.Ignore()).ForMember(x => x.CompetitorPrices, opt => opt.Ignore()).ForMember(x => x.ProductCategory, opt => opt.Ignore()));
+                Mapper.Map(product.Product, productEntity);
+                productEntity.ModifiedDate = DateTime.Now;
+
+                var productCategory = _categoryRepository.Get(i => i.Id == product.ProductCategory.Id).First();
+                productEntity.ProductCategory = productCategory;
+
+                TinyMapper.Bind<CompetitorPricesModel, CompetitorPricesEntity>();
+                if (product.CompetitorPrices != null)
+                {
+                    for (int i = 0; i < product.CompetitorPrices.Count; i++)
+                    {
+                        var competitorPrice = product.CompetitorPrices[i];
+                        var competitorPriceEntity = TinyMapper.Map<CompetitorPricesEntity>(competitorPrice);
+                        var competitor = _competitorRepository.Get(y => y.Id == competitorPrice.CompetitorId).First();
+                        competitorPriceEntity.Competitor = competitor;
+                        productEntity.CompetitorPrices.Add(competitorPriceEntity);
+                    }
+                }
+
+                _productRepository.Update(productEntity);
+            }
+            else
+            {
+                throw new Exception("Product already exists!");
+            }
+        }
+        public void DeleteProduct(int id)
+        {
+            var productEntity = _productRepository.Get(i => i.Id == id && i.IsDeleted == false).FirstOrDefault();
+            if (productEntity != null)
+            {
+                productEntity.IsDeleted = true;
+                productEntity.ModifiedDate = DateTime.Now;
+                _productRepository.SoftDelete(productEntity);
+            }
+        }
         #endregion
 
         #region Validations

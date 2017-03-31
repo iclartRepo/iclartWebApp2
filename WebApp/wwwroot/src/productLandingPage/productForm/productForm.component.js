@@ -50,6 +50,7 @@ var ProductFormComponent = (function () {
             CompanyPrice: 0,
             IsDeleted: false
         };
+        this.productId = 0;
         this.formErrors = {
             'name': '',
             'category': ''
@@ -129,14 +130,24 @@ var ProductFormComponent = (function () {
             "ProductCategory": this.selectedCategory,
             "CompetitorPrices": this.competitorPrices
         };
-        console.log(productForm);
-        this._service.addProduct(productForm)
-            .subscribe(function (product) {
-            _this.result = product;
-            if (_this.result.isError == false) {
-                _this._router.navigate(['/products', 2]);
-            }
-        }, function (error) { return _this.errorMessage = error; });
+        if (this.productId > 0) {
+            this._service.updateProduct(this.productId, productForm)
+                .subscribe(function (product) {
+                _this.result = product;
+                if (_this.result.isError == false) {
+                    _this._location.back();
+                }
+            }, function (error) { return _this.errorMessage = error; });
+        }
+        else {
+            this._service.addProduct(productForm)
+                .subscribe(function (product) {
+                _this.result = product;
+                if (_this.result.isError == false) {
+                    _this._router.navigate(['/products', 1]);
+                }
+            }, function (error) { return _this.errorMessage = error; });
+        }
     };
     ProductFormComponent.prototype.removeFromCompetitorList = function (id) {
         var _this = this;
@@ -145,6 +156,36 @@ var ProductFormComponent = (function () {
                 _this.resultCompetitors.ResultList.splice(index, 1);
             }
         });
+    };
+    ProductFormComponent.prototype.getProduct = function (id) {
+        var _this = this;
+        this._service.getProduct(id).subscribe(function (result) {
+            _this.result = result;
+            _this.product = _this.result.Result;
+            _this.assignCategory(_this.result.Result.ProductCategory);
+            var competitorPrices = _this.result.Result.CompetitorPrices;
+            for (var _i = 0, competitorPrices_1 = competitorPrices; _i < competitorPrices_1.length; _i++) {
+                var entry = competitorPrices_1[_i];
+                _this.editForm[entry.CompetitorId] = false;
+                _this.editFormData[entry.CompetitorId] = entry.Price;
+                var competitorPrice = {
+                    "CompetitorId": entry.CompetitorId,
+                    "Name": entry.Competitor.Name,
+                    "Price": entry.Price,
+                    "Competitor": entry.Competitor
+                };
+                _this.competitorPrices.push(competitorPrice);
+                _this.removeFromCompetitorList(entry.CompetitorId);
+            }
+        }, function (error) { return _this.errorMessage = error; });
+    };
+    ProductFormComponent.prototype.assignCategory = function (category) {
+        for (var _i = 0, _a = this.resultCategories.ResultList; _i < _a.length; _i++) {
+            var entry = _a[_i];
+            if (entry.Id == category.Id) {
+                this.selectedCategory = entry;
+            }
+        }
     };
     /*  Navigation */
     ProductFormComponent.prototype.onBack = function () {
@@ -162,6 +203,12 @@ var ProductFormComponent = (function () {
             .subscribe(function (result) {
             _this.resultCategories = result;
         }, function (error) { return _this.errorMessage = error; });
+        this._route.params.subscribe(function (params) {
+            _this.productId = +params['id'];
+            if (_this.productId != 0 && !isNaN(_this.productId)) {
+                _this.getProduct(_this.productId);
+            }
+        });
     };
     __decorate([
         core_1.ViewChild('productForm'), 

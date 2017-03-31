@@ -98,9 +98,6 @@ body {
 #viewClient .panel-body table {
   width: 55%; }
 
-#viewClient .panel-body .fin-table {
-  width: 32%; }
-
 #competitorAdmin .alert {
   text-align: center;
   width: 15%;
@@ -126,6 +123,12 @@ body {
 
 #productForm {
   margin-top: -20px; }
+  #productForm .alert {
+    width: 15%;
+    text-align: center;
+    position: absolute;
+    left: 45%;
+    top: 55px; }
   #productForm .productForm-group .productForm-action-buttons {
     position: absolute;
     right: 15px;
@@ -136,4 +139,17 @@ body {
     color: red; }
   #productForm .productForm-group .form-inline .form-group {
     padding-right: 10px; }
+
+#viewProduct .product-name {
+  display: inline-block;
+  padding-right: 10px; }
+
+#viewProduct .edit-button {
+  display: inline-block; }
+
+#viewProduct .panel-body table {
+  width: 55%; }
+
+#viewProduct .panel-body .fin-table {
+  width: 32%; }
 

@@ -10,6 +10,7 @@ import { IMessageResult } from '../../interfaces/messageResult.interface';
 })
 export class ProductListComponent implements OnInit {
     productName: string = "";
+    productToDelete: number;
     result: IMessageResult = {
         isError: false,
         Result: null,
@@ -35,7 +36,19 @@ export class ProductListComponent implements OnInit {
             },
             error => this.errorMessage = <any>error);
     }
-  
+    setProduct(id: number): void {
+        this.productToDelete = id;
+    }
+    deleteProduct(): void {
+        this._service.deleteProduct(this.productToDelete)
+            .subscribe(products => { this.getClients(); },
+            error => this.errorMessage = <any>error);
+    }
+    getClients(): void {
+        this._service.getProducts()
+            .subscribe(products => this.result = products,
+            error => this.errorMessage = <any>error);
+    }
     /* Initialize Functions */
     ngOnInit(): void {
         this._service.getProducts()

@@ -38,6 +38,19 @@ var ProductListComponent = (function () {
             _this.productName = "";
         }, function (error) { return _this.errorMessage = error; });
     };
+    ProductListComponent.prototype.setProduct = function (id) {
+        this.productToDelete = id;
+    };
+    ProductListComponent.prototype.deleteProduct = function () {
+        var _this = this;
+        this._service.deleteProduct(this.productToDelete)
+            .subscribe(function (products) { _this.getClients(); }, function (error) { return _this.errorMessage = error; });
+    };
+    ProductListComponent.prototype.getClients = function () {
+        var _this = this;
+        this._service.getProducts()
+            .subscribe(function (products) { return _this.result = products; }, function (error) { return _this.errorMessage = error; });
+    };
     /* Initialize Functions */
     ProductListComponent.prototype.ngOnInit = function () {
         var _this = this;

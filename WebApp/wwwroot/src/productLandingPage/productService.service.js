@@ -48,6 +48,11 @@ var ProductService = (function () {
             .map(function (response) { return response.json(); })
             .catch(this.handleError);
     };
+    ProductService.prototype.getProduct = function (id) {
+        return this._http.get(this.baseUrl + "GetProduct?id=" + id)
+            .map(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
     ProductService.prototype.searchProduct = function (name) {
         return this._http.get(this.baseUrl + "SearchProduct?name=" + name)
             .map(function (response) { return response.json(); })
@@ -57,6 +62,18 @@ var ProductService = (function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
         return this._http.post(this.baseUrl + "AddProduct", { newProduct: product }, options)
+            .map(function (response) { return response.json(); })
+            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
+            .catch(this.handleError);
+    };
+    ProductService.prototype.updateProduct = function (id, product) {
+        return this._http.put(this.baseUrl + "UpdateProduct", { id: id, product: product })
+            .map(function (response) { return response.json(); })
+            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
+            .catch(this.handleError);
+    };
+    ProductService.prototype.deleteProduct = function (id) {
+        return this._http.delete(this.baseUrl + "DeleteProduct?id=" + id)
             .map(function (response) { return response.json(); })
             .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
             .catch(this.handleError);

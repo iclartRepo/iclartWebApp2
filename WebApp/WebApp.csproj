@@ -300,6 +300,7 @@
     <Content Include="wwwroot\src\productLandingPage\productCategory\productCategory.component.html" />
     <Content Include="wwwroot\src\productLandingPage\productForm\productForm.component.html" />
     <Content Include="wwwroot\src\productLandingPage\productList\productList.component.html" />
+    <Content Include="wwwroot\src\productLandingPage\viewProduct\viewProduct.component.html" />
     <Content Include="wwwroot\styles\bootstrap.min.css" />
     <Content Include="wwwroot\styles\font-awesome.css" />
     <Content Include="wwwroot\styles\fonts.css" />
@@ -326,6 +327,7 @@
     <Content Include="wwwroot\src\productLandingPage\productCategory\productCategory.component.scss" />
     <Content Include="wwwroot\src\productLandingPage\productList\productList.component.scss" />
     <Content Include="wwwroot\src\productLandingPage\productForm\productForm.component.scss" />
+    <Content Include="wwwroot\src\productLandingPage\viewProduct\viewProduct.component.scss" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -364,6 +366,7 @@
     <TypeScriptCompile Include="wwwroot\src\productLandingPage\productForm\productForm.component.ts" />
     <TypeScriptCompile Include="wwwroot\src\productLandingPage\productList\productList.component.ts" />
     <TypeScriptCompile Include="wwwroot\src\productLandingPage\productService.service.ts" />
+    <TypeScriptCompile Include="wwwroot\src\productLandingPage\viewProduct\viewProduct.component.ts" />
     <TypeScriptCompile Include="wwwroot\src\shared\shared.module.ts" />
   </ItemGroup>
   <ItemGroup>

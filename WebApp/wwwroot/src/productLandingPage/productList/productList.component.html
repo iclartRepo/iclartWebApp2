@@ -21,10 +21,10 @@
         </thead>
         <tbody>
             <tr *ngFor="let product of result.ResultList">
-                <td>{{product.Name}}</td>
+                <td><a [routerLink]="['/product', product.Id]">{{product.Name}}</a></td>
                 <td>{{product.ProductCategory.Name}}</td>
-                <td><a class="btn btn-success btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
-                <td><button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal"><i class="fa fa-times" aria-hidden="true"></i></button></td>
+                <td><a class="btn btn-success btn-sm" [routerLink]="['/productForm', product.Id]"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                <td><button class="btn btn-danger btn-sm" (click)="setProduct(product.Id)" data-toggle="modal" data-target="#myModal"><i class="fa fa-times" aria-hidden="true"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteClient()">Delete</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteProduct()">Delete</button>
                 </div>
             </div>
 

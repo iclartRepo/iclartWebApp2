@@ -1,10 +1,5 @@
-﻿#viewClient {
-     ul {
-         a {
-             cursor:pointer;
-           }
-     }  
-     .client-name {
+﻿#viewProduct {
+      .product-name {
          display:inline-block;
          padding-right:10px;
      }
@@ -14,6 +9,9 @@
      .panel-body {
          table {
              width: 55%;
+         }
+         .fin-table {
+             width: 32%;
          }
      }
 }

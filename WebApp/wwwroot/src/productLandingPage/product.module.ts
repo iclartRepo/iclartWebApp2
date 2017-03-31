@@ -9,14 +9,17 @@ import { MainProductPageComponent } from './mainProductPage/mainProductPage.comp
 import { ProductCategoryComponent } from './productCategory/productCategory.component';
 import { ProductListComponent } from './productList/productList.component';
 import { ProductFormComponent } from './productForm/productForm.component';
+import { ProductViewComponent } from './viewProduct/viewProduct.component';
 
 @NgModule({
     imports: [RouterModule.forChild([
         { path: 'products', component: MainProductPageComponent },
         { path: 'products/:tabNum', component: MainProductPageComponent },
-        { path: 'productForm', component: ProductFormComponent }
+        { path: 'productForm', component: ProductFormComponent },
+        { path: 'productForm/:id', component: ProductFormComponent },
+        { path: 'product/:id', component: ProductViewComponent }
     ]), SharedModule],
-    declarations: [MainProductPageComponent, ProductCategoryComponent, ProductListComponent, ProductFormComponent],
+    declarations: [MainProductPageComponent, ProductCategoryComponent, ProductListComponent, ProductFormComponent, ProductViewComponent],
     providers: [ProductService]
 })
 export class ProductModule { }

@@ -53,7 +53,7 @@ export class ProductFormComponent implements OnInit {
         IsDeleted: false
     }
     
-
+    productId:number = 0;
     /* Form Validations */
     productForm: NgForm;
     @ViewChild('productForm') currentForm: NgForm;
@@ -139,15 +139,27 @@ export class ProductFormComponent implements OnInit {
             "ProductCategory": this.selectedCategory,
             "CompetitorPrices": this.competitorPrices
         };
-        console.log(productForm);
-        this._service.addProduct(productForm)
-            .subscribe(product => {
-                this.result = product;
-                if (this.result.isError == false) {
-                    this._router.navigate(['/products', 2]);
-                }
-            },
-            error => this.errorMessage = <any>error);
+        if (this.productId > 0) {
+            this._service.updateProduct(this.productId, productForm)
+                .subscribe(product => {
+                    this.result = product;
+                    if (this.result.isError == false) {
+                        this._location.back();
+                    }
+                },
+                error => this.errorMessage = <any>error);
+        }
+        else
+        {
+            this._service.addProduct(productForm)
+                .subscribe(product => {
+                    this.result = product;
+                    if (this.result.isError == false) {
+                        this._router.navigate(['/products', 1]);
+                    }
+                },
+                error => this.errorMessage = <any>error);
+        }
     }
     removeFromCompetitorList(id: number): void {
         this.resultCompetitors.ResultList.forEach((item, index) => {
@@ -156,6 +168,36 @@ export class ProductFormComponent implements OnInit {
             }
         });
     }
+    getProduct(id: number): void {
+        this._service.getProduct(id).subscribe(
+            result => {
+                this.result = result;
+                this.product = this.result.Result;
+                this.assignCategory(this.result.Result.ProductCategory);
+                var competitorPrices: any[] = this.result.Result.CompetitorPrices;
+                for (let entry of competitorPrices) {
+                    this.editForm[entry.CompetitorId] = false;
+                    this.editFormData[entry.CompetitorId] = entry.Price;
+                    var competitorPrice:any = {
+                        "CompetitorId": entry.CompetitorId,
+                        "Name": entry.Competitor.Name,
+                        "Price": entry.Price,
+                        "Competitor": entry.Competitor
+                    };
+                    this.competitorPrices.push(competitorPrice);
+                    this.removeFromCompetitorList(entry.CompetitorId);
+                }
+            },
+            error => this.errorMessage = <any>error);
+    }
+    assignCategory(category: any): void {
+        for (let entry of this.resultCategories.ResultList) {
+            if (entry.Id == category.Id)
+            {
+                this.selectedCategory = entry;
+            }
+        }
+    }
     
     /*  Navigation */
     onBack(): void {
@@ -163,6 +205,7 @@ export class ProductFormComponent implements OnInit {
     }
     /* Initialize */
     ngOnInit(): void {
+     
         this._adminService.getCompetitors()
             .subscribe(
             result => {
@@ -176,6 +219,13 @@ export class ProductFormComponent implements OnInit {
                 this.resultCategories = result;
             },
             error => this.errorMessage = <any>error);
+        this._route.params.subscribe(
+            params => {
+                this.productId = +params['id'];
+                if (this.productId != 0 && !isNaN(this.productId)) {
+                    this.getProduct(this.productId);
+                }
+            });
     }
 
    

@@ -16,6 +16,7 @@ var mainProductPage_component_1 = require('./mainProductPage/mainProductPage.com
 var productCategory_component_1 = require('./productCategory/productCategory.component');
 var productList_component_1 = require('./productList/productList.component');
 var productForm_component_1 = require('./productForm/productForm.component');
+var viewProduct_component_1 = require('./viewProduct/viewProduct.component');
 var ProductModule = (function () {
     function ProductModule() {
     }
@@ -24,9 +25,11 @@ var ProductModule = (function () {
             imports: [router_1.RouterModule.forChild([
                     { path: 'products', component: mainProductPage_component_1.MainProductPageComponent },
                     { path: 'products/:tabNum', component: mainProductPage_component_1.MainProductPageComponent },
-                    { path: 'productForm', component: productForm_component_1.ProductFormComponent }
+                    { path: 'productForm', component: productForm_component_1.ProductFormComponent },
+                    { path: 'productForm/:id', component: productForm_component_1.ProductFormComponent },
+                    { path: 'product/:id', component: viewProduct_component_1.ProductViewComponent }
                 ]), shared_module_1.SharedModule],
-            declarations: [mainProductPage_component_1.MainProductPageComponent, productCategory_component_1.ProductCategoryComponent, productList_component_1.ProductListComponent, productForm_component_1.ProductFormComponent],
+            declarations: [mainProductPage_component_1.MainProductPageComponent, productCategory_component_1.ProductCategoryComponent, productList_component_1.ProductListComponent, productForm_component_1.ProductFormComponent, viewProduct_component_1.ProductViewComponent],
             providers: [productService_service_1.ProductService]
         }), 
         __metadata('design:paramtypes', [])

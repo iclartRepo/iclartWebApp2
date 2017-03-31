@@ -1,12 +1,12 @@
 ﻿<div id="mainProductPage">
     <ul class="nav nav-pills">
-        <li [class.active]="tabNum == 1"><a (click)="setTab(1)">Product Categories</a></li>
-        <li [class.active]="tabNum == 2"><a (click)="setTab(2)">Product List</a></li>
+        <li [class.active]="tabNum == 1"><a (click)="setTab(1)">Product List</a></li>
+        <li [class.active]="tabNum == 2"><a (click)="setTab(2)">Product Categories</a></li>
     </ul>
-    <div *ngIf="tabNum == 1">
+    <div *ngIf="tabNum == 2">
         <web-view-product-category></web-view-product-category>
     </div>
-    <div *ngIf="tabNum ==2">
+    <div *ngIf="tabNum ==1">
         <web-product-list></web-product-list>
     </div>
 </div>

@@ -128,6 +128,43 @@ namespace WebApp.Controllers
                 return Json(message, JsonRequestBehavior.AllowGet);
             }
         }
+        [HttpGet]
+        public ActionResult GetProduct(int id)
+        {
+            try
+            {
+                using (var context = new DBContext())
+                {
+                    var productRepository = new GenericRepository<ProductEntity>(context);
+
+                    var productEntity = productRepository.Get(i => i.Id == id).First();
+
+                    TinyMapper.Bind<ProductEntity, ProductModel>();
+                    var productModel = TinyMapper.Map<ProductModel>(productEntity);
+
+                    var message = new MessageResult<ProductModel>
+                    {
+                        isError = false,
+                        ResultList = null,
+                        Message = "Success",
+                        Result = productModel
+                    };
+                    return Json(message, JsonRequestBehavior.AllowGet);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                var message = new MessageResult<ProductModel>
+                {
+                    isError = true,
+                    ResultList = null,
+                    Message = "Some error occured. Please contact the administrator.",
+                    Result = null
+                };
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+        }
         #endregion
 
         #region POST METHODS
@@ -219,6 +256,34 @@ namespace WebApp.Controllers
                 return Json(message, JsonRequestBehavior.AllowGet);
             }
         }
+        [HttpPut]
+        public ActionResult UpdateProduct(int id, ProductFormModel product)
+        {
+            try
+            {
+                var productBLL = new ProductBLL();
+                productBLL.UpdateProduct(id, product);
+                var message = new MessageResult<ProductModel>
+                {
+                    isError = false,
+                    ResultList = null,
+                    Message = "Product updated successfully!",
+                    Result = null
+                };
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                var message = new MessageResult<ProductModel>
+                {
+                    isError = true,
+                    ResultList = null,
+                    Message = ex.Message,
+                    Result = null
+                };
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+        }
         #endregion
 
         #region DELETE METHODS
@@ -239,6 +304,34 @@ namespace WebApp.Controllers
                 return Json(message, JsonRequestBehavior.AllowGet);
             }
             catch(Exception ex)
+            {
+                var message = new MessageResult<ProductCategoryModel>
+                {
+                    isError = true,
+                    ResultList = null,
+                    Message = ex.Message,
+                    Result = null
+                };
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+        }
+        [HttpDelete]
+        public ActionResult DeleteProduct(int id)
+        {
+            try
+            {
+                var productBLL = new ProductBLL();
+                productBLL.DeleteProduct(id);
+                var message = new MessageResult<ProductCategoryModel>
+                {
+                    isError = false,
+                    ResultList = null,
+                    Message = "Success",
+                    Result = null
+                };
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
             {
                 var message = new MessageResult<ProductCategoryModel>
                 {
