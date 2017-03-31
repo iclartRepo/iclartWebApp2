@@ -51,7 +51,10 @@ export class ClientListComponent implements OnInit {
     }
     searchClient(): void {
         this._clientService.searchClients(this.clientName)
-            .subscribe(peoples => this.result = peoples,
+            .subscribe(peoples => {
+                this.result = peoples;
+                this.clientName = "";
+            },
             error => this.errorMessage = <any>error);
     }
     setClient(id: number): void {

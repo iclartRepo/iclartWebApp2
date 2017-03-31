@@ -21,21 +21,24 @@ namespace WebApp.Controllers
         {
             try
             {
-                var clientRepository = new GenericRepository<ClientEntity>();
-
-                var clients = clientRepository.Get(i=>i.IsDeleted == false).ToList();
-
-                TinyMapper.Bind<List<ClientEntity>, List<ClientModel>>();
-                var clientsModel = TinyMapper.Map<List<ClientModel>>(clients);
-
-                var message = new MessageResult<ClientModel>
+                using (var context = new DBContext())
                 {
-                    isError = false,
-                    ResultList = clientsModel,
-                    Message = "Success",
-                    Result = null
-                };
-                return Json(message, JsonRequestBehavior.AllowGet);
+                    var clientRepository = new GenericRepository<ClientEntity>(context);
+
+                    var clients = clientRepository.Get(i => i.IsDeleted == false).OrderBy(i => i.Name).ToList();
+
+                    TinyMapper.Bind<List<ClientEntity>, List<ClientModel>>();
+                    var clientsModel = TinyMapper.Map<List<ClientModel>>(clients);
+
+                    var message = new MessageResult<ClientModel>
+                    {
+                        isError = false,
+                        ResultList = clientsModel,
+                        Message = "Success",
+                        Result = null
+                    };
+                    return Json(message, JsonRequestBehavior.AllowGet);
+                }                  
             }
             catch (Exception ex)
             {
@@ -59,22 +62,26 @@ namespace WebApp.Controllers
         {
             try
             {
-                var clientRepository = new GenericRepository<ClientEntity>();
-                
-
-                var clients = clientRepository.Get(i => i.IsDeleted == false && i.Name.Contains(clientName)).ToList();
-
-                TinyMapper.Bind<List<ClientEntity>, List<ClientModel>>();
-                var clientsModel = TinyMapper.Map<List<ClientModel>>(clients);
-
-                var message = new MessageResult<ClientModel>
+                using (var context = new DBContext())
                 {
-                    isError = false,
-                    ResultList = clientsModel,
-                    Message = "Success",
-                    Result = null
-                };
-                return Json(message, JsonRequestBehavior.AllowGet);
+                    var clientRepository = new GenericRepository<ClientEntity>(context);
+
+
+                    var clients = clientRepository.Get(i => i.IsDeleted == false && i.Name.Contains(clientName)).ToList();
+
+                    TinyMapper.Bind<List<ClientEntity>, List<ClientModel>>();
+                    var clientsModel = TinyMapper.Map<List<ClientModel>>(clients);
+
+                    var message = new MessageResult<ClientModel>
+                    {
+                        isError = false,
+                        ResultList = clientsModel,
+                        Message = "Success",
+                        Result = null
+                    };
+                    return Json(message, JsonRequestBehavior.AllowGet);
+                }
+                    
             }
             catch (Exception ex)
             {
@@ -98,21 +105,25 @@ namespace WebApp.Controllers
         {
             try
             {
-                var clientRepository = new GenericRepository<ClientEntity>();
-
-                var client = clientRepository.Get(y => y.Id == id).FirstOrDefault();
-
-                TinyMapper.Bind<ClientEntity, ClientModel>();
-                var clientModel = TinyMapper.Map<ClientModel>(client);
-
-                var message = new MessageResult<ClientModel>
+                using (var context = new DBContext())
                 {
-                    isError = false,
-                    ResultList = null,
-                    Message = "Success",
-                    Result = clientModel
-                };
-                return Json(message, JsonRequestBehavior.AllowGet);
+                    var clientRepository = new GenericRepository<ClientEntity>(context);
+
+                    var client = clientRepository.Get(y => y.Id == id).FirstOrDefault();
+
+                    TinyMapper.Bind<ClientEntity, ClientModel>();
+                    var clientModel = TinyMapper.Map<ClientModel>(client);
+
+                    var message = new MessageResult<ClientModel>
+                    {
+                        isError = false,
+                        ResultList = null,
+                        Message = "Success",
+                        Result = clientModel
+                    };
+                    return Json(message, JsonRequestBehavior.AllowGet);
+                }
+                 
             }
             catch (Exception ex)
             {

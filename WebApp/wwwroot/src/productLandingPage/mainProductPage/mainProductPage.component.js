@@ -11,8 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var MainProductPageComponent = (function () {
-    function MainProductPageComponent(_router) {
+    function MainProductPageComponent(_router, _route) {
         this._router = _router;
+        this._route = _route;
         this.tabNum = 1;
     }
     /* Navigation */
@@ -21,13 +22,24 @@ var MainProductPageComponent = (function () {
     };
     /* Initializer and Native Functions */
     MainProductPageComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._route.params.subscribe(function (params) {
+            var tab = +params['tabNum'];
+            console.log(tab);
+            if (!isNaN(tab)) {
+                _this.tabNum = 2;
+            }
+            else {
+                _this.tabNum = 1;
+            }
+        });
     };
     MainProductPageComponent = __decorate([
         core_1.Component({
             selector: 'web-view-product',
             templateUrl: 'wwwroot/src/productLandingPage/mainProductPage/mainProductPage.component.html'
         }), 
-        __metadata('design:paramtypes', [router_1.Router])
+        __metadata('design:paramtypes', [router_1.Router, router_1.ActivatedRoute])
     ], MainProductPageComponent);
     return MainProductPageComponent;
 }());

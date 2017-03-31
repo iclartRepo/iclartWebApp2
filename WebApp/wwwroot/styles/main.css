@@ -63,7 +63,7 @@ body {
   #clientForm .clientForm-group .client-form {
     overflow-x: hidden;
     overflow-y: scroll;
-    height: 500px;
+    height: 75vh;
     padding-top: 15px; }
   #clientForm .client-name {
     width: 100%; }
@@ -98,9 +98,6 @@ body {
 #viewClient .panel-body table {
   width: 55%; }
 
-#viewClient .panel-body .fin-table {
-  width: 32%; }
-
 #competitorAdmin .alert {
   text-align: center;
   width: 15%;
@@ -116,4 +113,43 @@ body {
 
 #productCategory .productCategory-display {
   display: inline-block; }
+
+#productList .add-product {
+  float: right; }
+
+#productList .product-filter {
+  float: left;
+  width: 50%; }
+
+#productForm {
+  margin-top: -20px; }
+  #productForm .alert {
+    width: 15%;
+    text-align: center;
+    position: absolute;
+    left: 45%;
+    top: 55px; }
+  #productForm .productForm-group .productForm-action-buttons {
+    position: absolute;
+    right: 15px;
+    top: 65px; }
+  #productForm .productForm-group sup {
+    color: red; }
+  #productForm .productForm-group small {
+    color: red; }
+  #productForm .productForm-group .form-inline .form-group {
+    padding-right: 10px; }
+
+#viewProduct .product-name {
+  display: inline-block;
+  padding-right: 10px; }
+
+#viewProduct .edit-button {
+  display: inline-block; }
+
+#viewProduct .panel-body table {
+  width: 55%; }
+
+#viewProduct .panel-body .fin-table {
+  width: 32%; }
 

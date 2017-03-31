@@ -20,8 +20,8 @@ namespace WebApp.BLL
 
         public ClientBLL()
         {
-            _repository = new GenericRepository<ClientEntity>();
-            context = _repository.GetContext();
+            context = new DBContext();
+            _repository = new GenericRepository<ClientEntity>(context);
             _competitorRepository = new GenericRepository<CompetitorEntity>(context);
             _dsSchemesRepository = new GenericRepository<CompetitorDiscountSchemesEntity>(context);
         }
@@ -86,6 +86,7 @@ namespace WebApp.BLL
                 Mapper.Initialize(cfg => cfg.CreateMap<ClientModel, ClientEntity>().ForMember(x => x.Created_Date, opt => opt.Ignore()).ForMember(x => x.CompetitorDiscountSchemes, opt => opt.Ignore()));
                 Mapper.Map(client.Client, clientEntity);
                 clientEntity.Modified_Date = DateTime.Now;
+             
 
                 TinyMapper.Bind<CompetitorDiscountSchemesModel, CompetitorDiscountSchemesEntity>();
                 if (client.CompetitorDiscountSchemes != null)
@@ -96,7 +97,6 @@ namespace WebApp.BLL
                         var competitorDSEntity = TinyMapper.Map<CompetitorDiscountSchemesEntity>(competitorDS);
                         var competitor = _competitorRepository.Get(y => y.Id == competitorDS.CompetitorId).First();
                         competitorDSEntity.CompetitorEntity = competitor;
-                        competitor.CompetitorDiscountSchemes.Add(competitorDSEntity);
                         clientEntity.CompetitorDiscountSchemes.Add(competitorDSEntity);
                     }
                 }              

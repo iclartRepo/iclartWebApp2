@@ -18,21 +18,26 @@ namespace WebApp.Controllers
         {
             try
             {
-                var competitorRepository = new GenericRepository<CompetitorEntity>();
-
-                var competitors = competitorRepository.Get().ToList();
-
-                TinyMapper.Bind<List<CompetitorEntity>, List<CompetitorModel>>();
-                var competitorsModel = TinyMapper.Map<List<CompetitorModel>>(competitors);
-
-                var message = new MessageResult<CompetitorModel>
+                using (var context = new DBContext())
                 {
-                    isError = false,
-                    ResultList = competitorsModel,
-                    Message = "Success",
-                    Result = null
-                };
-                return Json(message, JsonRequestBehavior.AllowGet);
+                    var competitorRepository = new GenericRepository<CompetitorEntity>(context);
+
+                    var competitors = competitorRepository.Get().OrderBy(i => i.Name).ToList();
+
+                    TinyMapper.Bind<List<CompetitorEntity>, List<CompetitorModel>>();
+                    var competitorsModel = TinyMapper.Map<List<CompetitorModel>>(competitors);
+
+                    var message = new MessageResult<CompetitorModel>
+                    {
+                        isError = false,
+                        ResultList = competitorsModel,
+                        Message = "Success",
+                        Result = null
+                    };
+                    return Json(message, JsonRequestBehavior.AllowGet);
+
+                }
+                   
             }
             catch (Exception ex)
             {

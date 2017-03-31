@@ -38,6 +38,42 @@ export class ProductService {
             .do(data => console.log('All: ' + JSON.stringify(data)))
             .catch(this.handleError);
     }
+
+    getProducts(): Observable<IMessageResult> {
+        return this._http.get(this.baseUrl + "GetProducts")
+            .map((response: Response) => <IMessageResult>response.json())
+            .catch(this.handleError);
+    }
+    getProduct(id:number): Observable<IMessageResult> {
+        return this._http.get(this.baseUrl + "GetProduct?id=" + id)
+            .map((response: Response) => <IMessageResult>response.json())
+            .catch(this.handleError);
+    }
+    searchProduct(name:string): Observable<IMessageResult> {
+        return this._http.get(this.baseUrl + "SearchProduct?name=" + name)
+            .map((response: Response) => <IMessageResult>response.json())
+            .catch(this.handleError);
+    }
+    addProduct(product: any): Observable<IMessageResult> {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this._http.post(this.baseUrl + "AddProduct", { newProduct: product }, options)
+            .map((response: Response) => <IMessageResult>response.json())
+            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+    updateProduct(id: number, product: any): Observable<IMessageResult> {
+        return this._http.put(this.baseUrl + "UpdateProduct", { id: id, product: product })
+            .map((response: Response) => <IMessageResult>response.json())
+            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+    deleteProduct(id: number): Observable<IMessageResult> {
+        return this._http.delete(this.baseUrl + "DeleteProduct?id=" + id)
+            .map((response: Response) => <IMessageResult>response.json())
+            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
     private handleError(error: Response) {
         // in a real world app, we may send the server to some remote logging infrastructure
         // instead of just logging it to the console

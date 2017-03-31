@@ -11,7 +11,7 @@ namespace WebApp.DAL
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        private DBContext context = new DBContext();
+        private DBContext context;
         private DbSet<TEntity> _dbSet;
         
         public GenericRepository()
@@ -20,7 +20,8 @@ namespace WebApp.DAL
         }
         public GenericRepository(DBContext contextInitial)
         {
-            _dbSet = contextInitial.Set<TEntity>();
+            context = contextInitial;
+            _dbSet = context.Set<TEntity>();
         }
         
         public DBContext GetContext()
