@@ -10,6 +10,22 @@
     <div class="add-product">
         <a class="btn btn-primary" routerLink="/productForm" >Add Product</a>
     </div> 
+    <div class="product-category-filter">
+        <div class="inline-block">
+            Filter:
+        </div>
+        <div class="inline-block">
+            <select [(ngModel)]="categoryFilter" name="productCategoryFilter" class="form-control"  (ngModelChange)="filterProducts()">
+                <option disabled>Select Product Category</option>
+                <option *ngFor="let category of categories" [ngValue]="category">
+                    {{category}}
+                </option>
+            </select>
+        </div>
+        <div class="inline-block" *ngIf="categoryFilter != 'Select Product Category'">
+            <label (click)="clearFilter()">Clear Filter</label>
+        </div>
+    </div>
     <table class="table table-responsive">
         <thead>
             <tr>

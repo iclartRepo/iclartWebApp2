@@ -27,7 +27,7 @@ var MainProductPageComponent = (function () {
             var tab = +params['tabNum'];
             console.log(tab);
             if (!isNaN(tab)) {
-                _this.tabNum = 2;
+                _this.tabNum = 1;
             }
             else {
                 _this.tabNum = 1;

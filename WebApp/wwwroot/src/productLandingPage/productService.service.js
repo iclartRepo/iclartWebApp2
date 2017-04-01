@@ -58,6 +58,11 @@ var ProductService = (function () {
             .map(function (response) { return response.json(); })
             .catch(this.handleError);
     };
+    ProductService.prototype.filterProducts = function (name) {
+        return this._http.get(this.baseUrl + "FilterProducts?name=" + name)
+            .map(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
     ProductService.prototype.addProduct = function (product) {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });

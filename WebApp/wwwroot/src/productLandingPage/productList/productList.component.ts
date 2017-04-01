@@ -11,6 +11,8 @@ import { IMessageResult } from '../../interfaces/messageResult.interface';
 export class ProductListComponent implements OnInit {
     productName: string = "";
     productToDelete: number;
+    categoryFilter: string = "Select Product Category";
+    categories: string[] = [];
     result: IMessageResult = {
         isError: false,
         Result: null,
@@ -29,6 +31,7 @@ export class ProductListComponent implements OnInit {
     }
     /* CRUD Functionalities */
     searchProduct(): void {
+        this.categoryFilter = "Select Product Category";
         this._service.searchProduct(this.productName)
             .subscribe(product => {
                 this.result = product;
@@ -41,18 +44,60 @@ export class ProductListComponent implements OnInit {
     }
     deleteProduct(): void {
         this._service.deleteProduct(this.productToDelete)
-            .subscribe(products => { this.getClients(); },
+            .subscribe(products => { this.getProducts(); },
             error => this.errorMessage = <any>error);
     }
-    getClients(): void {
+    getProducts(): void {
         this._service.getProducts()
             .subscribe(products => this.result = products,
             error => this.errorMessage = <any>error);
+    }
+    clearFilter(): void {
+        this.categoryFilter = "Select Product Category";
+        this.getProducts();
+    }
+    filterProducts(): void {
+        if (this.categoryFilter == "Select Product Category")
+        {
+            this.getProducts();
+        }
+        else
+        {
+            this._service.filterProducts(this.categoryFilter)
+                .subscribe(products => this.result = products,
+                error => this.errorMessage = <any>error);
+        }        
+    }
+    checkIfExists(name: string): boolean {
+        if (this.categories.length == 0)
+        {
+            return false;
+        }
+        else
+        {
+            var exists = false;
+            for (let entry of this.categories) {
+                if (entry == name)
+                {
+                    exists = true;
+                }
+            }
+            return exists;
+        }       
     }
     /* Initialize Functions */
     ngOnInit(): void {
         this._service.getProducts()
-            .subscribe(products => this.result = products,
+            .subscribe(products => {
+                this.result = products;
+                for (let entry of this.result.ResultList) {
+                    var exists: boolean = this.checkIfExists(entry.ProductCategory.Name);
+                    if (exists == false)
+                    {
+                        this.categories.push(entry.ProductCategory.Name);
+                    }
+                }
+            },
             error => this.errorMessage = <any>error);
         
 

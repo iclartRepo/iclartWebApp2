@@ -129,6 +129,43 @@ namespace WebApp.Controllers
             }
         }
         [HttpGet]
+        public ActionResult FilterProducts(string name)
+        {
+            try
+            {
+                using (var context = new DBContext())
+                {
+                    var productRepository = new GenericRepository<ProductEntity>(context);
+
+                    var productEntities = productRepository.Get(i => i.IsDeleted == false && i.ProductCategory.Name == name).OrderBy(i => i.Name).ToList();
+
+                    TinyMapper.Bind<List<ProductEntity>, List<ProductModel>>();
+                    var productsModel = TinyMapper.Map<List<ProductModel>>(productEntities);
+
+                    var message = new MessageResult<ProductModel>
+                    {
+                        isError = false,
+                        ResultList = productsModel,
+                        Message = "Success",
+                        Result = null
+                    };
+                    return Json(message, JsonRequestBehavior.AllowGet);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                var message = new MessageResult<ProductModel>
+                {
+                    isError = true,
+                    ResultList = null,
+                    Message = "Some error occured. Please contact the administrator.",
+                    Result = null
+                };
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+        }
+        [HttpGet]
         public ActionResult GetProduct(int id)
         {
             try
