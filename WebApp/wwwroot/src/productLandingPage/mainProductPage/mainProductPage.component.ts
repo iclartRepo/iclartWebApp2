@@ -28,7 +28,7 @@ export class MainProductPageComponent implements OnInit {
                 console.log(tab);
                 if (!isNaN(tab))
                 {
-                    this.tabNum = 2;
+                    this.tabNum = 1;
                 }
                 else
                 {

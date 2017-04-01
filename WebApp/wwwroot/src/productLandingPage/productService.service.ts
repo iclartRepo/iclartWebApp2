@@ -54,6 +54,11 @@ export class ProductService {
             .map((response: Response) => <IMessageResult>response.json())
             .catch(this.handleError);
     }
+    filterProducts(name:string): Observable<IMessageResult> {
+        return this._http.get(this.baseUrl + "FilterProducts?name=" + name)
+            .map((response: Response) => <IMessageResult>response.json())
+            .catch(this.handleError);
+    }
     addProduct(product: any): Observable<IMessageResult> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });

@@ -16,6 +16,8 @@ var ProductListComponent = (function () {
         this._route = _route;
         this._service = _service;
         this.productName = "";
+        this.categoryFilter = "Select Product Category";
+        this.categories = [];
         this.result = {
             isError: false,
             Result: null,
@@ -32,6 +34,7 @@ var ProductListComponent = (function () {
     /* CRUD Functionalities */
     ProductListComponent.prototype.searchProduct = function () {
         var _this = this;
+        this.categoryFilter = "Select Product Category";
         this._service.searchProduct(this.productName)
             .subscribe(function (product) {
             _this.result = product;
@@ -44,18 +47,56 @@ var ProductListComponent = (function () {
     ProductListComponent.prototype.deleteProduct = function () {
         var _this = this;
         this._service.deleteProduct(this.productToDelete)
-            .subscribe(function (products) { _this.getClients(); }, function (error) { return _this.errorMessage = error; });
+            .subscribe(function (products) { _this.getProducts(); }, function (error) { return _this.errorMessage = error; });
     };
-    ProductListComponent.prototype.getClients = function () {
+    ProductListComponent.prototype.getProducts = function () {
         var _this = this;
         this._service.getProducts()
             .subscribe(function (products) { return _this.result = products; }, function (error) { return _this.errorMessage = error; });
+    };
+    ProductListComponent.prototype.clearFilter = function () {
+        this.categoryFilter = "Select Product Category";
+        this.getProducts();
+    };
+    ProductListComponent.prototype.filterProducts = function () {
+        var _this = this;
+        if (this.categoryFilter == "Select Product Category") {
+            this.getProducts();
+        }
+        else {
+            this._service.filterProducts(this.categoryFilter)
+                .subscribe(function (products) { return _this.result = products; }, function (error) { return _this.errorMessage = error; });
+        }
+    };
+    ProductListComponent.prototype.checkIfExists = function (name) {
+        if (this.categories.length == 0) {
+            return false;
+        }
+        else {
+            var exists = false;
+            for (var _i = 0, _a = this.categories; _i < _a.length; _i++) {
+                var entry = _a[_i];
+                if (entry == name) {
+                    exists = true;
+                }
+            }
+            return exists;
+        }
     };
     /* Initialize Functions */
     ProductListComponent.prototype.ngOnInit = function () {
         var _this = this;
         this._service.getProducts()
-            .subscribe(function (products) { return _this.result = products; }, function (error) { return _this.errorMessage = error; });
+            .subscribe(function (products) {
+            _this.result = products;
+            for (var _i = 0, _a = _this.result.ResultList; _i < _a.length; _i++) {
+                var entry = _a[_i];
+                var exists = _this.checkIfExists(entry.ProductCategory.Name);
+                if (exists == false) {
+                    _this.categories.push(entry.ProductCategory.Name);
+                }
+            }
+        }, function (error) { return _this.errorMessage = error; });
     };
     ProductListComponent = __decorate([
         core_1.Component({

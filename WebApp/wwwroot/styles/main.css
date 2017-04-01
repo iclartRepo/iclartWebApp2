@@ -24,6 +24,9 @@ body {
 .table-borderless tfoot th {
   border: none !important; }
 
+.inline-block {
+  display: inline-block; }
+
 #clientList .add-client {
   float: right; }
 
@@ -120,6 +123,14 @@ body {
 #productList .product-filter {
   float: left;
   width: 50%; }
+
+#productList .product-category-filter {
+  clear: both;
+  padding-top: 15px; }
+
+#productList .inline-block label {
+  padding-left: 10px;
+  cursor: pointer; }
 
 #productForm {
   margin-top: -20px; }
