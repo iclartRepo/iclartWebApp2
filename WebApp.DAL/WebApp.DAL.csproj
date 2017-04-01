@@ -49,10 +49,50 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientRepository.cs" />
     <Compile Include="DBContext.cs" />
     <Compile Include="GenericRepository.cs" />
     <Compile Include="Interfaces\IGenericRepository.cs" />
+    <Compile Include="Migrations\201703091117085_Initial.cs" />
+    <Compile Include="Migrations\201703091117085_Initial.Designer.cs">
+      <DependentUpon>201703091117085_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703160954586_AddCompetitorTable.cs" />
+    <Compile Include="Migrations\201703160954586_AddCompetitorTable.Designer.cs">
+      <DependentUpon>201703160954586_AddCompetitorTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703161407153_AddDiscountSchemesTable.cs" />
+    <Compile Include="Migrations\201703161407153_AddDiscountSchemesTable.Designer.cs">
+      <DependentUpon>201703161407153_AddDiscountSchemesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703231406270_Fix.cs" />
+    <Compile Include="Migrations\201703231406270_Fix.Designer.cs">
+      <DependentUpon>201703231406270_Fix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703241338030_AddProductCategoryTable.cs" />
+    <Compile Include="Migrations\201703241338030_AddProductCategoryTable.Designer.cs">
+      <DependentUpon>201703241338030_AddProductCategoryTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703281019062_AddedProductTable.cs" />
+    <Compile Include="Migrations\201703281019062_AddedProductTable.Designer.cs">
+      <DependentUpon>201703281019062_AddedProductTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703281024191_AddedCompetitorPricesTable.cs" />
+    <Compile Include="Migrations\201703281024191_AddedCompetitorPricesTable.Designer.cs">
+      <DependentUpon>201703281024191_AddedCompetitorPricesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703281025483_AddedSoftDeleteBooleaninProduct.cs" />
+    <Compile Include="Migrations\201703281025483_AddedSoftDeleteBooleaninProduct.Designer.cs">
+      <DependentUpon>201703281025483_AddedSoftDeleteBooleaninProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703281036235_UpdatedProductTableConnecttoCompetitorPrices.cs" />
+    <Compile Include="Migrations\201703281036235_UpdatedProductTableConnecttoCompetitorPrices.Designer.cs">
+      <DependentUpon>201703281036235_UpdatedProductTableConnecttoCompetitorPrices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703301033404_AddedCreatedAndModifiedDateProductTable.cs" />
+    <Compile Include="Migrations\201703301033404_AddedCreatedAndModifiedDateProductTable.Designer.cs">
+      <DependentUpon>201703301033404_AddedCreatedAndModifiedDateProductTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +104,38 @@
       <Project>{3792E255-E198-4E1C-BAD6-E842CCC7DB80}</Project>
       <Name>WebApp.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201703091117085_Initial.resx">
+      <DependentUpon>201703091117085_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703160954586_AddCompetitorTable.resx">
+      <DependentUpon>201703160954586_AddCompetitorTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703161407153_AddDiscountSchemesTable.resx">
+      <DependentUpon>201703161407153_AddDiscountSchemesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703231406270_Fix.resx">
+      <DependentUpon>201703231406270_Fix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703241338030_AddProductCategoryTable.resx">
+      <DependentUpon>201703241338030_AddProductCategoryTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703281019062_AddedProductTable.resx">
+      <DependentUpon>201703281019062_AddedProductTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703281024191_AddedCompetitorPricesTable.resx">
+      <DependentUpon>201703281024191_AddedCompetitorPricesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703281025483_AddedSoftDeleteBooleaninProduct.resx">
+      <DependentUpon>201703281025483_AddedSoftDeleteBooleaninProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703281036235_UpdatedProductTableConnecttoCompetitorPrices.resx">
+      <DependentUpon>201703281036235_UpdatedProductTableConnecttoCompetitorPrices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703301033404_AddedCreatedAndModifiedDateProductTable.resx">
+      <DependentUpon>201703301033404_AddedCreatedAndModifiedDateProductTable.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

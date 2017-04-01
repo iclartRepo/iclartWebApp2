@@ -136,6 +136,10 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="TinyMapper, Version=2.0.0.40, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TinyMapper.2.0.8\lib\net45\TinyMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -203,20 +207,13 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\CompetitorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201703071357470_Test.cs" />
-    <Compile Include="Migrations\201703071357470_Test.Designer.cs">
-      <DependentUpon>201703071357470_Test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703071400299_AddBackIsDeleted.cs" />
-    <Compile Include="Migrations\201703071400299_AddBackIsDeleted.Designer.cs">
-      <DependentUpon>201703071400299_AddBackIsDeleted.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -236,9 +233,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="package.json" />
+    <Content Include="wwwroot\src\adminLandingPage\competitorAdmin\competitorAdmin.component.html" />
     <Content Include="wwwroot\src\app\app.component.html" />
     <Content Include="wwwroot\src\clientLandingPage\clientForm\clientForm.component.html" />
     <Content Include="wwwroot\src\clientLandingPage\clientList\clientList.component.html" />
+    <Content Include="wwwroot\src\clientLandingPage\viewClient\viewClient.component.html" />
     <Content Include="wwwroot\src\header\header.component.html" />
     <Content Include="wwwroot\src\mainLandingPage\mainLandingPage.component.html" />
     <None Include="compilerconfig.json" />
@@ -297,7 +296,14 @@
     <Content Include="tsconfig.json" />
     <Content Include="typings.json" />
     <Content Include="wwwroot\src\header\header.component.scss" />
+    <Content Include="wwwroot\src\productLandingPage\mainProductPage\mainProductPage.component.html" />
+    <Content Include="wwwroot\src\productLandingPage\productCategory\productCategory.component.html" />
+    <Content Include="wwwroot\src\productLandingPage\productForm\productForm.component.html" />
+    <Content Include="wwwroot\src\productLandingPage\productList\productList.component.html" />
+    <Content Include="wwwroot\src\productLandingPage\viewProduct\viewProduct.component.html" />
     <Content Include="wwwroot\styles\bootstrap.min.css" />
+    <Content Include="wwwroot\styles\font-awesome.css" />
+    <Content Include="wwwroot\styles\fonts.css" />
     <Content Include="wwwroot\styles\main.css">
       <DependentUpon>main.scss</DependentUpon>
     </Content>
@@ -308,10 +314,26 @@
     <Content Include="wwwroot\styles\body.scss" />
     <Content Include="wwwroot\src\clientLandingPage\clientList\clientList.component.scss" />
     <Content Include="wwwroot\src\clientLandingPage\clientForm\clientForm.component.scss" />
+    <Content Include="wwwroot\src\clientLandingPage\viewClient\viewClient.component.scss" />
+    <Content Include="wwwroot\styles\universal.scss" />
+    <Content Include="wwwroot\fonts\fontawesome-webfont.eot" />
+    <Content Include="wwwroot\fonts\Lato-Regular.ttf" />
+    <Content Include="wwwroot\fonts\fontawesome-webfont.ttf" />
+    <Content Include="wwwroot\fonts\FontAwesome.otf" />
+    <Content Include="wwwroot\fonts\fontawesome-webfont.woff" />
+    <Content Include="wwwroot\fonts\fontawesome-webfont.woff2" />
+    <Content Include="wwwroot\src\adminLandingPage\competitorAdmin\competitorAdmin.component.scss" />
+    <Content Include="wwwroot\src\productLandingPage\mainProductPage\mainProductPage.component.scss" />
+    <Content Include="wwwroot\src\productLandingPage\productCategory\productCategory.component.scss" />
+    <Content Include="wwwroot\src\productLandingPage\productList\productList.component.scss" />
+    <Content Include="wwwroot\src\productLandingPage\productForm\productForm.component.scss" />
+    <Content Include="wwwroot\src\productLandingPage\viewProduct\viewProduct.component.scss" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Client\" />
+    <Folder Include="Views\Competitor\" />
+    <Folder Include="Views\Products\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -322,30 +344,39 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\src\adminLandingPage\admin.module.ts" />
+    <TypeScriptCompile Include="wwwroot\src\adminLandingPage\adminService.service.ts" />
+    <TypeScriptCompile Include="wwwroot\src\adminLandingPage\competitorAdmin\competitorAdmin.component.ts" />
     <TypeScriptCompile Include="wwwroot\src\app\app.component.ts" />
     <TypeScriptCompile Include="wwwroot\app.module.ts" />
     <TypeScriptCompile Include="wwwroot\src\clientLandingPage\client.module.ts" />
     <TypeScriptCompile Include="wwwroot\src\clientLandingPage\clientForm\clientForm.component.ts" />
     <TypeScriptCompile Include="wwwroot\src\clientLandingPage\clientList\clientList.component.ts" />
     <TypeScriptCompile Include="wwwroot\src\clientLandingPage\clientService.service.ts" />
+    <TypeScriptCompile Include="wwwroot\src\clientLandingPage\viewClient\viewClient.component.ts" />
     <TypeScriptCompile Include="wwwroot\src\header\header.component.ts" />
     <TypeScriptCompile Include="wwwroot\main.ts" />
     <TypeScriptCompile Include="wwwroot\src\interfaces\client.interface.ts" />
+    <TypeScriptCompile Include="wwwroot\src\interfaces\messageResult.interface.ts" />
+    <TypeScriptCompile Include="wwwroot\src\interfaces\product.interface.ts" />
     <TypeScriptCompile Include="wwwroot\src\mainLandingPage\mainLandingPage.component.ts" />
+    <TypeScriptCompile Include="wwwroot\src\productLandingPage\mainProductPage\mainProductPage.component.ts" />
+    <TypeScriptCompile Include="wwwroot\src\productLandingPage\product.module.ts" />
+    <TypeScriptCompile Include="wwwroot\src\productLandingPage\productCategory\productCategory.component.ts" />
+    <TypeScriptCompile Include="wwwroot\src\productLandingPage\productForm\productForm.component.ts" />
+    <TypeScriptCompile Include="wwwroot\src\productLandingPage\productList\productList.component.ts" />
+    <TypeScriptCompile Include="wwwroot\src\productLandingPage\productService.service.ts" />
+    <TypeScriptCompile Include="wwwroot\src\productLandingPage\viewProduct\viewProduct.component.ts" />
     <TypeScriptCompile Include="wwwroot\src\shared\shared.module.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703071357470_Test.resx">
-      <DependentUpon>201703071357470_Test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703071400299_AddBackIsDeleted.resx">
-      <DependentUpon>201703071400299_AddBackIsDeleted.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\WebApp.BLL\WebApp.BLL.csproj">
+      <Project>{F12FA25C-2F1A-4970-86F1-76D8BFDEE241}</Project>
+      <Name>WebApp.BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebApp.Common\WebApp.Common.csproj">
       <Project>{3792E255-E198-4E1C-BAD6-E842CCC7DB80}</Project>
       <Name>WebApp.Common</Name>

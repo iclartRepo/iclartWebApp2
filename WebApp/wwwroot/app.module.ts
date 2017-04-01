@@ -9,6 +9,8 @@ import { MainComponent } from './src/mainLandingPage/mainLandingPage.component';
 
 /* Modules */
 import { ClientModule } from './src/clientLandingPage/client.module';
+import { AdminModule } from './src/adminLandingPage/admin.module';
+import { ProductModule } from './src/productLandingPage/product.module';
 
 @NgModule({
     imports: [BrowserModule,
@@ -16,7 +18,9 @@ import { ClientModule } from './src/clientLandingPage/client.module';
             { path: '', component: MainComponent }
         ]),
         HttpModule,
-        ClientModule],
+        ClientModule,
+        AdminModule,
+        ProductModule],
     declarations: [AppComponent,
         HeaderComponent,
         MainComponent],

@@ -14,20 +14,25 @@ var shared_module_1 = require('../shared/shared.module');
 //Components
 var clientList_component_1 = require('./clientList/clientList.component');
 var clientForm_component_1 = require('./clientForm/clientForm.component');
+var viewClient_component_1 = require('./viewClient/viewClient.component');
 //Services
 var clientService_service_1 = require('./clientService.service');
+var adminService_service_1 = require('../adminLandingPage/adminService.service');
 var ClientModule = (function () {
     function ClientModule() {
     }
     ClientModule = __decorate([
         core_1.NgModule({
             imports: [router_1.RouterModule.forChild([
+                    { path: 'client-form/:id', component: clientForm_component_1.ClientFormComponent },
+                    { path: 'client-info/:id', component: viewClient_component_1.ClientViewComponent },
                     { path: 'client-form', component: clientForm_component_1.ClientFormComponent },
                     { path: 'clients', component: clientList_component_1.ClientListComponent }
                 ]), shared_module_1.SharedModule],
             declarations: [clientList_component_1.ClientListComponent,
-                clientForm_component_1.ClientFormComponent],
-            providers: [clientService_service_1.ClientService]
+                clientForm_component_1.ClientFormComponent,
+                viewClient_component_1.ClientViewComponent],
+            providers: [clientService_service_1.ClientService, adminService_service_1.AdminService]
         }), 
         __metadata('design:paramtypes', [])
     ], ClientModule);

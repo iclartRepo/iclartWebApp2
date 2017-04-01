@@ -1,0 +1,19 @@
+﻿#productList {
+   .add-product {
+      float: right;
+   }
+    .product-filter {
+        float: left;
+        width: 50%;
+    }
+    .product-category-filter {
+        clear:both;
+        padding-top:15px;
+    }
+    .inline-block {
+        label {
+            padding-left:10px;
+            cursor:pointer;
+        }
+    }
+}

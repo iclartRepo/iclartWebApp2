@@ -1,7 +1,14 @@
 ﻿
 @import "wwwroot/src/header/header.component.scss";
 @import "body.scss";
-
+@import "universal.scss";
 
 @import "wwwroot/src/clientLandingPage/clientList/clientList.component.scss";
 @import "wwwroot/src/clientLandingPage/clientForm/clientForm.component.scss";
+@import "wwwroot/src/clientLandingPage/viewClient/viewClient.component.scss";
+@import "wwwroot/src/adminLandingPage/competitorAdmin/competitorAdmin.component.scss";
+@import "wwwroot/src/productLandingPage/mainProductPage/mainProductPage.component.scss";
+@import "wwwroot/src/productLandingPage/productCategory/productCategory.component.scss";
+@import "wwwroot/src/productLandingPage/productList/productList.component.scss";
+@import "wwwroot/src/productLandingPage/productForm/productForm.component.scss";
+@import "wwwroot/src/productLandingPage/viewProduct/viewProduct.component.scss";

@@ -15,14 +15,55 @@ var ClientListComponent = (function () {
     function ClientListComponent(_route, _clientService) {
         this._route = _route;
         this._clientService = _clientService;
+        this.clientName = "";
+        this.result = {
+            isError: false,
+            Result: null,
+            ResultList: null,
+            Message: ''
+        };
+        this.resultDeletion = {
+            isError: false,
+            Result: null,
+            ResultList: null,
+            Message: ''
+        };
     }
+    /* CRUD Functionalities */
     ClientListComponent.prototype.addClient = function () {
         this._route.navigate(['/client-form']);
     };
+    ClientListComponent.prototype.deleteClient = function () {
+        var _this = this;
+        this._clientService.deleteClient(this.clientToDelete)
+            .subscribe(function (deleteResponse) {
+            _this.resultDeletion = deleteResponse;
+            if (_this.resultDeletion.isError == false) {
+                _this.getListClients();
+            }
+        }, function (error) { return _this.errorMessage = error; });
+    };
+    ClientListComponent.prototype.getListClients = function () {
+        var _this = this;
+        this._clientService.getClients()
+            .subscribe(function (peoples) { return _this.result = peoples; }, function (error) { return _this.errorMessage = error; });
+    };
+    ClientListComponent.prototype.searchClient = function () {
+        var _this = this;
+        this._clientService.searchClients(this.clientName)
+            .subscribe(function (peoples) {
+            _this.result = peoples;
+            _this.clientName = "";
+        }, function (error) { return _this.errorMessage = error; });
+    };
+    ClientListComponent.prototype.setClient = function (id) {
+        this.clientToDelete = id;
+    };
+    /* Initialize Functions */
     ClientListComponent.prototype.ngOnInit = function () {
         var _this = this;
         this._clientService.getClients()
-            .subscribe(function (peoples) { return _this.clients = peoples; }, function (error) { return _this.errorMessage = error; });
+            .subscribe(function (peoples) { return _this.result = peoples; }, function (error) { return _this.errorMessage = error; });
     };
     ClientListComponent = __decorate([
         core_1.Component({

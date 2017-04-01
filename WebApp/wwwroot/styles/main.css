@@ -14,23 +14,49 @@
   padding-top: 65px; }
 
 body {
-  overflow-y: hidden; }
+  overflow-y: hidden;
+  font-family: 'Lato-Regular'; }
+
+.table-borderless,
+.table-borderless tr,
+.table-borderless tbody td,
+.table-borderless thead th,
+.table-borderless tfoot th {
+  border: none !important; }
+
+.inline-block {
+  display: inline-block; }
 
 #clientList .add-client {
   float: right; }
 
+#clientList .show-columns {
+  float: left; }
+
 #clientList .client-filter {
   float: left;
-  width: 75%; }
-  #clientList .client-filter .client-filter-label {
-    display: inline-block;
-    margin-right: 10px; }
-  #clientList .client-filter .client-filter-input {
-    display: inline-block;
-    width: 75%; }
+  width: 50%; }
+
+#clientList table .thead-name {
+  width: 40%; }
 
 #clientForm {
   margin-top: -20px; }
+  #clientForm .form-inline .form-group {
+    padding-right: 10px; }
+  #clientForm .table input {
+    width: 10%;
+    text-align: right; }
+  #clientForm sup {
+    color: red; }
+  #clientForm small {
+    color: red; }
+  #clientForm .alert {
+    width: 15%;
+    text-align: center;
+    position: absolute;
+    left: 45%;
+    top: 55px; }
   #clientForm .clientForm-action-buttons {
     position: absolute;
     right: 15px;
@@ -40,7 +66,7 @@ body {
   #clientForm .clientForm-group .client-form {
     overflow-x: hidden;
     overflow-y: scroll;
-    height: 500px;
+    height: 75vh;
     padding-top: 15px; }
   #clientForm .client-name {
     width: 100%; }
@@ -61,4 +87,80 @@ body {
     #clientForm .client-form-pagination a {
       color: black;
       cursor: pointer; }
+
+#viewClient ul a {
+  cursor: pointer; }
+
+#viewClient .client-name {
+  display: inline-block;
+  padding-right: 10px; }
+
+#viewClient .edit-button {
+  display: inline-block; }
+
+#viewClient .panel-body table {
+  width: 55%; }
+
+#competitorAdmin .alert {
+  text-align: center;
+  width: 15%;
+  margin: 0 auto; }
+
+#competitorAdmin .competitorAdmin-display {
+  display: inline-block; }
+
+#mainProductPage ul {
+  margin-bottom: 15px; }
+  #mainProductPage ul a {
+    cursor: pointer; }
+
+#productCategory .productCategory-display {
+  display: inline-block; }
+
+#productList .add-product {
+  float: right; }
+
+#productList .product-filter {
+  float: left;
+  width: 50%; }
+
+#productList .product-category-filter {
+  clear: both;
+  padding-top: 15px; }
+
+#productList .inline-block label {
+  padding-left: 10px;
+  cursor: pointer; }
+
+#productForm {
+  margin-top: -20px; }
+  #productForm .alert {
+    width: 15%;
+    text-align: center;
+    position: absolute;
+    left: 45%;
+    top: 55px; }
+  #productForm .productForm-group .productForm-action-buttons {
+    position: absolute;
+    right: 15px;
+    top: 65px; }
+  #productForm .productForm-group sup {
+    color: red; }
+  #productForm .productForm-group small {
+    color: red; }
+  #productForm .productForm-group .form-inline .form-group {
+    padding-right: 10px; }
+
+#viewProduct .product-name {
+  display: inline-block;
+  padding-right: 10px; }
+
+#viewProduct .edit-button {
+  display: inline-block; }
+
+#viewProduct .panel-body table {
+  width: 55%; }
+
+#viewProduct .panel-body .fin-table {
+  width: 32%; }
 
