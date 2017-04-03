@@ -27,18 +27,18 @@ body {
 .inline-block {
   display: inline-block; }
 
-#clientList .add-client {
-  float: right; }
-
-#clientList .show-columns {
-  float: left; }
-
-#clientList .client-filter {
-  float: left;
-  width: 50%; }
-
-#clientList table .thead-name {
-  width: 40%; }
+#clientList {
+  overflow-y: scroll;
+  height: 100vh; }
+  #clientList .add-client {
+    float: right; }
+  #clientList .show-columns {
+    float: left; }
+  #clientList .client-filter {
+    float: left;
+    width: 50%; }
+  #clientList table .thead-name {
+    width: 40%; }
 
 #clientForm {
   margin-top: -20px; }
@@ -117,20 +117,20 @@ body {
 #productCategory .productCategory-display {
   display: inline-block; }
 
-#productList .add-product {
-  float: right; }
-
-#productList .product-filter {
-  float: left;
-  width: 50%; }
-
-#productList .product-category-filter {
-  clear: both;
-  padding-top: 15px; }
-
-#productList .inline-block label {
-  padding-left: 10px;
-  cursor: pointer; }
+#productList {
+  height: 100vh;
+  overflow-y: scroll; }
+  #productList .add-product {
+    float: right; }
+  #productList .product-filter {
+    float: left;
+    width: 50%; }
+  #productList .product-category-filter {
+    clear: both;
+    padding-top: 15px; }
+  #productList .inline-block label {
+    padding-left: 10px;
+    cursor: pointer; }
 
 #productForm {
   margin-top: -20px; }

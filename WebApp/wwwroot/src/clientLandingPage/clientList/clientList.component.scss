@@ -1,4 +1,6 @@
 ﻿#clientList {
+    overflow-y: scroll;
+    height: 100vh;
     .add-client {
         float: right;
     }
