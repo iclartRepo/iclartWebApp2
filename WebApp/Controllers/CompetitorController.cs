@@ -22,15 +22,14 @@ namespace WebApp.Controllers
                 {
                     var competitorRepository = new GenericRepository<CompetitorEntity>(context);
 
-                    var competitors = competitorRepository.Get().OrderBy(i => i.Name).ToList();
+                    var competitors = competitorRepository.Get().OrderBy(i => i.Name).Select(i => new CompetitorModel { Id = i.Id, Name = i.Name }).ToList();
 
-                    TinyMapper.Bind<List<CompetitorEntity>, List<CompetitorModel>>();
-                    var competitorsModel = TinyMapper.Map<List<CompetitorModel>>(competitors);
+               
 
                     var message = new MessageResult<CompetitorModel>
                     {
                         isError = false,
-                        ResultList = competitorsModel,
+                        ResultList = competitors,
                         Message = "Success",
                         Result = null
                     };

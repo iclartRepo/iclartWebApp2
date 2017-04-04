@@ -11,8 +11,9 @@
     <div class="productCategory-display alert alert-danger" *ngIf="resultForm.isError == true">
         {{resultForm.Message}}
     </div> 
-    <div class="productCategory-table">
-        <table class="table">
+    <div class="productCategory-table panel panel-primary">
+        <div class="panel-body">
+        <table class="table header-fixed">
             <thead>
                 <tr>
                     <th>Product Category</th>
@@ -42,6 +43,7 @@
                 </tr>
             </tbody>
         </table>
+       </div>
     </div>
 
     <!-- Modal -->

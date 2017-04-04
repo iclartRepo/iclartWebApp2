@@ -28,8 +28,8 @@ body {
   display: inline-block; }
 
 #clientList {
-  overflow-y: scroll;
-  height: 100vh; }
+  /*overflow-y: scroll;
+    height: 100vh;*/ }
   #clientList .add-client {
     float: right; }
   #clientList .show-columns {
@@ -39,6 +39,31 @@ body {
     width: 50%; }
   #clientList table .thead-name {
     width: 40%; }
+  #clientList .header-fixed {
+    width: 100%; }
+  #clientList .panel {
+    position: relative;
+    top: 50px; }
+  #clientList .header-fixed > thead,
+  #clientList .header-fixed > tbody,
+  #clientList .header-fixed > thead > tr,
+  #clientList .header-fixed > tbody > tr,
+  #clientList .header-fixed > thead > tr > th,
+  #clientList .header-fixed > tbody > tr > td {
+    display: block; }
+  #clientList .header-fixed > tbody > tr:after,
+  #clientList .header-fixed > thead > tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both; }
+  #clientList .header-fixed > tbody {
+    overflow-y: auto;
+    height: 400px; }
+  #clientList .header-fixed > tbody > tr > td,
+  #clientList .header-fixed > thead > tr > th {
+    width: 20%;
+    float: left; }
 
 #clientForm {
   margin-top: -20px; }
@@ -107,7 +132,35 @@ body {
   margin: 0 auto; }
 
 #competitorAdmin .competitorAdmin-display {
-  display: inline-block; }
+  display: inline-block;
+  margin-bottom: 10px; }
+
+#competitorAdmin .header-fixed {
+  width: 100%; }
+
+#competitorAdmin .header-fixed > thead,
+#competitorAdmin .header-fixed > tbody,
+#competitorAdmin .header-fixed > thead > tr,
+#competitorAdmin .header-fixed > tbody > tr,
+#competitorAdmin .header-fixed > thead > tr > th,
+#competitorAdmin .header-fixed > tbody > tr > td {
+  display: block; }
+
+#competitorAdmin .header-fixed > tbody > tr:after,
+#competitorAdmin .header-fixed > thead > tr:after {
+  content: ' ';
+  display: block;
+  visibility: hidden;
+  clear: both; }
+
+#competitorAdmin .header-fixed > tbody {
+  overflow-y: auto;
+  height: 400px; }
+
+#competitorAdmin .header-fixed > tbody > tr > td,
+#competitorAdmin .header-fixed > thead > tr > th {
+  width: 33%;
+  float: left; }
 
 #mainProductPage ul {
   margin-bottom: 15px; }
@@ -115,11 +168,39 @@ body {
     cursor: pointer; }
 
 #productCategory .productCategory-display {
-  display: inline-block; }
+  display: inline-block;
+  margin-bottom: 10px; }
+
+#productCategory .header-fixed {
+  width: 100%; }
+
+#productCategory .header-fixed > thead,
+#productCategory .header-fixed > tbody,
+#productCategory .header-fixed > thead > tr,
+#productCategory .header-fixed > tbody > tr,
+#productCategory .header-fixed > thead > tr > th,
+#productCategory .header-fixed > tbody > tr > td {
+  display: block; }
+
+#productCategory .header-fixed > tbody > tr:after,
+#productCategory .header-fixed > thead > tr:after {
+  content: ' ';
+  display: block;
+  visibility: hidden;
+  clear: both; }
+
+#productCategory .header-fixed > tbody {
+  overflow-y: auto;
+  height: 300px; }
+
+#productCategory .header-fixed > tbody > tr > td,
+#productCategory .header-fixed > thead > tr > th {
+  width: 33%;
+  float: left; }
 
 #productList {
-  height: 100vh;
-  overflow-y: scroll; }
+  /*height:100vh;
+    overflow-y: scroll;*/ }
   #productList .add-product {
     float: right; }
   #productList .product-filter {
@@ -127,10 +208,33 @@ body {
     width: 50%; }
   #productList .product-category-filter {
     clear: both;
-    padding-top: 15px; }
+    padding-top: 15px;
+    margin-bottom: 10px; }
   #productList .inline-block label {
     padding-left: 10px;
     cursor: pointer; }
+  #productList .header-fixed {
+    width: 100%; }
+  #productList .header-fixed > thead,
+  #productList .header-fixed > tbody,
+  #productList .header-fixed > thead > tr,
+  #productList .header-fixed > tbody > tr,
+  #productList .header-fixed > thead > tr > th,
+  #productList .header-fixed > tbody > tr > td {
+    display: block; }
+  #productList .header-fixed > tbody > tr:after,
+  #productList .header-fixed > thead > tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both; }
+  #productList .header-fixed > tbody {
+    overflow-y: auto;
+    height: 300px; }
+  #productList .header-fixed > tbody > tr > td,
+  #productList .header-fixed > thead > tr > th {
+    width: 25%;
+    float: left; }
 
 #productForm {
   margin-top: -20px; }

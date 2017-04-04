@@ -19,7 +19,7 @@ namespace WebApp.Common.Models
         public double Accounts_Receivables { get; set; }
         public string Credit_Terms { get; set; }
         public double Discount_Scheme { get; set; }
-        public bool Agent { get; set; }
+        public string Agent { get; set; }
         public string Contacts_Order { get; set; }
         public string Contacts_Accounting { get; set; }
         public string Telephone_Number { get; set; }

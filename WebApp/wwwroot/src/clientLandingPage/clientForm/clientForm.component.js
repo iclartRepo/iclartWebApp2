@@ -50,7 +50,7 @@ var ClientFormComponent = (function () {
             Accounts_Receivables: 0,
             Credit_Terms: "",
             Discount_Scheme: 0,
-            Agent: false,
+            Agent: "",
             Contacts_Order: "",
             Contacts_Accounting: "",
             Telephone_Number: "",

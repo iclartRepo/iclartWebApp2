@@ -55,79 +55,79 @@ namespace MigrationTool
 
                 /* Adding Clients */
 
-                //var clientList = new List<ClientEntity>();
-                //for (int i=0; i < clients.Count; i++)
-                //{
-                //    var client = clients[i];
+                var clientList = new List<ClientEntity>();
+                for (int i = 0; i < clients.Count; i++)
+                {
+                    var client = clients[i];
 
-                //    var dealer = false;
-                //    var agent = false;
-                //    var rounded = false;
-                //    var vat = false;
-                //    var combine = false;
+                    var dealer = false;
+                 
+                    var rounded = false;
+                    var vat = false;
+                    var combine = false;
 
-                //    if (int.Parse(client[5].ToString()) == 1)
-                //    {
-                //        dealer = true;
-                //    }
+                    if (int.Parse(client[5].ToString()) == 1)
+                    {
+                        dealer = true;
+                    }
 
-                //    if (int.Parse(client[19].ToString()) == 1)
-                //    {
-                //        rounded = true;
-                //    }
-                //    if (int.Parse(client[22].ToString()) == 1)
-                //    {
-                //        vat = true;
-                //    }
-                //    if (int.Parse(client[24].ToString()) == 1)
-                //    {
-                //        combine = true;
-                //    }
-                //    var newClient = new ClientEntity
-                //    {
-                //        Name = client[1].ToString(),
-                //        TIN = client[2].ToString(),
-                //        Office_Address = client[3].ToString(),
-                //        Credit_Limit = double.Parse(client[4].ToString()),
-                //        Dealer = dealer,
-                //        Accounts_Receivables = 0,
-                //        Credit_Terms = client[7].ToString(),
-                //        Discount_Scheme = double.Parse(client[8].ToString()),
-                //        Agent = false,
-                //        Contacts_Order = client[13].ToString(),
-                //        Contacts_Accounting = client[14].ToString(),
-                //        Warehouse_Address = client[15].ToString(),
-                //        Telephone_Number = client[16].ToString(),
-                //        Fax_Number = client[17].ToString(),
-                //        Email = client[18].ToString(),
-                //        Rounded_Payment = rounded,
-                //        Usual_Ordered_Item = client[20].ToString(),
-                //        Witholding_Tax = double.Parse(client[21].ToString()),
-                //        Vat_Exemption = vat,
-                //        Collection_Period = client[23].ToString(),
-                //        Combine_Items = combine,
-                //        Overpayment_Counter = 0,
-                //        Created_Date = DateTime.Now
-                //    };
-                //    var competitorA = context.Competitors.First(y => y.Name == "Competitor A");
-                //    var competitorB = context.Competitors.First(y => y.Name == "Competitor B");
-                //    var dsSchemes = new List<CompetitorDiscountSchemesEntity>();
-                //    var competitorDS1 = new CompetitorDiscountSchemesEntity
-                //    {
-                //        DiscountScheme = double.Parse(client[9].ToString()),
-                //        CompetitorEntity = competitorA
-                //    };
-                //    var competitorDS2 = new CompetitorDiscountSchemesEntity
-                //    {
-                //        DiscountScheme = double.Parse(client[10].ToString()),
-                //        CompetitorEntity = competitorB
-                //    };
-                //    dsSchemes.Add(competitorDS1);
-                //    dsSchemes.Add(competitorDS2);
+                    if (int.Parse(client[19].ToString()) == 1)
+                    {
+                        rounded = true;
+                    }
+                    if (int.Parse(client[22].ToString()) == 1)
+                    {
+                        vat = true;
+                    }
+                    if (int.Parse(client[24].ToString()) == 1)
+                    {
+                        combine = true;
+                    }
+                    var newClient = new ClientEntity
+                    {
+                        Name = client[1].ToString(),
+                        TIN = client[2].ToString(),
+                        Office_Address = client[3].ToString(),
+                        Credit_Limit = double.Parse(client[4].ToString()),
+                        Dealer = dealer,
+                        Accounts_Receivables = 0,
+                        Credit_Terms = client[7].ToString(),
+                        Discount_Scheme = double.Parse(client[8].ToString()),
+                        Agent = client[12].ToString(),
+                        Contacts_Order = client[13].ToString(),
+                        Contacts_Accounting = client[14].ToString(),
+                        Warehouse_Address = client[15].ToString(),
+                        Telephone_Number = client[16].ToString(),
+                        Fax_Number = client[17].ToString(),
+                        Email = client[18].ToString(),
+                        Rounded_Payment = rounded,
+                        Usual_Ordered_Item = client[20].ToString(),
+                        Witholding_Tax = double.Parse(client[21].ToString()),
+                        Vat_Exemption = vat,
+                        Collection_Period = client[23].ToString(),
+                        Combine_Items = combine,
+                        Overpayment_Counter = 0,
+                        Created_Date = DateTime.Now
+                    };
+                    var competitorA = context.Competitors.First(y => y.Name == "Competitor A");
+                    var competitorB = context.Competitors.First(y => y.Name == "Competitor B");
+                    var dsSchemes = new List<CompetitorDiscountSchemesEntity>();
+                    var competitorDS1 = new CompetitorDiscountSchemesEntity
+                    {
+                        DiscountScheme = double.Parse(client[9].ToString()),
+                        CompetitorEntity = competitorA
+                    };
+                    var competitorDS2 = new CompetitorDiscountSchemesEntity
+                    {
+                        DiscountScheme = double.Parse(client[10].ToString()),
+                        CompetitorEntity = competitorB
+                    };
+                    dsSchemes.Add(competitorDS1);
+                    dsSchemes.Add(competitorDS2);
 
-                //    newClient.CompetitorDiscountSchemes = dsSchemes;
-                //    context.Clients.Add(newClient);
-                //}
+                    newClient.CompetitorDiscountSchemes = dsSchemes;
+                    context.Clients.Add(newClient);
+                }
 
                 /* Add Products */
 
@@ -155,7 +155,7 @@ namespace MigrationTool
                 //    CreatedDate = DateTime.Now,
                 //    Products = new List<ProductEntity>()
                 //};
-           
+
 
                 //for (int j = 0; j < products.Count; j++)
                 //{

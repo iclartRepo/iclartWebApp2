@@ -25,14 +25,14 @@
                     <div class="dealer">
                         <label for="dealer">Dealer</label><br />
                         <input type="checkbox" name="dealer" [(ngModel)]="client.Dealer" />
-                    </div>
-                    <div class="agent">
-                        <label for="agent">Agent</label><br />
-                        <input type="checkbox" name="agent" [(ngModel)]="client.Agent" />
-                    </div> <br />
+                    </div><br />
                     <small [hidden]="!formErrors.name">
                         {{formErrors.name}}
                     </small>
+                </div>
+                <div class="form-group">
+                    <label for="agent">Agent</label>
+                    <input type="text" name="agent" class="form-control" placeholder="Agent" [(ngModel)]="client.Agent" />
                 </div>
                 <div class="form-group">
                     <label for="tin">TIN</label>
