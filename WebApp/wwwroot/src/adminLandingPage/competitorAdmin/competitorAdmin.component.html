@@ -9,37 +9,39 @@
     <div class="competitorAdmin-display">
         <button class="btn btn-primary" (click)="addCompetitor()" [disabled]="newCompetitor == ''">Add Competitor</button>
     </div>   
-    <div class="competitorAdmin-table">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Competitor Name</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let competitor of result.ResultList">
-                    <td>
-                        <div *ngIf="editForm[competitor.Id] == false">
-                            {{editFormData[competitor.Id]}}
-                        </div> 
-                        <div *ngIf="editForm[competitor.Id] == true">
-                            <input type="text" class="form-control" [(ngModel)]="editFormData[competitor.Id]" />
-                        </div>   
-                    </td>
-                    <td>
-                        <div *ngIf="editForm[competitor.Id] == false">
-                            <button class="btn btn-success btn-sm" (click)="edit(competitor.Id)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                        </div>  
-                        <div *ngIf="editForm[competitor.Id] == true">
-                            <button class="btn btn-success btn-sm" [disabled]="editFormData[competitor.Id] == '' || checkIfExist(editFormData[competitor.Id], competitor.Id) == true" (click)="updateCompetitor(competitor.Id)"><i class="fa fa-check" aria-hidden="true"></i></button>
-                        </div>                       
-                    </td>
-                    <td><button class="btn btn-danger btn-sm" (click)="setCompetitor(competitor.Id)" data-toggle="modal" data-target="#myModal"><i class="fa fa-times" aria-hidden="true"></i></button></td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="competitorAdmin-table panel panel-primary">
+        <div class="panel-body">
+            <table class="table header-fixed">
+                <thead>
+                    <tr>
+                        <th>Competitor Name</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let competitor of result.ResultList">
+                        <td>
+                            <div *ngIf="editForm[competitor.Id] == false">
+                                {{editFormData[competitor.Id]}}
+                            </div>
+                            <div *ngIf="editForm[competitor.Id] == true">
+                                <input type="text" class="form-control" [(ngModel)]="editFormData[competitor.Id]" />
+                            </div>
+                        </td>
+                        <td>
+                            <div *ngIf="editForm[competitor.Id] == false">
+                                <button class="btn btn-success btn-sm" (click)="edit(competitor.Id)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                            </div>
+                            <div *ngIf="editForm[competitor.Id] == true">
+                                <button class="btn btn-success btn-sm" [disabled]="editFormData[competitor.Id] == '' || checkIfExist(editFormData[competitor.Id], competitor.Id) == true" (click)="updateCompetitor(competitor.Id)"><i class="fa fa-check" aria-hidden="true"></i></button>
+                            </div>
+                        </td>
+                        <td><button class="btn btn-danger btn-sm" (click)="setCompetitor(competitor.Id)" data-toggle="modal" data-target="#myModal"><i class="fa fa-times" aria-hidden="true"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>      
     </div>
 
     <!-- Modal -->

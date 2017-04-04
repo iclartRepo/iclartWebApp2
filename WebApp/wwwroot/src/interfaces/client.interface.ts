@@ -9,7 +9,7 @@
     Accounts_Receivables: number,
     Credit_Terms: string,
     Discount_Scheme: number,
-    Agent: boolean,
+    Agent: string,
     Contacts_Order: string,
     Contacts_Accounting: string,
     Telephone_Number: string,

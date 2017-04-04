@@ -62,15 +62,14 @@ namespace WebApp.Controllers
                 {
                     var productRepository = new GenericRepository<ProductEntity>(context);
 
-                    var productEntities = productRepository.Get(i => i.IsDeleted == false).OrderBy(i => i.ProductCategory.Name).ThenBy(i => i.Name).ToList();
+                    var productEntities = productRepository.Get(i => i.IsDeleted == false).OrderBy(i => i.ProductCategory.Name).ThenBy(i => i.Name).Select(x => new ProductModel { Id = x.Id, Name = x.Name, ProductCategory = new ProductCategoryModel { Name = x.ProductCategory.Name } }).ToList();
 
-                    TinyMapper.Bind<List<ProductEntity>, List<ProductModel>>();
-                    var productsModel = TinyMapper.Map<List<ProductModel>>(productEntities);
+             
 
                     var message = new MessageResult<ProductModel>
                     {
                         isError = false,
-                        ResultList = productsModel,
+                        ResultList = productEntities,
                         Message = "Success",
                         Result = null
                     };
@@ -100,15 +99,13 @@ namespace WebApp.Controllers
                 {
                     var productRepository = new GenericRepository<ProductEntity>(context);
 
-                    var productEntities = productRepository.Get(i => i.IsDeleted == false && i.Name.Contains(name)).OrderBy(i => i.Name).ToList();
+                    var productEntities = productRepository.Get(i => i.IsDeleted == false && i.Name.Contains(name)).OrderBy(i => i.Name).Select(x => new ProductModel { Id = x.Id, Name = x.Name, ProductCategory = new ProductCategoryModel { Name = x.ProductCategory.Name } }).ToList();
 
-                    TinyMapper.Bind<List<ProductEntity>, List<ProductModel>>();
-                    var productsModel = TinyMapper.Map<List<ProductModel>>(productEntities);
 
                     var message = new MessageResult<ProductModel>
                     {
                         isError = false,
-                        ResultList = productsModel,
+                        ResultList = productEntities,
                         Message = "Success",
                         Result = null
                     };
@@ -137,15 +134,14 @@ namespace WebApp.Controllers
                 {
                     var productRepository = new GenericRepository<ProductEntity>(context);
 
-                    var productEntities = productRepository.Get(i => i.IsDeleted == false && i.ProductCategory.Name == name).OrderBy(i => i.Name).ToList();
+                    var productEntities = productRepository.Get(i => i.IsDeleted == false && i.ProductCategory.Name == name).OrderBy(i => i.Name).Select(x => new ProductModel { Id = x.Id, Name = x.Name, ProductCategory = new ProductCategoryModel { Name = x.ProductCategory.Name } }).ToList();
 
-                    TinyMapper.Bind<List<ProductEntity>, List<ProductModel>>();
-                    var productsModel = TinyMapper.Map<List<ProductModel>>(productEntities);
+                 
 
                     var message = new MessageResult<ProductModel>
                     {
                         isError = false,
-                        ResultList = productsModel,
+                        ResultList = productEntities,
                         Message = "Success",
                         Result = null
                     };

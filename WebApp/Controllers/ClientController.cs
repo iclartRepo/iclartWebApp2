@@ -25,15 +25,12 @@ namespace WebApp.Controllers
                 {
                     var clientRepository = new GenericRepository<ClientEntity>(context);
 
-                    var clients = clientRepository.Get(i => i.IsDeleted == false).OrderBy(i => i.Name).ToList();
-
-                    TinyMapper.Bind<List<ClientEntity>, List<ClientModel>>();
-                    var clientsModel = TinyMapper.Map<List<ClientModel>>(clients);
+                    var clients = clientRepository.Get(i => i.IsDeleted == false).OrderBy(i => i.Name).Select(x => new ClientModel { Id = x.Id, Name = x.Name, Telephone_Number = x.Telephone_Number, Email = x.Email }).ToList();
 
                     var message = new MessageResult<ClientModel>
                     {
                         isError = false,
-                        ResultList = clientsModel,
+                        ResultList = clients,
                         Message = "Success",
                         Result = null
                     };
@@ -67,15 +64,14 @@ namespace WebApp.Controllers
                     var clientRepository = new GenericRepository<ClientEntity>(context);
 
 
-                    var clients = clientRepository.Get(i => i.IsDeleted == false && i.Name.Contains(clientName)).ToList();
+                    var clients = clientRepository.Get(i => i.IsDeleted == false && i.Name.Contains(clientName)).Select(x => new ClientModel { Id = x.Id, Name = x.Name, Telephone_Number = x.Telephone_Number, Email = x.Email }).ToList();
 
-                    TinyMapper.Bind<List<ClientEntity>, List<ClientModel>>();
-                    var clientsModel = TinyMapper.Map<List<ClientModel>>(clients);
+                 
 
                     var message = new MessageResult<ClientModel>
                     {
                         isError = false,
-                        ResultList = clientsModel,
+                        ResultList = clients,
                         Message = "Success",
                         Result = null
                     };
