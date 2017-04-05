@@ -53,6 +53,14 @@ namespace WebApp.Controllers
         }
 
         //
+        //GET: Check Authenticated
+        [AllowAnonymous]
+        public ActionResult IsAuthenticated()
+        {
+            var user = User.Identity.IsAuthenticated;
+            return Json(user, JsonRequestBehavior.AllowGet);
+        }
+        //
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)

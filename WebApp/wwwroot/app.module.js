@@ -21,6 +21,7 @@ var forms_1 = require('@angular/forms');
 var client_module_1 = require('./src/clientLandingPage/client.module');
 var admin_module_1 = require('./src/adminLandingPage/admin.module');
 var product_module_1 = require('./src/productLandingPage/product.module');
+var authService_service_1 = require('./src/accountServices/authService.service');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -38,7 +39,8 @@ var AppModule = (function () {
             declarations: [app_component_1.AppComponent,
                 header_component_1.HeaderComponent,
                 login_component_1.LoginComponent],
-            bootstrap: [app_component_1.AppComponent]
+            bootstrap: [app_component_1.AppComponent],
+            providers: [authService_service_1.AuthService]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);

@@ -214,10 +214,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704051350257_AddedSeedData.cs" />
+    <Compile Include="Migrations\201704051350257_AddedSeedData.Designer.cs">
+      <DependentUpon>201704051350257_AddedSeedData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\SeedUsersRoles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -347,6 +351,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\src\accountServices\authService.service.ts" />
     <TypeScriptCompile Include="wwwroot\src\adminLandingPage\admin.module.ts" />
     <TypeScriptCompile Include="wwwroot\src\adminLandingPage\adminService.service.ts" />
     <TypeScriptCompile Include="wwwroot\src\adminLandingPage\competitorAdmin\competitorAdmin.component.ts" />
@@ -389,6 +394,11 @@
       <Project>{C69F8A4E-B49E-4A1E-BE94-2905C7A3CD1A}</Project>
       <Name>WebApp.DAL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201704051350257_AddedSeedData.resx">
+      <DependentUpon>201704051350257_AddedSeedData.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

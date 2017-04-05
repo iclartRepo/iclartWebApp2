@@ -9,15 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var authService_service_1 = require('../accountServices/authService.service');
 var HeaderComponent = (function () {
-    function HeaderComponent() {
+    function HeaderComponent(_authService) {
+        this._authService = _authService;
     }
+    HeaderComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._authService.isAuthenticated()
+            .subscribe(function (authenticated) { return _this.isAuthenticated = authenticated; }, function (error) { return _this.errorMessage = error; });
+    };
     HeaderComponent = __decorate([
         core_1.Component({
             selector: 'web-header',
             templateUrl: 'wwwroot/src/header/header.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [authService_service_1.AuthService])
     ], HeaderComponent);
     return HeaderComponent;
 }());

@@ -18,7 +18,7 @@ var LoginComponent = (function () {
         };
         this.validationMessages = {
             'username': {
-                'required': 'Username is required.'
+                'required': 'Email is required.'
             },
             'password': {
                 'required': 'Password is required.'

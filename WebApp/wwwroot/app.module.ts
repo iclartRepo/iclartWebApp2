@@ -13,6 +13,8 @@ import { ClientModule } from './src/clientLandingPage/client.module';
 import { AdminModule } from './src/adminLandingPage/admin.module';
 import { ProductModule } from './src/productLandingPage/product.module';
 
+import { AuthService } from './src/accountServices/authService.service';
+
 @NgModule({
     imports: [BrowserModule,
         RouterModule.forRoot([
@@ -26,6 +28,7 @@ import { ProductModule } from './src/productLandingPage/product.module';
     declarations: [AppComponent,
         HeaderComponent,
         LoginComponent],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    providers: [AuthService]
 })
 export class AppModule { }
