@@ -217,6 +217,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\SeedUsersRoles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -239,6 +240,7 @@
     <Content Include="wwwroot\src\clientLandingPage\clientList\clientList.component.html" />
     <Content Include="wwwroot\src\clientLandingPage\viewClient\viewClient.component.html" />
     <Content Include="wwwroot\src\header\header.component.html" />
+    <Content Include="wwwroot\src\login\login.component.html" />
     <Content Include="wwwroot\src\mainLandingPage\mainLandingPage.component.html" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
@@ -328,6 +330,7 @@
     <Content Include="wwwroot\src\productLandingPage\productList\productList.component.scss" />
     <Content Include="wwwroot\src\productLandingPage\productForm\productForm.component.scss" />
     <Content Include="wwwroot\src\productLandingPage\viewProduct\viewProduct.component.scss" />
+    <Content Include="wwwroot\src\login\login.component.scss" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -359,6 +362,7 @@
     <TypeScriptCompile Include="wwwroot\src\interfaces\client.interface.ts" />
     <TypeScriptCompile Include="wwwroot\src\interfaces\messageResult.interface.ts" />
     <TypeScriptCompile Include="wwwroot\src\interfaces\product.interface.ts" />
+    <TypeScriptCompile Include="wwwroot\src\login\login.component.ts" />
     <TypeScriptCompile Include="wwwroot\src\mainLandingPage\mainLandingPage.component.ts" />
     <TypeScriptCompile Include="wwwroot\src\productLandingPage\mainProductPage\mainProductPage.component.ts" />
     <TypeScriptCompile Include="wwwroot\src\productLandingPage\product.module.ts" />

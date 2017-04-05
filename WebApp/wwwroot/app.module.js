@@ -15,8 +15,9 @@ var http_1 = require('@angular/http');
 /* Main Components */
 var app_component_1 = require('./src/app/app.component');
 var header_component_1 = require('./src/header/header.component');
-var mainLandingPage_component_1 = require('./src/mainLandingPage/mainLandingPage.component');
+var login_component_1 = require('./src/login/login.component');
 /* Modules */
+var forms_1 = require('@angular/forms');
 var client_module_1 = require('./src/clientLandingPage/client.module');
 var admin_module_1 = require('./src/adminLandingPage/admin.module');
 var product_module_1 = require('./src/productLandingPage/product.module');
@@ -27,15 +28,16 @@ var AppModule = (function () {
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule,
                 router_1.RouterModule.forRoot([
-                    { path: '', component: mainLandingPage_component_1.MainComponent }
+                    { path: '', component: login_component_1.LoginComponent }
                 ]),
                 http_1.HttpModule,
+                forms_1.FormsModule,
                 client_module_1.ClientModule,
                 admin_module_1.AdminModule,
                 product_module_1.ProductModule],
             declarations: [app_component_1.AppComponent,
                 header_component_1.HeaderComponent,
-                mainLandingPage_component_1.MainComponent],
+                login_component_1.LoginComponent],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])
