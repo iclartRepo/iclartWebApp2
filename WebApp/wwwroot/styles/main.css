@@ -9,6 +9,8 @@
     color: #333 !important; }
   .navbar .open a {
     color: #333 !important; }
+  .navbar a {
+    cursor: pointer; }
 
 .content {
   padding-top: 65px; }

@@ -10,8 +10,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
+var router_1 = require('@angular/router');
+var authService_service_1 = require('../accountServices/authService.service');
+var localStorageService_service_1 = require('../universal/localStorageService.service');
 var LoginComponent = (function () {
-    function LoginComponent() {
+    function LoginComponent(_authService, _localStorageService, _router) {
+        this._authService = _authService;
+        this._localStorageService = _localStorageService;
+        this._router = _router;
+        this.result = {
+            isError: false,
+            Result: null,
+            ResultList: null,
+            Message: ''
+        };
         this.formErrors = {
             'username': '',
             'password': ''
@@ -25,6 +37,24 @@ var LoginComponent = (function () {
             }
         };
     }
+    LoginComponent.prototype.login = function () {
+        var _this = this;
+        var loginForm = {
+            "Email": this.email,
+            "Password": this.password
+        };
+        this._authService.login(loginForm)
+            .subscribe(function (login) {
+            _this.result = login;
+            if (_this.result.isError == false) {
+                _this._localStorageService.setItem("IsAuthenticated", "Authorized");
+                _this._router.navigate(['/home']);
+            }
+            else {
+                _this._localStorageService.setItem("IsAuthenticated", "Unauthorized");
+            }
+        }, function (error) { return _this.errorMessage = error; });
+    };
     LoginComponent.prototype.ngAfterViewChecked = function () {
         this.formChanged();
     };
@@ -65,7 +95,7 @@ var LoginComponent = (function () {
             selector: 'web-login',
             templateUrl: 'wwwroot/src/login/login.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [authService_service_1.AuthService, localStorageService_service_1.LocalStorageService, router_1.Router])
     ], LoginComponent);
     return LoginComponent;
 }());

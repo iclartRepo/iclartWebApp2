@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WebApp.Models;
+using WebApp.Common.Models;
 
 namespace WebApp.Controllers
 {
@@ -73,7 +74,7 @@ namespace WebApp.Controllers
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
@@ -87,15 +88,28 @@ namespace WebApp.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    var message = new MessageResult<string>
+                    {
+                        isError = false,
+                        ResultList = null,
+                        Message = "Success",
+                        Result = null
+                    };
+                    return Json(message, JsonRequestBehavior.AllowGet);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                    var messageError = new MessageResult<string>
+                    {
+                        isError = true,
+                        ResultList = null,
+                        Message = "Invalid Login Attempt",
+                        Result = null
+                    };
+                    return Json(messageError, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -396,11 +410,18 @@ namespace WebApp.Controllers
         //
         // POST: /Account/LogOff
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            var message = new MessageResult<string>
+            {
+                isError = false,
+                ResultList = null,
+                Message = "Success",
+                Result = null
+            };
+            return Json(message, JsonRequestBehavior.AllowGet);
         }
 
         //

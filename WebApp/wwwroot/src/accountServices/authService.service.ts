@@ -20,6 +20,22 @@ export class AuthService {
             .map((response: Response) => <boolean>response.json())
             .catch(this.handleError);
     }
+    login(loginForm: any): Observable<IMessageResult> {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this._http.post(this.baseUrl + "Login", { "model": loginForm }, options)
+            .map((response: Response) => <IMessageResult>response.json())
+            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+    logout(): Observable<IMessageResult> {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this._http.post(this.baseUrl + "LogOff", {}, options)
+            .map((response: Response) => <IMessageResult>response.json())
+            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
     private handleError(error: Response) {
         // in a real world app, we may send the server to some remote logging infrastructure
         // instead of just logging it to the console
