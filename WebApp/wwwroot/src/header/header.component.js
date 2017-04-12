@@ -20,10 +20,12 @@ var HeaderComponent = (function () {
     }
     HeaderComponent.prototype.logOut = function () {
         var _this = this;
-        this._authService.logout()
+        this.ticket = localStorage.getItem("ticket");
+        this._authService.logout(this.ticket)
             .subscribe(function (result) {
             if (result.isError == false) {
                 _this._localStorageService.setItem("IsAuthenticated", "Unauthorized");
+                localStorage.removeItem("ticket");
                 _this._router.navigate(["/"]);
             }
         }, function (error) { return _this.errorMessage = error; });

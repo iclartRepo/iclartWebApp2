@@ -33,6 +33,8 @@ export class LoginComponent {
         this._authService.login(loginForm)
             .subscribe(login => {
                 this.result = login;
+                localStorage.setItem("ticket", this.result.Result);
+                console.log(localStorage.getItem("ticket"));
                 if (this.result.isError == false)
                 {
                     this._localStorageService.setItem("IsAuthenticated", "Authorized");

@@ -19,6 +19,7 @@ var AuthService = (function () {
     function AuthService(_http) {
         this._http = _http;
         this.baseUrl = "/Account/";
+        this.antiForgeryToken = document.getElementsByName("__RequestVerificationToken")[0];
     }
     AuthService.prototype.isAuthenticated = function () {
         return this._http.get(this.baseUrl + "IsAuthenticated")
@@ -26,20 +27,51 @@ var AuthService = (function () {
             .catch(this.handleError);
     };
     AuthService.prototype.login = function (loginForm) {
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var postedData = {};
+        if (localStorage.getItem("ticket") == null || localStorage.getItem("ticket") == "") {
+            postedData = {
+                "__RequestVerificationToken": this.antiForgeryToken.value,
+                "username": loginForm.Email,
+                "password": loginForm.Password
+            };
+        }
+        else {
+            postedData = {
+                "__RequestVerificationToken": this.antiForgeryToken,
+                "username": loginForm.Email,
+                "password": loginForm.Password
+            };
+        }
+        var headers = new http_1.Headers({ 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' });
         var options = new http_1.RequestOptions({ headers: headers });
-        return this._http.post(this.baseUrl + "Login", { "model": loginForm }, options)
+        var params = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "Login", params, options)
             .map(function (response) { return response.json(); })
             .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
             .catch(this.handleError);
     };
-    AuthService.prototype.logout = function () {
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+    AuthService.prototype.logout = function (ticket) {
+        var postedData = {
+            "__RequestVerificationToken": ticket
+        };
+        var headers = new http_1.Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' });
         var options = new http_1.RequestOptions({ headers: headers });
-        return this._http.post(this.baseUrl + "LogOff", {}, options)
+        var params = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "LogOff", params, options)
             .map(function (response) { return response.json(); })
             .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
             .catch(this.handleError);
+    };
+    AuthService.prototype.serialize = function (obj) {
+        var params = new http_1.URLSearchParams();
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                var element = obj[key];
+                params.set(key, element);
+            }
+        }
+        return params;
     };
     AuthService.prototype.handleError = function (error) {
         // in a real world app, we may send the server to some remote logging infrastructure

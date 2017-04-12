@@ -10,15 +10,18 @@ export class HeaderComponent {
 
     isAuthenticated: boolean;
     errorMessage: string;
+    ticket: string;
 
     constructor(private _authService: AuthService, private _localStorageService: LocalStorageService, private _router: Router) {
     }
 
     logOut(): void {
-        this._authService.logout()
+        this.ticket = localStorage.getItem("ticket");       
+        this._authService.logout(this.ticket)
             .subscribe(result => {
                 if (result.isError == false) {
                     this._localStorageService.setItem("IsAuthenticated", "Unauthorized");
+                    localStorage.removeItem("ticket");
                     this._router.navigate(["/"]);
                 }
             },

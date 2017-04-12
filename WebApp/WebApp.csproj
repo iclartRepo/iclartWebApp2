@@ -335,6 +335,7 @@
     <Content Include="wwwroot\src\productLandingPage\productForm\productForm.component.scss" />
     <Content Include="wwwroot\src\productLandingPage\viewProduct\viewProduct.component.scss" />
     <Content Include="wwwroot\src\login\login.component.scss" />
+    <Content Include="wwwroot\src\header\_Header.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

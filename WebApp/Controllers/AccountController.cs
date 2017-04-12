@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WebApp.Models;
 using WebApp.Common.Models;
+using System.Web.Helpers;
 
 namespace WebApp.Controllers
 {
@@ -74,32 +75,31 @@ namespace WebApp.Controllers
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Login(string username, string password, string returnUrl)
         {
-            if (!ModelState.IsValid)
+            var loginModel = new LoginViewModel
             {
-                return View(model);
-            }
+                Email = username,
+                Password = password,
+                RememberMe = false
+            };
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(model);
+            //}
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(loginModel.Email, loginModel.Password, loginModel.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
-                    var message = new MessageResult<string>
-                    {
-                        isError = false,
-                        ResultList = null,
-                        Message = "Success",
-                        Result = null
-                    };
-                    return Json(message, JsonRequestBehavior.AllowGet);
+                    return RedirectToAction("ReturnNewToken");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = loginModel.RememberMe });
                 case SignInStatus.Failure:
                 default:
                     var messageError = new MessageResult<string>
@@ -112,7 +112,21 @@ namespace WebApp.Controllers
                     return Json(messageError, JsonRequestBehavior.AllowGet);
             }
         }
+        public ActionResult ReturnNewToken()
+        {
+            string cookieToken, formToken;
+            string oldCookieToken = Request.Cookies[AntiForgeryConfig.CookieName] == null ? null : Request.Cookies[AntiForgeryConfig.CookieName].Value;
+            AntiForgery.GetTokens(oldCookieToken, out cookieToken, out formToken);
 
+            var message = new MessageResult<string>
+            {
+                isError = false,
+                ResultList = null,
+                Message = "Success",
+                Result = formToken
+            };
+            return Json(message, JsonRequestBehavior.AllowGet);
+        }
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
@@ -410,7 +424,7 @@ namespace WebApp.Controllers
         //
         // POST: /Account/LogOff
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
