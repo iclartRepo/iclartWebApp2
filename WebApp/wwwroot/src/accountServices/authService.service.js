@@ -26,6 +26,20 @@ var AuthService = (function () {
             .map(function (response) { return response.json(); })
             .catch(this.handleError);
     };
+    AuthService.prototype.getRolesOfUser = function () {
+        var postedData = {
+            "__RequestVerificationToken": localStorage.getItem("ticket")
+        };
+        var headers = new http_1.Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        var options = new http_1.RequestOptions({ headers: headers });
+        var params = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "GetRolesofUser", params, options)
+            .map(function (response) { return response.json(); })
+            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
+            .catch(this.handleError);
+    };
     AuthService.prototype.login = function (loginForm) {
         var postedData = {};
         if (localStorage.getItem("ticket") == null || localStorage.getItem("ticket") == "") {

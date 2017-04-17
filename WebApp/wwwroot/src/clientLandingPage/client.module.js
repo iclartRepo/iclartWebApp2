@@ -18,21 +18,22 @@ var viewClient_component_1 = require('./viewClient/viewClient.component');
 //Services
 var clientService_service_1 = require('./clientService.service');
 var adminService_service_1 = require('../adminLandingPage/adminService.service');
+var authGuard_1 = require('../routeGuards/authGuard');
 var ClientModule = (function () {
     function ClientModule() {
     }
     ClientModule = __decorate([
         core_1.NgModule({
             imports: [router_1.RouterModule.forChild([
-                    { path: 'client-form/:id', component: clientForm_component_1.ClientFormComponent },
-                    { path: 'client-info/:id', component: viewClient_component_1.ClientViewComponent },
-                    { path: 'client-form', component: clientForm_component_1.ClientFormComponent },
-                    { path: 'clients', component: clientList_component_1.ClientListComponent }
+                    { path: 'client-form/:id', component: clientForm_component_1.ClientFormComponent, canActivate: [authGuard_1.AuthAccessGuard] },
+                    { path: 'client-info/:id', component: viewClient_component_1.ClientViewComponent, canActivate: [authGuard_1.AuthAccessGuard] },
+                    { path: 'client-form', component: clientForm_component_1.ClientFormComponent, canActivate: [authGuard_1.AuthAccessGuard] },
+                    { path: 'clients', component: clientList_component_1.ClientListComponent, canActivate: [authGuard_1.AuthAccessGuard] }
                 ]), shared_module_1.SharedModule],
             declarations: [clientList_component_1.ClientListComponent,
                 clientForm_component_1.ClientFormComponent,
                 viewClient_component_1.ClientViewComponent],
-            providers: [clientService_service_1.ClientService, adminService_service_1.AdminService]
+            providers: [clientService_service_1.ClientService, adminService_service_1.AdminService, authGuard_1.AuthAccessGuard]
         }), 
         __metadata('design:paramtypes', [])
     ], ClientModule);

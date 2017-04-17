@@ -11,15 +11,16 @@ import { ProductListComponent } from './productList/productList.component';
 import { ProductFormComponent } from './productForm/productForm.component';
 import { ProductViewComponent } from './viewProduct/viewProduct.component';
 
+import { AuthAccessGuard } from '../routeGuards/authGuard';
 @NgModule({
     imports: [RouterModule.forChild([
-        { path: 'products', component: MainProductPageComponent },
-        { path: 'products/:tabNum', component: MainProductPageComponent },
-        { path: 'productForm', component: ProductFormComponent },
-        { path: 'productForm/:id', component: ProductFormComponent },
-        { path: 'product/:id', component: ProductViewComponent }
+        { path: 'products', component: MainProductPageComponent, canActivate: [AuthAccessGuard] },
+        { path: 'products/:tabNum', component: MainProductPageComponent, canActivate: [AuthAccessGuard] },
+        { path: 'productForm', component: ProductFormComponent, canActivate: [AuthAccessGuard] },
+        { path: 'productForm/:id', component: ProductFormComponent, canActivate: [AuthAccessGuard] },
+        { path: 'product/:id', component: ProductViewComponent, canActivate: [AuthAccessGuard] }
     ]), SharedModule],
     declarations: [MainProductPageComponent, ProductCategoryComponent, ProductListComponent, ProductFormComponent, ProductViewComponent],
-    providers: [ProductService]
+    providers: [ProductService, AuthAccessGuard]
 })
 export class ProductModule { }

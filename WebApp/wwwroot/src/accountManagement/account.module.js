@@ -11,23 +11,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var shared_module_1 = require('../shared/shared.module');
-var adminService_service_1 = require('./adminService.service');
-var competitorAdmin_component_1 = require('./competitorAdmin/competitorAdmin.component');
+var account_component_1 = require('./accountLandingPage/account.component');
 var authGuard_1 = require('../routeGuards/authGuard');
-var AdminModule = (function () {
-    function AdminModule() {
+var AccountManagementModule = (function () {
+    function AccountManagementModule() {
     }
-    AdminModule = __decorate([
+    AccountManagementModule = __decorate([
         core_1.NgModule({
             imports: [router_1.RouterModule.forChild([
-                    { path: 'competitors', component: competitorAdmin_component_1.CompetitorAdminComponent, canActivate: [authGuard_1.AuthAccessGuard] }
+                    { path: "accounts", component: account_component_1.AccountManagementComponent, canActivate: [authGuard_1.AuthAccessGuard] }
                 ]), shared_module_1.SharedModule],
-            declarations: [competitorAdmin_component_1.CompetitorAdminComponent],
-            providers: [adminService_service_1.AdminService, authGuard_1.AuthAccessGuard]
+            declarations: [account_component_1.AccountManagementComponent],
+            providers: [authGuard_1.AuthAccessGuard]
         }), 
         __metadata('design:paramtypes', [])
-    ], AdminModule);
-    return AdminModule;
+    ], AccountManagementModule);
+    return AccountManagementModule;
 }());
-exports.AdminModule = AdminModule;
-//# sourceMappingURL=admin.module.js.map
+exports.AccountManagementModule = AccountManagementModule;
+//# sourceMappingURL=account.module.js.map

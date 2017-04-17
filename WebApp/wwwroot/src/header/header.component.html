@@ -7,13 +7,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" routerLink="">ICLART</a>
+            <a class="navbar-brand" routerLink="/home">ICLART</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav" *ngIf="isAuthenticated == true">
-                <li class="dropdown">
+                <li class="dropdown" *ngIf="isAdmin == true">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin <span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        <li><a routerLink="/accounts">Account Management</a></li>
                         <li><a routerLink="/clients">Client Management</a></li>
                         <li><a routerLink="/competitors">Competitor Management</a></li>
                         <li><a routerLink="/products">Product Management</a></li>

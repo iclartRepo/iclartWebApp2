@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using WebApp.Models;
 using WebApp.Common.Models;
 using System.Web.Helpers;
+using System.Web.Security;
 
 namespace WebApp.Controllers
 {
@@ -62,6 +63,24 @@ namespace WebApp.Controllers
             var user = User.Identity.IsAuthenticated;
             return Json(user, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> GetRolesofUser()
+        {
+            var currentUser = User.Identity.Name;
+            var user = await UserManager.FindByEmailAsync(currentUser);
+            var roles = await UserManager.GetRolesAsync(user.Id);
+            var message = new MessageResult<string>
+            {
+                isError = false,
+                ResultList = roles.ToList(),
+                Message = "Success",
+                Result = null
+            };
+            return Json(message, JsonRequestBehavior.AllowGet);
+        } 
+
         //
         // GET: /Account/Login
         [AllowAnonymous]

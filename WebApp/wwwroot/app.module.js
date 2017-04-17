@@ -22,8 +22,10 @@ var forms_1 = require('@angular/forms');
 var client_module_1 = require('./src/clientLandingPage/client.module');
 var admin_module_1 = require('./src/adminLandingPage/admin.module');
 var product_module_1 = require('./src/productLandingPage/product.module');
+var account_module_1 = require('./src/accountManagement/account.module');
 var authService_service_1 = require('./src/accountServices/authService.service');
 var localStorageService_service_1 = require('./src/universal/localStorageService.service');
+var authGuard_1 = require('./src/routeGuards/authGuard');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -32,19 +34,20 @@ var AppModule = (function () {
             imports: [platform_browser_1.BrowserModule,
                 router_1.RouterModule.forRoot([
                     { path: '', component: login_component_1.LoginComponent },
-                    { path: 'home', component: mainLandingPage_component_1.MainComponent }
+                    { path: 'home', component: mainLandingPage_component_1.MainComponent, canActivate: [authGuard_1.AuthAccessGuard] }
                 ]),
                 http_1.HttpModule,
                 forms_1.FormsModule,
                 client_module_1.ClientModule,
                 admin_module_1.AdminModule,
-                product_module_1.ProductModule],
+                product_module_1.ProductModule,
+                account_module_1.AccountManagementModule],
             declarations: [app_component_1.AppComponent,
                 header_component_1.HeaderComponent,
                 login_component_1.LoginComponent,
                 mainLandingPage_component_1.MainComponent],
             bootstrap: [app_component_1.AppComponent],
-            providers: [authService_service_1.AuthService, localStorageService_service_1.LocalStorageService]
+            providers: [authService_service_1.AuthService, localStorageService_service_1.LocalStorageService, authGuard_1.AuthAccessGuard]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);
