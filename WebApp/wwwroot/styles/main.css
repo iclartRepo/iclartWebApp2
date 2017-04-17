@@ -9,6 +9,8 @@
     color: #333 !important; }
   .navbar .open a {
     color: #333 !important; }
+  .navbar a {
+    cursor: pointer; }
 
 .content {
   padding-top: 65px; }
@@ -267,4 +269,27 @@ body {
 
 #viewProduct .panel-body .fin-table {
   width: 32%; }
+
+#login .login {
+  width: 25%;
+  margin: 0 auto;
+  margin-top: 100px !important;
+  border-color: #142b3d; }
+  #login .login .panel-heading {
+    background-color: #142b3d;
+    border-color: #142b3d;
+    font-size: 20px; }
+  #login .login button {
+    width: 150px;
+    font-size: 15px;
+    margin-bottom: 10px; }
+
+#login .loginForm-action-buttons {
+  text-align: center; }
+
+#login sup {
+  color: red; }
+
+#login small {
+  color: red; }
 

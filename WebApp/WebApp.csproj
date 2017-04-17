@@ -214,6 +214,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704051350257_AddedSeedData.cs" />
+    <Compile Include="Migrations\201704051350257_AddedSeedData.Designer.cs">
+      <DependentUpon>201704051350257_AddedSeedData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -239,6 +244,7 @@
     <Content Include="wwwroot\src\clientLandingPage\clientList\clientList.component.html" />
     <Content Include="wwwroot\src\clientLandingPage\viewClient\viewClient.component.html" />
     <Content Include="wwwroot\src\header\header.component.html" />
+    <Content Include="wwwroot\src\login\login.component.html" />
     <Content Include="wwwroot\src\mainLandingPage\mainLandingPage.component.html" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
@@ -328,6 +334,8 @@
     <Content Include="wwwroot\src\productLandingPage\productList\productList.component.scss" />
     <Content Include="wwwroot\src\productLandingPage\productForm\productForm.component.scss" />
     <Content Include="wwwroot\src\productLandingPage\viewProduct\viewProduct.component.scss" />
+    <Content Include="wwwroot\src\login\login.component.scss" />
+    <Content Include="wwwroot\src\header\_Header.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -344,6 +352,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\src\accountServices\authService.service.ts" />
     <TypeScriptCompile Include="wwwroot\src\adminLandingPage\admin.module.ts" />
     <TypeScriptCompile Include="wwwroot\src\adminLandingPage\adminService.service.ts" />
     <TypeScriptCompile Include="wwwroot\src\adminLandingPage\competitorAdmin\competitorAdmin.component.ts" />
@@ -359,6 +368,7 @@
     <TypeScriptCompile Include="wwwroot\src\interfaces\client.interface.ts" />
     <TypeScriptCompile Include="wwwroot\src\interfaces\messageResult.interface.ts" />
     <TypeScriptCompile Include="wwwroot\src\interfaces\product.interface.ts" />
+    <TypeScriptCompile Include="wwwroot\src\login\login.component.ts" />
     <TypeScriptCompile Include="wwwroot\src\mainLandingPage\mainLandingPage.component.ts" />
     <TypeScriptCompile Include="wwwroot\src\productLandingPage\mainProductPage\mainProductPage.component.ts" />
     <TypeScriptCompile Include="wwwroot\src\productLandingPage\product.module.ts" />
@@ -368,6 +378,7 @@
     <TypeScriptCompile Include="wwwroot\src\productLandingPage\productService.service.ts" />
     <TypeScriptCompile Include="wwwroot\src\productLandingPage\viewProduct\viewProduct.component.ts" />
     <TypeScriptCompile Include="wwwroot\src\shared\shared.module.ts" />
+    <TypeScriptCompile Include="wwwroot\src\universal\localStorageService.service.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
@@ -385,6 +396,11 @@
       <Project>{C69F8A4E-B49E-4A1E-BE94-2905C7A3CD1A}</Project>
       <Name>WebApp.DAL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201704051350257_AddedSeedData.resx">
+      <DependentUpon>201704051350257_AddedSeedData.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
