@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var shared_module_1 = require('../shared/shared.module');
 var account_component_1 = require('./accountLandingPage/account.component');
+var rolesList_component_1 = require('./rolesList/rolesList.component');
 var authGuard_1 = require('../routeGuards/authGuard');
 var AccountManagementModule = (function () {
     function AccountManagementModule() {
@@ -21,7 +22,7 @@ var AccountManagementModule = (function () {
             imports: [router_1.RouterModule.forChild([
                     { path: "accounts", component: account_component_1.AccountManagementComponent, canActivate: [authGuard_1.AuthAccessGuard] }
                 ]), shared_module_1.SharedModule],
-            declarations: [account_component_1.AccountManagementComponent],
+            declarations: [account_component_1.AccountManagementComponent, rolesList_component_1.RolesListComponent],
             providers: [authGuard_1.AuthAccessGuard]
         }), 
         __metadata('design:paramtypes', [])

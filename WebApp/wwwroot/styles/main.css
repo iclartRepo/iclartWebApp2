@@ -293,3 +293,34 @@ body {
 #login small {
   color: red; }
 
+#accountLandingPage a {
+  cursor: pointer; }
+
+#rolesList {
+  margin-top: 15px; }
+  #rolesList .rolesList-display {
+    display: inline-block;
+    margin-bottom: 10px; }
+  #rolesList .header-fixed {
+    width: 100%; }
+  #rolesList .header-fixed > thead,
+  #rolesList .header-fixed > tbody,
+  #rolesList .header-fixed > thead > tr,
+  #rolesList .header-fixed > tbody > tr,
+  #rolesList .header-fixed > thead > tr > th,
+  #rolesList .header-fixed > tbody > tr > td {
+    display: block; }
+  #rolesList .header-fixed > tbody > tr:after,
+  #rolesList .header-fixed > thead > tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both; }
+  #rolesList .header-fixed > tbody {
+    overflow-y: auto;
+    height: 400px; }
+  #rolesList .header-fixed > tbody > tr > td,
+  #rolesList .header-fixed > thead > tr > th {
+    width: 33%;
+    float: left; }
+

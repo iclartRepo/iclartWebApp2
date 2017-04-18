@@ -9,6 +9,12 @@ import { IMessageResult } from '../../interfaces/messageResult.interface';
 })
 export class AccountManagementComponent implements OnInit {
 
+    tabNum: number = 1;
+
+    setTab(tab: number): void {
+        this.tabNum = tab;
+    }
+
     /* Initializer and Native Functions */
     ngOnInit(): void {
      

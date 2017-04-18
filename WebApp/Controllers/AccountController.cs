@@ -12,6 +12,8 @@ using WebApp.Models;
 using WebApp.Common.Models;
 using System.Web.Helpers;
 using System.Web.Security;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 
 namespace WebApp.Controllers
 {
@@ -62,6 +64,22 @@ namespace WebApp.Controllers
         {
             var user = User.Identity.IsAuthenticated;
             return Json(user, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult GetRoles()
+        {
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+            var roles = roleManager.Roles.ToList();
+            var message = new MessageResult<IdentityRole>
+            {
+                isError = false,
+                ResultList = roles,
+                Message = "Success",
+                Result = null
+            };
+            return Json(message, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

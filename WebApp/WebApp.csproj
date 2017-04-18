@@ -218,6 +218,10 @@
     <Compile Include="Migrations\201704051350257_AddedSeedData.Designer.cs">
       <DependentUpon>201704051350257_AddedSeedData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704181328148_AddedNewSeedData.cs" />
+    <Compile Include="Migrations\201704181328148_AddedNewSeedData.Designer.cs">
+      <DependentUpon>201704181328148_AddedNewSeedData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -239,6 +243,7 @@
     </Content>
     <Content Include="package.json" />
     <Content Include="wwwroot\src\accountManagement\accountLandingPage\account.component.html" />
+    <Content Include="wwwroot\src\accountManagement\rolesList\rolesList.component.html" />
     <Content Include="wwwroot\src\adminLandingPage\competitorAdmin\competitorAdmin.component.html" />
     <Content Include="wwwroot\src\app\app.component.html" />
     <Content Include="wwwroot\src\clientLandingPage\clientForm\clientForm.component.html" />
@@ -337,6 +342,7 @@
     <Content Include="wwwroot\src\productLandingPage\viewProduct\viewProduct.component.scss" />
     <Content Include="wwwroot\src\login\login.component.scss" />
     <Content Include="wwwroot\src\accountManagement\accountLandingPage\account.component.scss" />
+    <Content Include="wwwroot\src\accountManagement\rolesList\rolesList.component.scss" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -354,6 +360,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="wwwroot\src\accountManagement\account.module.ts" />
+    <TypeScriptCompile Include="wwwroot\src\accountManagement\rolesList\rolesList.component.ts" />
     <TypeScriptCompile Include="wwwroot\src\accountServices\authService.service.ts" />
     <TypeScriptCompile Include="wwwroot\src\accountManagement\accountLandingPage\account.component.ts" />
     <TypeScriptCompile Include="wwwroot\src\adminLandingPage\admin.module.ts" />
@@ -404,6 +411,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201704051350257_AddedSeedData.resx">
       <DependentUpon>201704051350257_AddedSeedData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704181328148_AddedNewSeedData.resx">
+      <DependentUpon>201704181328148_AddedNewSeedData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -11,7 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var AccountManagementComponent = (function () {
     function AccountManagementComponent() {
+        this.tabNum = 1;
     }
+    AccountManagementComponent.prototype.setTab = function (tab) {
+        this.tabNum = tab;
+    };
     /* Initializer and Native Functions */
     AccountManagementComponent.prototype.ngOnInit = function () {
     };
