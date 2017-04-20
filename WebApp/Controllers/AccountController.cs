@@ -81,6 +81,68 @@ namespace WebApp.Controllers
             };
             return Json(message, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult GetUsers()
+        {
+            var users = UserManager.Users.ToList();
+            var message = new MessageResult<ApplicationUser>
+            {
+                isError = false,
+                ResultList = users,
+                Message = "Success",
+                Result = null
+            };
+            return Json(message, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SearchUsers(string userName)
+        {
+           
+            var users = UserManager.Users.Where(x => x.UserName.Contains(userName)).ToList();
+            var message = new MessageResult<ApplicationUser>
+            {
+                isError = false,
+                ResultList = users,
+                Message = "Success",
+                Result = null
+            };
+            return Json(message, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteUser(string id)
+        {
+            var currentUser = User.Identity.GetUserName();
+            var user = UserManager.FindById(id);
+            if (user.UserName == currentUser)
+            {
+                var errorMessage = new MessageResult<string>
+                {
+                    isError = true,
+                    ResultList = null,
+                    Message = "Account is being used.",
+                    Result = null
+                };
+                return Json(errorMessage, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                UserManager.Delete(user);
+                var message = new MessageResult<string>
+                {
+                    isError = false,
+                    ResultList = null,
+                    Message = "Success",
+                    Result = null
+                };
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+          
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]

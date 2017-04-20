@@ -13,6 +13,7 @@ var router_1 = require('@angular/router');
 var shared_module_1 = require('../shared/shared.module');
 var account_component_1 = require('./accountLandingPage/account.component');
 var rolesList_component_1 = require('./rolesList/rolesList.component');
+var accountRegisterForm_component_1 = require('./accountRegisterForm/accountRegisterForm.component');
 var authGuard_1 = require('../routeGuards/authGuard');
 var AccountManagementModule = (function () {
     function AccountManagementModule() {
@@ -20,9 +21,10 @@ var AccountManagementModule = (function () {
     AccountManagementModule = __decorate([
         core_1.NgModule({
             imports: [router_1.RouterModule.forChild([
-                    { path: "accounts", component: account_component_1.AccountManagementComponent, canActivate: [authGuard_1.AuthAccessGuard] }
+                    { path: "accounts", component: account_component_1.AccountManagementComponent, canActivate: [authGuard_1.AuthAccessGuard] },
+                    { path: "add-account", component: accountRegisterForm_component_1.AccountRegisterFormComponent, canActivate: [authGuard_1.AuthAccessGuard] }
                 ]), shared_module_1.SharedModule],
-            declarations: [account_component_1.AccountManagementComponent, rolesList_component_1.RolesListComponent],
+            declarations: [account_component_1.AccountManagementComponent, rolesList_component_1.RolesListComponent, accountRegisterForm_component_1.AccountRegisterFormComponent],
             providers: [authGuard_1.AuthAccessGuard]
         }), 
         __metadata('design:paramtypes', [])

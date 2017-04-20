@@ -296,6 +296,44 @@ body {
 #accountLandingPage a {
   cursor: pointer; }
 
+#accountLandingPage .add-account {
+  float: right; }
+
+#accountLandingPage .account-filter {
+  float: left;
+  width: 50%; }
+
+#accountLandingPage .panel {
+  position: relative;
+  top: 50px; }
+
+#accountLandingPage .header-fixed {
+  width: 100%; }
+
+#accountLandingPage .header-fixed > thead,
+#accountLandingPage .header-fixed > tbody,
+#accountLandingPage .header-fixed > thead > tr,
+#accountLandingPage .header-fixed > tbody > tr,
+#accountLandingPage .header-fixed > thead > tr > th,
+#accountLandingPage .header-fixed > tbody > tr > td {
+  display: block; }
+
+#accountLandingPage .header-fixed > tbody > tr:after,
+#accountLandingPage .header-fixed > thead > tr:after {
+  content: ' ';
+  display: block;
+  visibility: hidden;
+  clear: both; }
+
+#accountLandingPage .header-fixed > tbody {
+  overflow-y: auto;
+  height: 400px; }
+
+#accountLandingPage .header-fixed > tbody > tr > td,
+#accountLandingPage .header-fixed > thead > tr > th {
+  width: 50%;
+  float: left; }
+
 #rolesList {
   margin-top: 15px; }
   #rolesList .rolesList-display {

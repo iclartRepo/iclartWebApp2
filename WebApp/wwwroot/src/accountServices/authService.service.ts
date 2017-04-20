@@ -23,6 +23,35 @@ export class AuthService {
             .map((response: Response) => <boolean>response.json())
             .catch(this.handleError);
     }
+    getUsers(): Observable<IMessageResult> {
+        var postedData = {
+            "__RequestVerificationToken": localStorage.getItem("ticket")
+        };
+        let headers = new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        let options = new RequestOptions({ headers: headers });
+        let params: URLSearchParams = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "GetUsers", params, options)
+            .map((response: Response) => <IMessageResult>response.json())
+            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+    searchUser(userName:string): Observable<IMessageResult> {
+        var postedData = {
+            "__RequestVerificationToken": localStorage.getItem("ticket"),
+            "userName": userName
+        };
+        let headers = new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        let options = new RequestOptions({ headers: headers });
+        let params: URLSearchParams = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "SearchUsers", params, options)
+            .map((response: Response) => <IMessageResult>response.json())
+            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
     getAllRoles(): Observable<IMessageResult> {
         var postedData = {
             "__RequestVerificationToken": localStorage.getItem("ticket")
@@ -47,6 +76,21 @@ export class AuthService {
         let options = new RequestOptions({ headers: headers });
         let params: URLSearchParams = this.serialize(postedData);
         return this._http.post(this.baseUrl + "GetRolesofUser", params, options)
+            .map((response: Response) => <IMessageResult>response.json())
+            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+    deleteUser(id:number): Observable<IMessageResult> {
+        var postedData = {
+            "__RequestVerificationToken": localStorage.getItem("ticket"),
+            "id": id
+        };
+        let headers = new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        let options = new RequestOptions({ headers: headers });
+        let params: URLSearchParams = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "DeleteUser", params, options)
             .map((response: Response) => <IMessageResult>response.json())
             .do(data => console.log('All: ' + JSON.stringify(data)))
             .catch(this.handleError);
