@@ -362,3 +362,12 @@ body {
     width: 33%;
     float: left; }
 
+#accountRegister {
+  margin-top: -20px; }
+  #accountRegister .form-control {
+    width: 25%; }
+  #accountRegister sup {
+    color: red; }
+  #accountRegister small {
+    color: red; }
+

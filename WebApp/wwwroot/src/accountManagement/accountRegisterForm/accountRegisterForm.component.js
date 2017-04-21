@@ -11,83 +11,101 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var common_1 = require('@angular/common');
+var forms_1 = require('@angular/forms');
+var authService_service_1 = require('../../accountServices/authService.service');
 var AccountRegisterFormComponent = (function () {
-    function AccountRegisterFormComponent(_router, _route, _location) {
+    function AccountRegisterFormComponent(_router, _route, _location, _authService) {
         this._router = _router;
         this._route = _route;
         this._location = _location;
+        this._authService = _authService;
         this.result = {
             isError: false,
             Result: null,
             ResultList: null,
             Message: ''
         };
+        this.resultRoles = {
+            isError: false,
+            Result: null,
+            ResultList: null,
+            Message: ''
+        };
+        this.formErrors = {
+            'email': '',
+            'role': ''
+        };
+        this.validationMessages = {
+            'email': {
+                'required': 'Email is required.'
+            },
+            'role': {
+                'required': 'Role is required.'
+            }
+        };
     }
-    /* Form Validations */
-    //clientForm: NgForm;
-    //@ViewChild('clientForm') currentForm: NgForm;
-    //ngAfterViewChecked() {
-    //    this.formChanged();
-    //}
-    //formChanged() {
-    //    if (this.currentForm === this.clientForm) { return; }
-    //    this.clientForm = this.currentForm;
-    //    if (this.clientForm) {
-    //        this.clientForm.valueChanges
-    //            .subscribe(data => this.onValueChanged(data));
-    //    }
-    //}
-    //onValueChanged(data?: any) {
-    //    if (!this.clientForm) { return; }
-    //    const form = this.clientForm.form;
-    //    for (const field in this.formErrors) {
-    //        // clear previous error message (if any)
-    //        this.formErrors[field] = '';
-    //        const control = form.get(field);
-    //        if (control && control.dirty && !control.valid) {
-    //            const messages = this.validationMessages[field];
-    //            for (const key in control.errors) {
-    //                this.formErrors[field] += messages[key] + ' ';
-    //            }
-    //        }
-    //    }
-    //}
-    //formErrors = {
-    //    'name': '',
-    //    'telephoneNumber': '',
-    //    'discountScheme': '',
-    //    'contactsOrder': '',
-    //    'creditLimit': ''
-    //};
-    //validationMessages = {
-    //    'name': {
-    //        'required': 'Client Name is required.'
-    //    },
-    //    'telephoneNumber': {
-    //        'required': 'Telephone Number is required.'
-    //    },
-    //    'discountScheme': {
-    //        'required': 'Discount Scheme is required.'
-    //    },
-    //    'contactsOrder': {
-    //        'required': 'Contact Persons from Sales is required.'
-    //    },
-    //    'creditLimit': {
-    //        'required': 'Credit Limit is required.'
-    //    }
-    //};
+    AccountRegisterFormComponent.prototype.ngAfterViewChecked = function () {
+        this.formChanged();
+    };
+    AccountRegisterFormComponent.prototype.formChanged = function () {
+        var _this = this;
+        if (this.currentForm === this.registerForm) {
+            return;
+        }
+        this.registerForm = this.currentForm;
+        if (this.registerForm) {
+            this.registerForm.valueChanges
+                .subscribe(function (data) { return _this.onValueChanged(data); });
+        }
+    };
+    AccountRegisterFormComponent.prototype.onValueChanged = function (data) {
+        if (!this.registerForm) {
+            return;
+        }
+        var form = this.registerForm.form;
+        for (var field in this.formErrors) {
+            // clear previous error message (if any)
+            this.formErrors[field] = '';
+            var control = form.get(field);
+            if (control && control.dirty && !control.valid) {
+                var messages = this.validationMessages[field];
+                for (var key in control.errors) {
+                    this.formErrors[field] += messages[key] + ' ';
+                }
+            }
+        }
+    };
+    AccountRegisterFormComponent.prototype.register = function () {
+        var _this = this;
+        this._authService.registerUser(this.accountEmail, this.selectedRole)
+            .subscribe(function (register) {
+            _this.result = register;
+            if (_this.result.isError == false) {
+                _this._location.back();
+            }
+        });
+    };
     /* Navigation Functions */
     AccountRegisterFormComponent.prototype.onBack = function () {
         this._location.back();
     };
     /* Initialize */
     AccountRegisterFormComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._authService.getAllRoles()
+            .subscribe(function (roles) {
+            _this.resultRoles = roles;
+        });
     };
+    __decorate([
+        core_1.ViewChild('registerForm'), 
+        __metadata('design:type', forms_1.NgForm)
+    ], AccountRegisterFormComponent.prototype, "currentForm", void 0);
     AccountRegisterFormComponent = __decorate([
         core_1.Component({
             templateUrl: 'wwwroot/src/accountManagement/accountRegisterForm/accountRegisterForm.component.html'
         }), 
-        __metadata('design:paramtypes', [router_1.Router, router_1.ActivatedRoute, common_1.Location])
+        __metadata('design:paramtypes', [router_1.Router, router_1.ActivatedRoute, common_1.Location, authService_service_1.AuthService])
     ], AccountRegisterFormComponent);
     return AccountRegisterFormComponent;
 }());

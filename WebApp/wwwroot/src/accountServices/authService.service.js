@@ -83,6 +83,22 @@ var AuthService = (function () {
             .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
             .catch(this.handleError);
     };
+    AuthService.prototype.registerUser = function (email, role) {
+        var postedData = {
+            "__RequestVerificationToken": localStorage.getItem("ticket"),
+            "email": email,
+            "role": role
+        };
+        var headers = new http_1.Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        var options = new http_1.RequestOptions({ headers: headers });
+        var params = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "Register", params, options)
+            .map(function (response) { return response.json(); })
+            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
+            .catch(this.handleError);
+    };
     AuthService.prototype.deleteUser = function (id) {
         var postedData = {
             "__RequestVerificationToken": localStorage.getItem("ticket"),

@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
 
-
+import { AuthService } from '../../accountServices/authService.service';
 import { IMessageResult } from '../../interfaces/messageResult.interface';
 
 @Component({
@@ -11,7 +11,7 @@ import { IMessageResult } from '../../interfaces/messageResult.interface';
 })
 export class AccountRegisterFormComponent implements OnInit {
 
-    constructor(private _router: Router, private _route: ActivatedRoute, private _location: Location) {
+    constructor(private _router: Router, private _route: ActivatedRoute, private _location: Location, private _authService: AuthService) {
 
     }
     result: IMessageResult = {
@@ -20,74 +20,76 @@ export class AccountRegisterFormComponent implements OnInit {
         ResultList: null,
         Message: ''
     };
-
+    resultRoles: IMessageResult = {
+        isError: false,
+        Result: null,
+        ResultList: null,
+        Message: ''
+    };
+    accountEmail: string;
+    selectedRole: string;
     errorMessage: string;
   
     /* Form Validations */
-    //clientForm: NgForm;
-    //@ViewChild('clientForm') currentForm: NgForm;
+    registerForm: NgForm;
+    @ViewChild('registerForm') currentForm: NgForm;
 
-    //ngAfterViewChecked() {
-    //    this.formChanged();
-    //}
+    ngAfterViewChecked() {
+        this.formChanged();
+    }
 
-    //formChanged() {
-    //    if (this.currentForm === this.clientForm) { return; }
-    //    this.clientForm = this.currentForm;
-    //    if (this.clientForm) {
-    //        this.clientForm.valueChanges
-    //            .subscribe(data => this.onValueChanged(data));
-    //    }
-    //}
+    formChanged() {
+        if (this.currentForm === this.registerForm) { return; }
+        this.registerForm = this.currentForm;
+        if (this.registerForm) {
+            this.registerForm.valueChanges
+                .subscribe(data => this.onValueChanged(data));
+        }
+    }
 
-    //onValueChanged(data?: any) {
-    //    if (!this.clientForm) { return; }
-    //    const form = this.clientForm.form;
+    onValueChanged(data?: any) {
+        if (!this.registerForm) { return; }
+        const form = this.registerForm.form;
 
-    //    for (const field in this.formErrors) {
-    //        // clear previous error message (if any)
-    //        this.formErrors[field] = '';
-    //        const control = form.get(field);
+        for (const field in this.formErrors) {
+            // clear previous error message (if any)
+            this.formErrors[field] = '';
+            const control = form.get(field);
 
-    //        if (control && control.dirty && !control.valid) {
-    //            const messages = this.validationMessages[field];
-    //            for (const key in control.errors) {
-    //                this.formErrors[field] += messages[key] + ' ';
-    //            }
-    //        }
-    //    }
-    //}
+            if (control && control.dirty && !control.valid) {
+                const messages = this.validationMessages[field];
+                for (const key in control.errors) {
+                    this.formErrors[field] += messages[key] + ' ';
+                }
+            }
+        }
+    }
 
-    //formErrors = {
-    //    'name': '',
-    //    'telephoneNumber': '',
-    //    'discountScheme': '',
-    //    'contactsOrder': '',
-    //    'creditLimit': ''
-    //};
+    formErrors = {
+        'email': '',
+        'role': ''
+    };
 
-    //validationMessages = {
-    //    'name': {
-    //        'required': 'Client Name is required.'
-    //    },
-    //    'telephoneNumber': {
-    //        'required': 'Telephone Number is required.'
-    //    },
-    //    'discountScheme': {
-    //        'required': 'Discount Scheme is required.'
-    //    },
-    //    'contactsOrder': {
-    //        'required': 'Contact Persons from Sales is required.'
-    //    },
-    //    'creditLimit': {
-    //        'required': 'Credit Limit is required.'
-    //    }
-    //};
+    validationMessages = {
+        'email': {
+            'required': 'Email is required.'
+        },
+        'role': {
+            'required': 'Role is required.'
+        }
+    };
 
-
-
-
-
+    register(): void {
+        this._authService.registerUser(this.accountEmail, this.selectedRole)
+            .subscribe(register => {
+                this.result = register;
+                if (this.result.isError == false)
+                {
+                    this._location.back();
+                }
+            });
+    }
+    
     /* Navigation Functions */
     onBack(): void {
         this._location.back();
@@ -95,7 +97,10 @@ export class AccountRegisterFormComponent implements OnInit {
 
     /* Initialize */
     ngOnInit(): void {
-      
+        this._authService.getAllRoles()
+            .subscribe(roles => {
+                this.resultRoles = roles;
+            });
     }
 
     /* Function to Get Client Info */
