@@ -66,6 +66,18 @@ export class AuthService {
             .do(data => console.log('All: ' + JSON.stringify(data)))
             .catch(this.handleError);
     }
+    getNewToken(): Observable<IMessageResult> {
+     
+        let headers = new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        let options = new RequestOptions({ headers: headers });
+
+        return this._http.post(this.baseUrl + "ReturnNewLogOutToken", {}, options)
+            .map((response: Response) => <IMessageResult>response.json())
+            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
     getRolesOfUser(): Observable<IMessageResult> {
         var postedData = {
             "__RequestVerificationToken": localStorage.getItem("ticket")
@@ -92,6 +104,22 @@ export class AuthService {
         let options = new RequestOptions({ headers: headers });
         let params: URLSearchParams = this.serialize(postedData);
         return this._http.post(this.baseUrl + "Register", params, options)
+            .map((response: Response) => <IMessageResult>response.json())
+            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+    changePassword(oldPassword: string, newPassword: string): Observable<IMessageResult> {
+        var postedData = {
+            "__RequestVerificationToken": localStorage.getItem("ticket"),
+            "oldPassword": oldPassword,
+            "newPassword": newPassword
+        };
+        let headers = new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        let options = new RequestOptions({ headers: headers });
+        let params: URLSearchParams = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "ChangePassword", params, options)
             .map((response: Response) => <IMessageResult>response.json())
             .do(data => console.log('All: ' + JSON.stringify(data)))
             .catch(this.handleError);
@@ -123,7 +151,7 @@ export class AuthService {
         else
         {
             postedData = {
-                "__RequestVerificationToken": this.antiForgeryToken,
+                "__RequestVerificationToken": localStorage.getItem("ticket"),
                 "username": loginForm.Email,
                 "password": loginForm.Password
             };

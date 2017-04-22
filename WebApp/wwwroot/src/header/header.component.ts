@@ -8,7 +8,6 @@ import { IMessageResult } from '../interfaces/messageResult.interface';
     templateUrl: 'wwwroot/src/header/header.component.html'
 })
 export class HeaderComponent {
-
     isAuthenticated: boolean;
     errorMessage: string;
     ticket: string;
@@ -31,8 +30,12 @@ export class HeaderComponent {
             .subscribe(result => {
                 if (result.isError == false) {
                     this._localStorageService.setItem("IsAuthenticated", "Unauthorized");
-                    localStorage.removeItem("ticket");
-                    this._router.navigate(["/"]);
+                    this._authService.getNewToken()
+                        .subscribe(token => {
+                            localStorage.setItem("ticket", token.Result);
+                            this._router.navigate(["/"]);
+                        });
+                   
                 }
             },
             error => this.errorMessage = <any>error);

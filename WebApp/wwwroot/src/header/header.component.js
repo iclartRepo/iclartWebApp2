@@ -33,8 +33,11 @@ var HeaderComponent = (function () {
             .subscribe(function (result) {
             if (result.isError == false) {
                 _this._localStorageService.setItem("IsAuthenticated", "Unauthorized");
-                localStorage.removeItem("ticket");
-                _this._router.navigate(["/"]);
+                _this._authService.getNewToken()
+                    .subscribe(function (token) {
+                    localStorage.setItem("ticket", token.Result);
+                    _this._router.navigate(["/"]);
+                });
             }
         }, function (error) { return _this.errorMessage = error; });
     };

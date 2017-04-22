@@ -242,6 +242,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="package.json" />
+    <Content Include="wwwroot\src\accountManagement\accountChangePassword\accountChangePassword.component.html" />
     <Content Include="wwwroot\src\accountManagement\accountLandingPage\account.component.html" />
     <Content Include="wwwroot\src\accountManagement\accountRegisterForm\accountRegisterForm.component.html" />
     <Content Include="wwwroot\src\accountManagement\rolesList\rolesList.component.html" />
@@ -345,6 +346,7 @@
     <Content Include="wwwroot\src\accountManagement\accountLandingPage\account.component.scss" />
     <Content Include="wwwroot\src\accountManagement\rolesList\rolesList.component.scss" />
     <Content Include="wwwroot\src\accountManagement\accountRegisterForm\accountRegisterForm.component.scss" />
+    <Content Include="wwwroot\src\accountManagement\accountChangePassword\accountChangePassword.component.scss" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -362,6 +364,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="wwwroot\src\accountManagement\account.module.ts" />
+    <TypeScriptCompile Include="wwwroot\src\accountManagement\accountChangePassword\accountChangePassword.component.ts" />
     <TypeScriptCompile Include="wwwroot\src\accountManagement\accountRegisterForm\accountRegisterForm.component.ts" />
     <TypeScriptCompile Include="wwwroot\src\accountManagement\rolesList\rolesList.component.ts" />
     <TypeScriptCompile Include="wwwroot\src\accountServices\authService.service.ts" />

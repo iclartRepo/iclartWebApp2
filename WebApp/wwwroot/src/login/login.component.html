@@ -2,6 +2,7 @@
     <div class="panel panel-primary login">
         <div class="panel-heading">Login to ICLART</div>
         <div class="panel-body">
+            <p *ngIf="result.isError == true">{{result.Message}}</p>
             <form #loginForm="ngForm" novalidate>
                 
                 <div class="form-group">

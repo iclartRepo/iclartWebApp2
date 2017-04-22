@@ -270,6 +270,10 @@ body {
 #viewProduct .panel-body .fin-table {
   width: 32%; }
 
+#login p {
+  text-align: center;
+  color: red; }
+
 #login .login {
   width: 25%;
   margin: 0 auto;
@@ -369,5 +373,20 @@ body {
   #accountRegister sup {
     color: red; }
   #accountRegister small {
+    color: red; }
+  #accountRegister .alert {
+    width: 15%;
+    text-align: center;
+    position: absolute;
+    left: 45%;
+    top: 55px; }
+
+#changePassword {
+  margin-top: -20px; }
+  #changePassword .form-control {
+    width: 25%; }
+  #changePassword sup {
+    color: red; }
+  #changePassword small {
     color: red; }
 

@@ -1,5 +1,6 @@
 ﻿<div id="accountRegister">
     <h3 class="accountRegister-label">Add Account</h3>
+    <div class="alert alert-danger" *ngIf="result.isError">{{result.Message}}</div> 
     <div class="productForm-group">
         <form #registerForm="ngForm" novalidate>
           

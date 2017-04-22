@@ -14,6 +14,7 @@ using System.Web.Helpers;
 using System.Web.Security;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
+using WebApp.BLL;
 
 namespace WebApp.Controllers
 {
@@ -171,7 +172,32 @@ namespace WebApp.Controllers
                 Result = null
             };
             return Json(message, JsonRequestBehavior.AllowGet);
-        } 
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangePassword(string oldPassword, string newPassword)
+        {
+            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), oldPassword, newPassword);
+            if (result.Succeeded)
+            {
+                var message = new MessageResult<string>
+                {
+                    isError = false,
+                    ResultList = null,
+                    Message = "Success",
+                    Result = null
+                };
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+            var errorMessage = new MessageResult<string>
+            {
+                isError = true,
+                ResultList = null,
+                Message = "Error encountered",
+                Result = null
+            };
+            return Json(errorMessage, JsonRequestBehavior.AllowGet);
+        }
 
         //
         // GET: /Account/Login
@@ -228,6 +254,8 @@ namespace WebApp.Controllers
             string cookieToken, formToken;
             string oldCookieToken = Request.Cookies[AntiForgeryConfig.CookieName] == null ? null : Request.Cookies[AntiForgeryConfig.CookieName].Value;
             AntiForgery.GetTokens(oldCookieToken, out cookieToken, out formToken);
+
+         
 
             var message = new MessageResult<string>
             {
@@ -298,17 +326,20 @@ namespace WebApp.Controllers
         {
            
                 var user = new ApplicationUser { UserName = email, Email = email };
-                var randomPassword = "Abc123#";
+                var randomPassword = CreateRandomPassword(8);
                 var result = await UserManager.CreateAsync(user, randomPassword);
                 if (result.Succeeded)
                 {
                     // await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     UserManager.AddToRole(user.Id, role);
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                // Send an email with this link
+                // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                var emailHelper = new EmailHelper();
+                emailHelper.EmailNewAccount(email, randomPassword);
                     var message = new MessageResult<string>
                     {
                         isError = false,
@@ -548,6 +579,7 @@ namespace WebApp.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
             var message = new MessageResult<string>
             {
                 isError = false,
@@ -558,7 +590,23 @@ namespace WebApp.Controllers
             return Json(message, JsonRequestBehavior.AllowGet);
 
         }
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ReturnNewLogOutToken()
+        {
+            string cookieToken, formToken;
+            string oldCookieToken = Request.Cookies[AntiForgeryConfig.CookieName] == null ? null : Request.Cookies[AntiForgeryConfig.CookieName].Value;
+            AntiForgery.GetTokens(oldCookieToken, out cookieToken, out formToken);
 
+            var message = new MessageResult<string>
+            {
+                isError = false,
+                ResultList = null,
+                Message = "Success",
+                Result = formToken
+            };
+            return Json(message, JsonRequestBehavior.AllowGet);
+        }
         //
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]
