@@ -239,12 +239,15 @@ namespace WebApp.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = loginModel.RememberMe });
                 case SignInStatus.Failure:
                 default:
+                    string cookieToken, formToken;
+                    string oldCookieToken = Request.Cookies[AntiForgeryConfig.CookieName] == null ? null : Request.Cookies[AntiForgeryConfig.CookieName].Value;
+                    AntiForgery.GetTokens(oldCookieToken, out cookieToken, out formToken);
                     var messageError = new MessageResult<string>
                     {
                         isError = true,
                         ResultList = null,
                         Message = "Invalid Login Attempt",
-                        Result = null
+                        Result = formToken
                     };
                     return Json(messageError, JsonRequestBehavior.AllowGet);
             }
