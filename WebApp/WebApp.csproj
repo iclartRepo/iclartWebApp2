@@ -243,8 +243,10 @@
     </Content>
     <Content Include="package.json" />
     <Content Include="wwwroot\src\accountManagement\accountChangePassword\accountChangePassword.component.html" />
+    <Content Include="wwwroot\src\accountManagement\accountForgotPassword\accountForgotPassword.component.html" />
     <Content Include="wwwroot\src\accountManagement\accountLandingPage\account.component.html" />
     <Content Include="wwwroot\src\accountManagement\accountRegisterForm\accountRegisterForm.component.html" />
+    <Content Include="wwwroot\src\accountManagement\accountResetPassword\accountResetPassword.component.html" />
     <Content Include="wwwroot\src\accountManagement\rolesList\rolesList.component.html" />
     <Content Include="wwwroot\src\adminLandingPage\competitorAdmin\competitorAdmin.component.html" />
     <Content Include="wwwroot\src\app\app.component.html" />
@@ -348,6 +350,8 @@
     <Content Include="wwwroot\src\accountManagement\rolesList\rolesList.component.scss" />
     <Content Include="wwwroot\src\accountManagement\accountRegisterForm\accountRegisterForm.component.scss" />
     <Content Include="wwwroot\src\accountManagement\accountChangePassword\accountChangePassword.component.scss" />
+    <Content Include="wwwroot\src\accountManagement\accountForgotPassword\accountForgotPassword.component.scss" />
+    <Content Include="wwwroot\src\accountManagement\accountResetPassword\accountResetPassword.component.scss" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -366,7 +370,9 @@
   <ItemGroup>
     <TypeScriptCompile Include="wwwroot\src\accountManagement\account.module.ts" />
     <TypeScriptCompile Include="wwwroot\src\accountManagement\accountChangePassword\accountChangePassword.component.ts" />
+    <TypeScriptCompile Include="wwwroot\src\accountManagement\accountForgotPassword\accountForgotPassword.component.ts" />
     <TypeScriptCompile Include="wwwroot\src\accountManagement\accountRegisterForm\accountRegisterForm.component.ts" />
+    <TypeScriptCompile Include="wwwroot\src\accountManagement\accountResetPassword\accountResetPassword.component.ts" />
     <TypeScriptCompile Include="wwwroot\src\accountManagement\rolesList\rolesList.component.ts" />
     <TypeScriptCompile Include="wwwroot\src\accountServices\authService.service.ts" />
     <TypeScriptCompile Include="wwwroot\src\accountManagement\accountLandingPage\account.component.ts" />

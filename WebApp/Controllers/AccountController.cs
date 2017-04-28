@@ -232,7 +232,14 @@ namespace WebApp.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToAction("ReturnNewToken");
+                    var message = new MessageResult<string>
+                    {
+                        isError = false,
+                        ResultList = null,
+                        Message = "Success",
+                        Result = null
+                    };
+                    return Json(message, JsonRequestBehavior.AllowGet);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -388,27 +395,48 @@ namespace WebApp.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        public async Task<ActionResult> ForgotPassword(string email)
         {
-            if (ModelState.IsValid)
-            {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+        
+                var user = await UserManager.FindByNameAsync(email);
+                if (user == null)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
+                    var messageErrorNull = new MessageResult<string>
+                    {
+                        isError = true,
+                        Result = null,
+                        Message = "User does not exist!",
+                        ResultList = null
+                    };
+
+                    return Json(messageErrorNull, JsonRequestBehavior.AllowGet);
                 }
 
+                var businessBLL = new BusinessBLL();
+
+                var rootUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+                 var userParameter = user.UserName;
+                var callbackUrl = rootUrl + "/#/reset-password/" + userParameter;
+
+                var emailHelper = new EmailHelper();
+                emailHelper.EmailForgotPassword(user.UserName, callbackUrl);
+
+                var message = new MessageResult<string>
+                {
+                    isError = false,
+                    Result = null,
+                    Message = "Success",
+                    ResultList = null
+                };
+
+                return Json(message, JsonRequestBehavior.AllowGet);
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
                 // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
                 // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 // return RedirectToAction("ForgotPasswordConfirmation", "Account");
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
         }
 
         //
@@ -432,25 +460,45 @@ namespace WebApp.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
+        public async Task<ActionResult> ResetPassword(string username, string newPassword)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-            var user = await UserManager.FindByNameAsync(model.Email);
+            var businessBLL = new BusinessBLL();
+            var email = username;
+            var user = await UserManager.FindByEmailAsync(email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                var messageErrorSuccess = new MessageResult<string>
+                {
+                    isError = false,
+                    Result = null,
+                    ResultList = null,
+                    Message = "Error"
+                };
+                return Json(messageErrorSuccess, JsonRequestBehavior.AllowGet);
             }
-            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+            await UserManager.RemovePasswordAsync(user.Id);
+
+            var result = await UserManager.AddPasswordAsync(user.Id, newPassword);
             if (result.Succeeded)
             {
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                var message = new MessageResult<string>
+                {
+                    isError = false,
+                    Result = null,
+                    ResultList = null,
+                    Message = "Reset password successfully."
+                };
+                return Json(message, JsonRequestBehavior.AllowGet);
             }
-            AddErrors(result);
-            return View();
+            var messageError = new MessageResult<string>
+            {
+                isError = true,
+                Result = null,
+                ResultList = null,
+                Message = "Error encountered."
+            };
+            return Json(messageError, JsonRequestBehavior.AllowGet);
         }
 
         //
@@ -593,23 +641,7 @@ namespace WebApp.Controllers
             return Json(message, JsonRequestBehavior.AllowGet);
 
         }
-        [HttpPost]
-        [AllowAnonymous]
-        public ActionResult ReturnNewLogOutToken()
-        {
-            string cookieToken, formToken;
-            string oldCookieToken = Request.Cookies[AntiForgeryConfig.CookieName] == null ? null : Request.Cookies[AntiForgeryConfig.CookieName].Value;
-            AntiForgery.GetTokens(oldCookieToken, out cookieToken, out formToken);
-
-            var message = new MessageResult<string>
-            {
-                isError = false,
-                ResultList = null,
-                Message = "Success",
-                Result = formToken
-            };
-            return Json(message, JsonRequestBehavior.AllowGet);
-        }
+       
         //
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]

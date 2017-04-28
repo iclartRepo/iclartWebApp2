@@ -28,16 +28,11 @@ var HeaderComponent = (function () {
     }
     HeaderComponent.prototype.logOut = function () {
         var _this = this;
-        this.ticket = localStorage.getItem("ticket");
-        this._authService.logout(this.ticket)
+        this._authService.logout()
             .subscribe(function (result) {
             if (result.isError == false) {
                 _this._localStorageService.setItem("IsAuthenticated", "Unauthorized");
-                _this._authService.getNewToken()
-                    .subscribe(function (token) {
-                    localStorage.setItem("ticket", token.Result);
-                    _this._router.navigate(["/"]);
-                });
+                window.location.href = "/";
             }
         }, function (error) { return _this.errorMessage = error; });
     };

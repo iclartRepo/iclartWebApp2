@@ -25,6 +25,7 @@ namespace WebApp
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 CookieName = "CookieToken",
+                ExpireTimeSpan = TimeSpan.FromMinutes(30),
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Account/Login"),
                 Provider = new CookieAuthenticationProvider

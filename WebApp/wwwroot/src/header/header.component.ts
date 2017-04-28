@@ -24,18 +24,12 @@ export class HeaderComponent {
     constructor(private _authService: AuthService, private _localStorageService: LocalStorageService, private _router: Router) {
     }
 
-    logOut(): void {
-        this.ticket = localStorage.getItem("ticket");       
-        this._authService.logout(this.ticket)
+    logOut(): void {    
+        this._authService.logout()
             .subscribe(result => {
                 if (result.isError == false) {
                     this._localStorageService.setItem("IsAuthenticated", "Unauthorized");
-                    this._authService.getNewToken()
-                        .subscribe(token => {
-                            localStorage.setItem("ticket", token.Result);
-                            this._router.navigate(["/"]);
-                        });
-                   
+                    window.location.href = "/";               
                 }
             },
             error => this.errorMessage = <any>error);

@@ -37,13 +37,11 @@ export class LoginComponent {
                 if (this.result.isError == false)
                 {
                     this._localStorageService.setItem("IsAuthenticated", "Authorized");
-                    this._router.navigate(['/home']);
-                    localStorage.setItem("ticket", this.result.Result);
+                    window.location.href = "/home";
                 }
                 else
                 {
                     this._localStorageService.setItem("IsAuthenticated", "Unauthorized");
-                    localStorage.setItem("ticket", this.result.Result);
                 }
             },
             error => this.errorMessage = <any>error);

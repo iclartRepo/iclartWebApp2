@@ -48,12 +48,10 @@ var LoginComponent = (function () {
             _this.result = login;
             if (_this.result.isError == false) {
                 _this._localStorageService.setItem("IsAuthenticated", "Authorized");
-                _this._router.navigate(['/home']);
-                localStorage.setItem("ticket", _this.result.Result);
+                window.location.href = "/home";
             }
             else {
                 _this._localStorageService.setItem("IsAuthenticated", "Unauthorized");
-                localStorage.setItem("ticket", _this.result.Result);
             }
         }, function (error) { return _this.errorMessage = error; });
     };

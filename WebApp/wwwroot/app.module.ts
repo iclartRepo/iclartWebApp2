@@ -1,12 +1,15 @@
-﻿import { NgModule } from '@angular/core';
+﻿import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 /* Main Components */
 import { AppComponent }  from './src/app/app.component';
 import { HeaderComponent } from './src/header/header.component';
 import { LoginComponent } from './src/login/login.component';
 import { MainComponent } from './src/mainLandingPage/mainLandingPage.component';
+import { AccountForgotPasswordFormComponent } from "./src/accountManagement/accountForgotPassword/accountForgotPassword.component";
+import { AccountResetPasswordFormComponent } from './src/accountManagement/accountResetPassword/accountResetPassword.component';
 
 /* Modules */
 import { FormsModule } from '@angular/forms';
@@ -24,7 +27,9 @@ import { AuthAccessGuard } from './src/routeGuards/authGuard';
     imports: [BrowserModule,
         RouterModule.forRoot([
             { path: '', component: LoginComponent },
-            { path: 'home', component: MainComponent, canActivate: [AuthAccessGuard] }
+            { path: 'home', component: MainComponent, canActivate: [AuthAccessGuard] },
+            { path: 'forgot-password', component: AccountForgotPasswordFormComponent },
+            { path: 'reset-password/:id', component: AccountResetPasswordFormComponent }
         ]),
         HttpModule,
         FormsModule,
@@ -35,8 +40,10 @@ import { AuthAccessGuard } from './src/routeGuards/authGuard';
     declarations: [AppComponent,
         HeaderComponent,
         LoginComponent,
-        MainComponent],
-    bootstrap: [AppComponent],
-    providers: [AuthService, LocalStorageService, AuthAccessGuard]
+        MainComponent,
+        AccountForgotPasswordFormComponent,
+        AccountResetPasswordFormComponent],
+    bootstrap: [AppComponent, HeaderComponent],
+    providers: [AuthService, LocalStorageService, AuthAccessGuard, { provide: LocationStrategy, useClass: HashLocationStrategy }]
 })
 export class AppModule { }

@@ -48,6 +48,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessBLL.cs" />
     <Compile Include="ClientBLL.cs" />
     <Compile Include="CompetitorBLL.cs" />
     <Compile Include="EmailHelper.cs" />

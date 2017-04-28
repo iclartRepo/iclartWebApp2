@@ -12,11 +12,14 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var router_1 = require('@angular/router');
 var http_1 = require('@angular/http');
+var common_1 = require('@angular/common');
 /* Main Components */
 var app_component_1 = require('./src/app/app.component');
 var header_component_1 = require('./src/header/header.component');
 var login_component_1 = require('./src/login/login.component');
 var mainLandingPage_component_1 = require('./src/mainLandingPage/mainLandingPage.component');
+var accountForgotPassword_component_1 = require("./src/accountManagement/accountForgotPassword/accountForgotPassword.component");
+var accountResetPassword_component_1 = require('./src/accountManagement/accountResetPassword/accountResetPassword.component');
 /* Modules */
 var forms_1 = require('@angular/forms');
 var client_module_1 = require('./src/clientLandingPage/client.module');
@@ -34,7 +37,9 @@ var AppModule = (function () {
             imports: [platform_browser_1.BrowserModule,
                 router_1.RouterModule.forRoot([
                     { path: '', component: login_component_1.LoginComponent },
-                    { path: 'home', component: mainLandingPage_component_1.MainComponent, canActivate: [authGuard_1.AuthAccessGuard] }
+                    { path: 'home', component: mainLandingPage_component_1.MainComponent, canActivate: [authGuard_1.AuthAccessGuard] },
+                    { path: 'forgot-password', component: accountForgotPassword_component_1.AccountForgotPasswordFormComponent },
+                    { path: 'reset-password/:id', component: accountResetPassword_component_1.AccountResetPasswordFormComponent }
                 ]),
                 http_1.HttpModule,
                 forms_1.FormsModule,
@@ -45,9 +50,11 @@ var AppModule = (function () {
             declarations: [app_component_1.AppComponent,
                 header_component_1.HeaderComponent,
                 login_component_1.LoginComponent,
-                mainLandingPage_component_1.MainComponent],
-            bootstrap: [app_component_1.AppComponent],
-            providers: [authService_service_1.AuthService, localStorageService_service_1.LocalStorageService, authGuard_1.AuthAccessGuard]
+                mainLandingPage_component_1.MainComponent,
+                accountForgotPassword_component_1.AccountForgotPasswordFormComponent,
+                accountResetPassword_component_1.AccountResetPasswordFormComponent],
+            bootstrap: [app_component_1.AppComponent, header_component_1.HeaderComponent],
+            providers: [authService_service_1.AuthService, localStorageService_service_1.LocalStorageService, authGuard_1.AuthAccessGuard, { provide: common_1.LocationStrategy, useClass: common_1.HashLocationStrategy }]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);
