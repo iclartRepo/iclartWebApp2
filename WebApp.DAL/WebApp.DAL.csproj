@@ -96,6 +96,10 @@
     <Compile Include="Migrations\201704041224248_UpdatedClientDatabase.Designer.cs">
       <DependentUpon>201704041224248_UpdatedClientDatabase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705010944039_AddedPasswordExpiryTable.cs" />
+    <Compile Include="Migrations\201705010944039_AddedPasswordExpiryTable.Designer.cs">
+      <DependentUpon>201705010944039_AddedPasswordExpiryTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -142,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704041224248_UpdatedClientDatabase.resx">
       <DependentUpon>201704041224248_UpdatedClientDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705010944039_AddedPasswordExpiryTable.resx">
+      <DependentUpon>201705010944039_AddedPasswordExpiryTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

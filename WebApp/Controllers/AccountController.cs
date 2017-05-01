@@ -15,6 +15,8 @@ using System.Web.Security;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
 using WebApp.BLL;
+using WebApp.DAL;
+using WebApp.Common.Entities;
 
 namespace WebApp.Controllers
 {
@@ -397,7 +399,7 @@ namespace WebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ForgotPassword(string email)
         {
-        
+                
                 var user = await UserManager.FindByNameAsync(email);
                 if (user == null)
                 {
@@ -416,8 +418,19 @@ namespace WebApp.Controllers
                 var businessBLL = new BusinessBLL();
 
                 var rootUrl = Request.Url.GetLeftPart(UriPartial.Authority);
-                 var userParameter = user.UserName;
+                var userParameter = user.Id;
                 var callbackUrl = rootUrl + "/#/reset-password/" + userParameter;
+
+                var dateTimeNow = DateTime.UtcNow;
+                var expiryDate = dateTimeNow.AddMinutes(30);
+
+                var passwordExpiry = new PasswordExpiryEntity()
+                {
+                    UserId = user.Id,
+                    ExpiryDate = expiryDate
+                };
+                var passwordExpiryRepo = new GenericRepository<PasswordExpiryEntity>();
+                passwordExpiryRepo.Insert(passwordExpiry);
 
                 var emailHelper = new EmailHelper();
                 emailHelper.EmailForgotPassword(user.UserName, callbackUrl);
@@ -454,7 +467,7 @@ namespace WebApp.Controllers
         {
             return code == null ? View("Error") : View();
         }
-
+      
         //
         // POST: /Account/ResetPassword
         [HttpPost]
@@ -462,9 +475,10 @@ namespace WebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(string username, string newPassword)
         {
+            
             var businessBLL = new BusinessBLL();
-            var email = username;
-            var user = await UserManager.FindByEmailAsync(email);
+            //var email = businessBLL.Base64Decode(username);
+            var user = await UserManager.FindByIdAsync(username);
             if (user == null)
             {
                 // Don't reveal that the user does not exist

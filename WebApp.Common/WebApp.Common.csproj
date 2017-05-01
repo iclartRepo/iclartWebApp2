@@ -45,6 +45,7 @@
     <Compile Include="Entities\CompetitorDiscountSchemesEntity.cs" />
     <Compile Include="Entities\CompetitorEntity.cs" />
     <Compile Include="Entities\CompetitorPricesEntity.cs" />
+    <Compile Include="Entities\PasswordExpiryEntity.cs" />
     <Compile Include="Entities\ProductCategoryEntity.cs" />
     <Compile Include="Entities\ProductEntity.cs" />
     <Compile Include="Models\ClientFormModel.cs" />

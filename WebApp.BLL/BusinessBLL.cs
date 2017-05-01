@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,15 +10,16 @@ namespace WebApp.BLL
 {
     public class BusinessBLL
     {
-        public string Decode(string decodeMe)
+        public string Base64Encode(string plainText)
         {
-            byte[] encoded = Convert.FromBase64String(decodeMe);
-            return System.Text.Encoding.UTF8.GetString(encoded);
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+            return System.Convert.ToBase64String(plainTextBytes);
         }
-        public string Encode(string encodeMe)
+        public string Base64Decode(string base64EncodedData)
         {
-            byte[] encoded = System.Text.Encoding.UTF8.GetBytes(encodeMe);
-            return Convert.ToBase64String(encoded);
+            var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
+            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
         }
+     
     }
 }
