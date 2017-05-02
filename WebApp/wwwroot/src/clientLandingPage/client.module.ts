@@ -12,16 +12,18 @@ import { ClientViewComponent } from './viewClient/viewClient.component';
 import { ClientService } from './clientService.service';
 import { AdminService } from '../adminLandingPage/adminService.service';
 
+import { AuthAccessGuard } from '../routeGuards/authGuard';
+
 @NgModule({
     imports: [RouterModule.forChild([
-        { path: 'client-form/:id', component: ClientFormComponent },
-        { path: 'client-info/:id', component: ClientViewComponent },
-        { path: 'client-form', component: ClientFormComponent },
-        { path: 'clients', component: ClientListComponent }
+        { path: 'client-form/:id', component: ClientFormComponent, canActivate: [AuthAccessGuard] },
+        { path: 'client-info/:id', component: ClientViewComponent, canActivate: [AuthAccessGuard] },
+        { path: 'client-form', component: ClientFormComponent, canActivate: [AuthAccessGuard] },
+        { path: 'clients', component: ClientListComponent, canActivate: [AuthAccessGuard] }
     ]), SharedModule],
     declarations: [ClientListComponent,
         ClientFormComponent,
         ClientViewComponent],
-    providers: [ClientService, AdminService]
+    providers: [ClientService, AdminService, AuthAccessGuard]
 })
 export class ClientModule { }

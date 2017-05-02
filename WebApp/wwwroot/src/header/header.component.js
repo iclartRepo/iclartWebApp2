@@ -17,16 +17,22 @@ var HeaderComponent = (function () {
         this._authService = _authService;
         this._localStorageService = _localStorageService;
         this._router = _router;
+        this.rolesOfUser = {
+            isError: false,
+            Result: null,
+            ResultList: null,
+            Message: ''
+        };
+        //Roles
+        this.isAdmin = false;
     }
     HeaderComponent.prototype.logOut = function () {
         var _this = this;
-        this.ticket = localStorage.getItem("ticket");
-        this._authService.logout(this.ticket)
+        this._authService.logout()
             .subscribe(function (result) {
             if (result.isError == false) {
                 _this._localStorageService.setItem("IsAuthenticated", "Unauthorized");
-                localStorage.removeItem("ticket");
-                _this._router.navigate(["/"]);
+                window.location.href = "/";
             }
         }, function (error) { return _this.errorMessage = error; });
     };
@@ -47,6 +53,14 @@ var HeaderComponent = (function () {
         this._localStorageService.collection$.subscribe(function (authenticated) {
             if (authenticated == "Authorized") {
                 _this.isAuthenticated = true;
+                _this._authService.getRolesOfUser()
+                    .subscribe(function (roles) {
+                    _this.rolesOfUser = roles;
+                    if (_this.rolesOfUser.ResultList.some(function (x) { return x == "Admin"; })) {
+                        _this.isAdmin = true;
+                    }
+                }, function (error) { return _this.errorMessage = error; });
+                _this._router.navigate(['/home']);
             }
             else {
                 _this.isAuthenticated = false;

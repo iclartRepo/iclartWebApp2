@@ -48,8 +48,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessBLL.cs" />
     <Compile Include="ClientBLL.cs" />
     <Compile Include="CompetitorBLL.cs" />
+    <Compile Include="EmailHelper.cs" />
     <Compile Include="ProductBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

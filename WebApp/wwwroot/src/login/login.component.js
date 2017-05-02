@@ -46,11 +46,9 @@ var LoginComponent = (function () {
         this._authService.login(loginForm)
             .subscribe(function (login) {
             _this.result = login;
-            localStorage.setItem("ticket", _this.result.Result);
-            console.log(localStorage.getItem("ticket"));
             if (_this.result.isError == false) {
                 _this._localStorageService.setItem("IsAuthenticated", "Authorized");
-                _this._router.navigate(['/home']);
+                window.location.href = "/home";
             }
             else {
                 _this._localStorageService.setItem("IsAuthenticated", "Unauthorized");

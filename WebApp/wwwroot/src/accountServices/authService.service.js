@@ -26,22 +26,162 @@ var AuthService = (function () {
             .map(function (response) { return response.json(); })
             .catch(this.handleError);
     };
+    AuthService.prototype.getUsers = function () {
+        var postedData = {
+            "__RequestVerificationToken": this.antiForgeryToken.value
+        };
+        var headers = new http_1.Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        var options = new http_1.RequestOptions({ headers: headers });
+        var params = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "GetUsers", params, options)
+            .map(function (response) { return response.json(); })
+            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
+            .catch(this.handleError);
+    };
+    AuthService.prototype.searchUser = function (userName) {
+        var postedData = {
+            "__RequestVerificationToken": this.antiForgeryToken.value,
+            "userName": userName
+        };
+        var headers = new http_1.Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        var options = new http_1.RequestOptions({ headers: headers });
+        var params = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "SearchUsers", params, options)
+            .map(function (response) { return response.json(); })
+            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
+            .catch(this.handleError);
+    };
+    AuthService.prototype.getAllRoles = function () {
+        var postedData = {
+            "__RequestVerificationToken": this.antiForgeryToken.value
+        };
+        var headers = new http_1.Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        var options = new http_1.RequestOptions({ headers: headers });
+        var params = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "GetRoles", params, options)
+            .map(function (response) { return response.json(); })
+            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
+            .catch(this.handleError);
+    };
+    AuthService.prototype.getRolesOfUser = function () {
+        var postedData = {
+            "__RequestVerificationToken": this.antiForgeryToken.value
+        };
+        var headers = new http_1.Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        var options = new http_1.RequestOptions({ headers: headers });
+        var params = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "GetRolesofUser", params, options)
+            .map(function (response) { return response.json(); })
+            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
+            .catch(this.handleError);
+    };
+    AuthService.prototype.forgotPassword = function (email) {
+        var postedData = {
+            "__RequestVerificationToken": this.antiForgeryToken.value,
+            "email": email
+        };
+        var headers = new http_1.Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        var options = new http_1.RequestOptions({ headers: headers });
+        var params = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "ForgotPassword", params, options)
+            .map(function (response) { return response.json(); })
+            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
+            .catch(this.handleError);
+    };
+    AuthService.prototype.resetPassword = function (username, newPassword) {
+        var postedData = {
+            "__RequestVerificationToken": this.antiForgeryToken.value,
+            "username": username,
+            "newPassword": newPassword
+        };
+        var headers = new http_1.Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        var options = new http_1.RequestOptions({ headers: headers });
+        var params = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "ResetPassword", params, options)
+            .map(function (response) { return response.json(); })
+            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
+            .catch(this.handleError);
+    };
+    AuthService.prototype.checkResetExpiry = function (username) {
+        var postedData = {
+            "__RequestVerificationToken": this.antiForgeryToken.value,
+            "username": username
+        };
+        var headers = new http_1.Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        var options = new http_1.RequestOptions({ headers: headers });
+        var params = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "CheckResetExpiry", params, options)
+            .map(function (response) { return response.json(); })
+            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
+            .catch(this.handleError);
+    };
+    AuthService.prototype.registerUser = function (email, role) {
+        var postedData = {
+            "__RequestVerificationToken": this.antiForgeryToken.value,
+            "email": email,
+            "role": role
+        };
+        var headers = new http_1.Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        var options = new http_1.RequestOptions({ headers: headers });
+        var params = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "Register", params, options)
+            .map(function (response) { return response.json(); })
+            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
+            .catch(this.handleError);
+    };
+    AuthService.prototype.changePassword = function (oldPassword, newPassword) {
+        var postedData = {
+            "__RequestVerificationToken": this.antiForgeryToken.value,
+            "oldPassword": oldPassword,
+            "newPassword": newPassword
+        };
+        var headers = new http_1.Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        var options = new http_1.RequestOptions({ headers: headers });
+        var params = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "ChangePassword", params, options)
+            .map(function (response) { return response.json(); })
+            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
+            .catch(this.handleError);
+    };
+    AuthService.prototype.deleteUser = function (id) {
+        var postedData = {
+            "__RequestVerificationToken": this.antiForgeryToken.value,
+            "id": id
+        };
+        var headers = new http_1.Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        var options = new http_1.RequestOptions({ headers: headers });
+        var params = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "DeleteUser", params, options)
+            .map(function (response) { return response.json(); })
+            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
+            .catch(this.handleError);
+    };
     AuthService.prototype.login = function (loginForm) {
-        var postedData = {};
-        if (localStorage.getItem("ticket") == null || localStorage.getItem("ticket") == "") {
-            postedData = {
-                "__RequestVerificationToken": this.antiForgeryToken.value,
-                "username": loginForm.Email,
-                "password": loginForm.Password
-            };
-        }
-        else {
-            postedData = {
-                "__RequestVerificationToken": this.antiForgeryToken,
-                "username": loginForm.Email,
-                "password": loginForm.Password
-            };
-        }
+        var postedData = {
+            "__RequestVerificationToken": this.antiForgeryToken.value,
+            "username": loginForm.Email,
+            "password": loginForm.Password
+        };
         var headers = new http_1.Headers({ 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' });
         var options = new http_1.RequestOptions({ headers: headers });
         var params = this.serialize(postedData);
@@ -50,9 +190,9 @@ var AuthService = (function () {
             .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
             .catch(this.handleError);
     };
-    AuthService.prototype.logout = function (ticket) {
+    AuthService.prototype.logout = function () {
         var postedData = {
-            "__RequestVerificationToken": ticket
+            "__RequestVerificationToken": this.antiForgeryToken.value
         };
         var headers = new http_1.Headers({
             'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' });

@@ -25,6 +25,34 @@ namespace WebApp.Migrations
                 var role = new IdentityRole { Name = "Admin" };
                 manager.Create(role);
             }
+            if (!context.Roles.Any(r => r.Name == "Sales Manager"))
+            {
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
+                var role = new IdentityRole { Name = "Sales Manager" };
+                manager.Create(role);
+            }
+            if (!context.Roles.Any(r => r.Name == "Collection Manager"))
+            {
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
+                var role = new IdentityRole { Name = "Collection Manager" };
+                manager.Create(role);
+            }
+            if (!context.Roles.Any(r => r.Name == "Finance Manager"))
+            {
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
+                var role = new IdentityRole { Name = "Finance Manager" };
+                manager.Create(role);
+            }
+            if (!context.Roles.Any(r => r.Name == "Secretary"))
+            {
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
+                var role = new IdentityRole { Name = "Secretary" };
+                manager.Create(role);
+            }
 
 
             //add initial admin user

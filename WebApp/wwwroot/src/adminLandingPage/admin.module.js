@@ -13,16 +13,17 @@ var router_1 = require('@angular/router');
 var shared_module_1 = require('../shared/shared.module');
 var adminService_service_1 = require('./adminService.service');
 var competitorAdmin_component_1 = require('./competitorAdmin/competitorAdmin.component');
+var authGuard_1 = require('../routeGuards/authGuard');
 var AdminModule = (function () {
     function AdminModule() {
     }
     AdminModule = __decorate([
         core_1.NgModule({
             imports: [router_1.RouterModule.forChild([
-                    { path: 'competitors', component: competitorAdmin_component_1.CompetitorAdminComponent }
+                    { path: 'competitors', component: competitorAdmin_component_1.CompetitorAdminComponent, canActivate: [authGuard_1.AuthAccessGuard] }
                 ]), shared_module_1.SharedModule],
             declarations: [competitorAdmin_component_1.CompetitorAdminComponent],
-            providers: [adminService_service_1.AdminService]
+            providers: [adminService_service_1.AdminService, authGuard_1.AuthAccessGuard]
         }), 
         __metadata('design:paramtypes', [])
     ], AdminModule);

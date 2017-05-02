@@ -29,16 +29,15 @@ export class LoginComponent {
         var loginForm: any =  {
             "Email": this.email,
             "Password": this.password
-        };
+        };      
         this._authService.login(loginForm)
             .subscribe(login => {
                 this.result = login;
-                localStorage.setItem("ticket", this.result.Result);
-                console.log(localStorage.getItem("ticket"));
+               
                 if (this.result.isError == false)
                 {
                     this._localStorageService.setItem("IsAuthenticated", "Authorized");
-                    this._router.navigate(['/home']);
+                    window.location.href = "/home";
                 }
                 else
                 {

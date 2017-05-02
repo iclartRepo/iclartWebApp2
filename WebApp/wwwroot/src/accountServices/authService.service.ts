@@ -23,23 +23,163 @@ export class AuthService {
             .map((response: Response) => <boolean>response.json())
             .catch(this.handleError);
     }
+    getUsers(): Observable<IMessageResult> {
+        var postedData = {
+            "__RequestVerificationToken": this.antiForgeryToken.value
+        };
+        let headers = new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        let options = new RequestOptions({ headers: headers });
+        let params: URLSearchParams = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "GetUsers", params, options)
+            .map((response: Response) => <IMessageResult>response.json())
+            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+    searchUser(userName:string): Observable<IMessageResult> {
+        var postedData = {
+            "__RequestVerificationToken": this.antiForgeryToken.value,
+            "userName": userName
+        };
+        let headers = new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        let options = new RequestOptions({ headers: headers });
+        let params: URLSearchParams = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "SearchUsers", params, options)
+            .map((response: Response) => <IMessageResult>response.json())
+            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+    getAllRoles(): Observable<IMessageResult> {
+        var postedData = {
+            "__RequestVerificationToken": this.antiForgeryToken.value
+        };
+        let headers = new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        let options = new RequestOptions({ headers: headers });
+        let params: URLSearchParams = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "GetRoles", params, options)
+            .map((response: Response) => <IMessageResult>response.json())
+            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+ 
+    getRolesOfUser(): Observable<IMessageResult> {
+        var postedData = {
+            "__RequestVerificationToken": this.antiForgeryToken.value
+        };
+        let headers = new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        let options = new RequestOptions({ headers: headers });
+        let params: URLSearchParams = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "GetRolesofUser", params, options)
+            .map((response: Response) => <IMessageResult>response.json())
+            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+    forgotPassword(email: string): Observable<IMessageResult> {
+        var postedData = {
+            "__RequestVerificationToken": this.antiForgeryToken.value,
+            "email": email
+        };
+        let headers = new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        let options = new RequestOptions({ headers: headers });
+        let params: URLSearchParams = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "ForgotPassword", params, options)
+            .map((response: Response) => <IMessageResult>response.json())
+            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+    resetPassword(username: string, newPassword:string): Observable<IMessageResult> {
+        var postedData = {
+            "__RequestVerificationToken": this.antiForgeryToken.value,
+            "username": username,
+            "newPassword": newPassword
+        };
+        let headers = new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        let options = new RequestOptions({ headers: headers });
+        let params: URLSearchParams = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "ResetPassword", params, options)
+            .map((response: Response) => <IMessageResult>response.json())
+            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+    checkResetExpiry(username: string): Observable<IMessageResult> {
+        var postedData = {
+            "__RequestVerificationToken": this.antiForgeryToken.value,
+            "username": username
+        };
+        let headers = new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        let options = new RequestOptions({ headers: headers });
+        let params: URLSearchParams = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "CheckResetExpiry", params, options)
+            .map((response: Response) => <IMessageResult>response.json())
+            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+    registerUser(email:string, role:string): Observable<IMessageResult> {
+        var postedData = {
+            "__RequestVerificationToken": this.antiForgeryToken.value,
+            "email": email,
+            "role" : role
+        };
+        let headers = new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        let options = new RequestOptions({ headers: headers });
+        let params: URLSearchParams = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "Register", params, options)
+            .map((response: Response) => <IMessageResult>response.json())
+            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+    changePassword(oldPassword: string, newPassword: string): Observable<IMessageResult> {
+        var postedData = {
+            "__RequestVerificationToken": this.antiForgeryToken.value,
+            "oldPassword": oldPassword,
+            "newPassword": newPassword
+        };
+        let headers = new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        let options = new RequestOptions({ headers: headers });
+        let params: URLSearchParams = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "ChangePassword", params, options)
+            .map((response: Response) => <IMessageResult>response.json())
+            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+    deleteUser(id:number): Observable<IMessageResult> {
+        var postedData = {
+            "__RequestVerificationToken": this.antiForgeryToken.value,
+            "id": id
+        };
+        let headers = new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        let options = new RequestOptions({ headers: headers });
+        let params: URLSearchParams = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "DeleteUser", params, options)
+            .map((response: Response) => <IMessageResult>response.json())
+            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
     login(loginForm: any): Observable<IMessageResult> {
-        var postedData = {};
-        if (localStorage.getItem("ticket") == null || localStorage.getItem("ticket") == "") {
-             postedData = {
-                "__RequestVerificationToken": this.antiForgeryToken.value,
-                "username": loginForm.Email,
-                "password": loginForm.Password
-            };
-        }
-        else
-        {
-            postedData = {
-                "__RequestVerificationToken": this.antiForgeryToken,
-                "username": loginForm.Email,
-                "password": loginForm.Password
-            };
-        }
+        var postedData = {
+            "__RequestVerificationToken": this.antiForgeryToken.value,
+            "username": loginForm.Email,
+            "password": loginForm.Password
+        };
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' });
         let options = new RequestOptions({ headers: headers });
         let params: URLSearchParams = this.serialize(postedData);
@@ -48,9 +188,9 @@ export class AuthService {
             .do(data => console.log('All: ' + JSON.stringify(data)))
             .catch(this.handleError);
     }
-    logout(ticket:string): Observable<IMessageResult> {
+    logout(): Observable<IMessageResult> {
         var postedData = {
-            "__RequestVerificationToken": ticket
+            "__RequestVerificationToken": this.antiForgeryToken.value
         };
         let headers = new Headers({
             'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' });
