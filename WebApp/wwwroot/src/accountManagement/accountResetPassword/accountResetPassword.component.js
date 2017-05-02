@@ -85,6 +85,13 @@ var AccountResetPasswordFormComponent = (function () {
         this._route.params.subscribe(function (params) {
             var name = params['id'];
             _this.encodedEmail = name;
+            _this._authService.checkResetExpiry(_this.encodedEmail)
+                .subscribe(function (fp) {
+                _this.result = fp;
+                if (_this.result.isError == true) {
+                    _this._router.navigate(["/reset-expired"]);
+                }
+            }, function (error) { return _this.errorMessage = error; });
         });
     };
     __decorate([

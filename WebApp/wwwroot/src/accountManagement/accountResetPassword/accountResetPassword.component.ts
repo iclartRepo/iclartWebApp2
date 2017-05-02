@@ -91,9 +91,19 @@ export class AccountResetPasswordFormComponent implements OnInit {
             params => {
                 let name = params['id'];
                 this.encodedEmail = name;
+                this._authService.checkResetExpiry(this.encodedEmail)
+                    .subscribe(fp => {
+                        this.result = fp;
+                        if (this.result.isError == true) {
+                            this._router.navigate(["/reset-expired"]);
+                        }
+                    },
+                    error => this.errorMessage = <any>error);
             });
+
+     
     }
 
-    /* Function to Get Client Info */
+ 
 
 }

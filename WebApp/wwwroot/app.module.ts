@@ -10,7 +10,7 @@ import { LoginComponent } from './src/login/login.component';
 import { MainComponent } from './src/mainLandingPage/mainLandingPage.component';
 import { AccountForgotPasswordFormComponent } from "./src/accountManagement/accountForgotPassword/accountForgotPassword.component";
 import { AccountResetPasswordFormComponent } from './src/accountManagement/accountResetPassword/accountResetPassword.component';
-
+import { AccountResetExpiredComponent } from "./src/accountManagement/accountResetExpired/accountResetExpired.component";
 /* Modules */
 import { FormsModule } from '@angular/forms';
 import { ClientModule } from './src/clientLandingPage/client.module';
@@ -29,7 +29,8 @@ import { AuthAccessGuard } from './src/routeGuards/authGuard';
             { path: '', component: LoginComponent },
             { path: 'home', component: MainComponent, canActivate: [AuthAccessGuard] },
             { path: 'forgot-password', component: AccountForgotPasswordFormComponent },
-            { path: 'reset-password/:id', component: AccountResetPasswordFormComponent }
+            { path: 'reset-password/:id', component: AccountResetPasswordFormComponent },
+            { path: 'reset-expired', component: AccountResetExpiredComponent}
         ]),
         HttpModule,
         FormsModule,
@@ -42,7 +43,8 @@ import { AuthAccessGuard } from './src/routeGuards/authGuard';
         LoginComponent,
         MainComponent,
         AccountForgotPasswordFormComponent,
-        AccountResetPasswordFormComponent],
+        AccountResetPasswordFormComponent,
+        AccountResetExpiredComponent],
     bootstrap: [AppComponent, HeaderComponent],
     providers: [AuthService, LocalStorageService, AuthAccessGuard, { provide: LocationStrategy, useClass: HashLocationStrategy }]
 })

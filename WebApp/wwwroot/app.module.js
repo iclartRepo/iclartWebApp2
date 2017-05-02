@@ -20,6 +20,7 @@ var login_component_1 = require('./src/login/login.component');
 var mainLandingPage_component_1 = require('./src/mainLandingPage/mainLandingPage.component');
 var accountForgotPassword_component_1 = require("./src/accountManagement/accountForgotPassword/accountForgotPassword.component");
 var accountResetPassword_component_1 = require('./src/accountManagement/accountResetPassword/accountResetPassword.component');
+var accountResetExpired_component_1 = require("./src/accountManagement/accountResetExpired/accountResetExpired.component");
 /* Modules */
 var forms_1 = require('@angular/forms');
 var client_module_1 = require('./src/clientLandingPage/client.module');
@@ -39,7 +40,8 @@ var AppModule = (function () {
                     { path: '', component: login_component_1.LoginComponent },
                     { path: 'home', component: mainLandingPage_component_1.MainComponent, canActivate: [authGuard_1.AuthAccessGuard] },
                     { path: 'forgot-password', component: accountForgotPassword_component_1.AccountForgotPasswordFormComponent },
-                    { path: 'reset-password/:id', component: accountResetPassword_component_1.AccountResetPasswordFormComponent }
+                    { path: 'reset-password/:id', component: accountResetPassword_component_1.AccountResetPasswordFormComponent },
+                    { path: 'reset-expired', component: accountResetExpired_component_1.AccountResetExpiredComponent }
                 ]),
                 http_1.HttpModule,
                 forms_1.FormsModule,
@@ -52,7 +54,8 @@ var AppModule = (function () {
                 login_component_1.LoginComponent,
                 mainLandingPage_component_1.MainComponent,
                 accountForgotPassword_component_1.AccountForgotPasswordFormComponent,
-                accountResetPassword_component_1.AccountResetPasswordFormComponent],
+                accountResetPassword_component_1.AccountResetPasswordFormComponent,
+                accountResetExpired_component_1.AccountResetExpiredComponent],
             bootstrap: [app_component_1.AppComponent, header_component_1.HeaderComponent],
             providers: [authService_service_1.AuthService, localStorageService_service_1.LocalStorageService, authGuard_1.AuthAccessGuard, { provide: common_1.LocationStrategy, useClass: common_1.HashLocationStrategy }]
         }), 

@@ -429,7 +429,8 @@ namespace WebApp.Controllers
                     UserId = user.Id,
                     ExpiryDate = expiryDate
                 };
-                var passwordExpiryRepo = new GenericRepository<PasswordExpiryEntity>();
+                var dbContext = new DBContext();
+                var passwordExpiryRepo = new GenericRepository<PasswordExpiryEntity>(dbContext);
                 passwordExpiryRepo.Insert(passwordExpiry);
 
                 var emailHelper = new EmailHelper();
@@ -467,7 +468,53 @@ namespace WebApp.Controllers
         {
             return code == null ? View("Error") : View();
         }
-      
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult CheckResetExpiry(string username)
+        {
+            var nowDate = DateTime.UtcNow;
+            var dbContext = new DBContext();
+            var passwordExpiryRepo = new GenericRepository<PasswordExpiryEntity>(dbContext);
+
+            var checkExpiry =  passwordExpiryRepo.Get(i => i.UserId == username).LastOrDefault();
+
+            if (checkExpiry == null)
+            {
+                var messageError = new MessageResult<string>
+                {
+                    isError = true,
+                    Result = "",
+                    Message = "Invalid Request.",
+                    ResultList = null
+                };
+                return Json(messageError, JsonRequestBehavior.AllowGet);
+            }
+
+            if (nowDate <= checkExpiry.ExpiryDate)
+            {
+                var message = new MessageResult<string>
+                {
+                    isError = false,
+                    Result = "",
+                    Message = "Valid Request.",
+                    ResultList = null
+                };
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var messageExpired = new MessageResult<string>
+                {
+                    isError = true,
+                    Result = "",
+                    Message = "Expired Request.",
+                    ResultList = null
+                };
+                return Json(messageExpired, JsonRequestBehavior.AllowGet);
+            }
+            
+        }
         //
         // POST: /Account/ResetPassword
         [HttpPost]

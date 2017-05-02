@@ -112,6 +112,21 @@ export class AuthService {
             .do(data => console.log('All: ' + JSON.stringify(data)))
             .catch(this.handleError);
     }
+    checkResetExpiry(username: string): Observable<IMessageResult> {
+        var postedData = {
+            "__RequestVerificationToken": this.antiForgeryToken.value,
+            "username": username
+        };
+        let headers = new Headers({
+            'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest'
+        });
+        let options = new RequestOptions({ headers: headers });
+        let params: URLSearchParams = this.serialize(postedData);
+        return this._http.post(this.baseUrl + "CheckResetExpiry", params, options)
+            .map((response: Response) => <IMessageResult>response.json())
+            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
     registerUser(email:string, role:string): Observable<IMessageResult> {
         var postedData = {
             "__RequestVerificationToken": this.antiForgeryToken.value,
