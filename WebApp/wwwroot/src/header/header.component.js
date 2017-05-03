@@ -25,6 +25,8 @@ var HeaderComponent = (function () {
         };
         //Roles
         this.isAdmin = false;
+        this.isSecretary = false;
+        this.isSalesManager = false;
     }
     HeaderComponent.prototype.logOut = function () {
         var _this = this;
@@ -58,6 +60,12 @@ var HeaderComponent = (function () {
                     _this.rolesOfUser = roles;
                     if (_this.rolesOfUser.ResultList.some(function (x) { return x == "Admin"; })) {
                         _this.isAdmin = true;
+                    }
+                    if (_this.rolesOfUser.ResultList.some(function (x) { return x == "Secreatry"; })) {
+                        _this.isSecretary = true;
+                    }
+                    if (_this.rolesOfUser.ResultList.some(function (x) { return x == "Sales Manager"; })) {
+                        _this.isSalesManager = true;
                     }
                 }, function (error) { return _this.errorMessage = error; });
                 _this._router.navigate(['/home']);

@@ -100,6 +100,18 @@
     <Compile Include="Migrations\201705010944039_AddedPasswordExpiryTable.Designer.cs">
       <DependentUpon>201705010944039_AddedPasswordExpiryTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705031257427_AddedSOSTableDB.cs" />
+    <Compile Include="Migrations\201705031257427_AddedSOSTableDB.Designer.cs">
+      <DependentUpon>201705031257427_AddedSOSTableDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705031312057_AddedSOSConnectorTable.cs" />
+    <Compile Include="Migrations\201705031312057_AddedSOSConnectorTable.Designer.cs">
+      <DependentUpon>201705031312057_AddedSOSConnectorTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705031325042_AddedFix.cs" />
+    <Compile Include="Migrations\201705031325042_AddedFix.Designer.cs">
+      <DependentUpon>201705031325042_AddedFix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -149,6 +161,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705010944039_AddedPasswordExpiryTable.resx">
       <DependentUpon>201705010944039_AddedPasswordExpiryTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705031257427_AddedSOSTableDB.resx">
+      <DependentUpon>201705031257427_AddedSOSTableDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705031312057_AddedSOSConnectorTable.resx">
+      <DependentUpon>201705031312057_AddedSOSConnectorTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705031325042_AddedFix.resx">
+      <DependentUpon>201705031325042_AddedFix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

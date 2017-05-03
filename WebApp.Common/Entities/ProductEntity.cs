@@ -19,5 +19,6 @@ namespace WebApp.Common.Entities
         [ForeignKey("ProductCategoryId")]
         public virtual ProductCategoryEntity ProductCategory { get; set; }
         public virtual ICollection<CompetitorPricesEntity> CompetitorPrices { get; set; }
+        public virtual ICollection<SOSProductEntity> SOSOrders { get; set; }
     }
 }

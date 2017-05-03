@@ -36,5 +36,7 @@ namespace WebApp.Common.Models
         public DateTime? Modified_Date { get; set; }
         public bool IsDeleted { get; set; }
         public List<CompetitorDiscountSchemesModel> CompetitorDiscountSchemes { get; set; }
+        public List<SOSModel> SalesOrderSlips { get; set; }
+        public List<SOSCustomModel> CustomOrders { get; set; }
     }
 }

@@ -48,6 +48,9 @@
     <Compile Include="Entities\PasswordExpiryEntity.cs" />
     <Compile Include="Entities\ProductCategoryEntity.cs" />
     <Compile Include="Entities\ProductEntity.cs" />
+    <Compile Include="Entities\SOSCustomEntity.cs" />
+    <Compile Include="Entities\SOSEntity.cs" />
+    <Compile Include="Entities\SOSProductEntity.cs" />
     <Compile Include="Models\ClientFormModel.cs" />
     <Compile Include="Models\ClientModel.cs" />
     <Compile Include="Models\CompetitorDiscountSchemesModel.cs" />
@@ -57,6 +60,9 @@
     <Compile Include="Models\ProductCategoryModel.cs" />
     <Compile Include="Models\ProductFormModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\SOSCustomModel.cs" />
+    <Compile Include="Models\SOSModel.cs" />
+    <Compile Include="Models\SOSProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -20,6 +20,8 @@ export class HeaderComponent {
 
     //Roles
     isAdmin: boolean = false;
+    isSecretary: boolean = false;
+    isSalesManager: boolean = false;
 
     constructor(private _authService: AuthService, private _localStorageService: LocalStorageService, private _router: Router) {
     }
@@ -60,9 +62,16 @@ export class HeaderComponent {
                 this._authService.getRolesOfUser()
                     .subscribe(roles => {
                         this.rolesOfUser = roles;
+                        
                         if (this.rolesOfUser.ResultList.some(x => x == "Admin"))
                         {
                             this.isAdmin = true;
+                        }
+                        if (this.rolesOfUser.ResultList.some(x => x == "Secreatry")) {
+                            this.isSecretary = true;
+                        }
+                        if (this.rolesOfUser.ResultList.some(x => x == "Sales Manager")) {
+                            this.isSalesManager = true;
                         }
                     },
                     error => this.errorMessage = <any>error);

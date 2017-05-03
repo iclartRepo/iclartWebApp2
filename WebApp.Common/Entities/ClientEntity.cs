@@ -38,6 +38,7 @@ namespace WebApp.Common.Entities
         public bool IsDeleted { get; set; }
 
         public virtual ICollection<CompetitorDiscountSchemesEntity> CompetitorDiscountSchemes { get; set; }
-
+        public virtual ICollection<SOSEntity> SalesOrderSlips { get; set; }
+        public virtual ICollection<SOSCustomEntity> CustomOrders { get; set; }
     }
 }

@@ -22,6 +22,9 @@ namespace WebApp.DAL
         public DbSet<ProductEntity> Products { get; set; }
         public DbSet<CompetitorPricesEntity> CompetitorPrices { get; set; }
         public DbSet<PasswordExpiryEntity> PasswordExpiry { get; set; }
+        public DbSet<SOSEntity> SalesOrderSlips { get; set; }
+        public DbSet<SOSProductEntity> SOSOrders { get; set; }
+        public DbSet<SOSCustomEntity> SOSCustomOrders { get; set; }
     }
     public class IclartDBInitializer : CreateDatabaseIfNotExists<DBContext>
     {
