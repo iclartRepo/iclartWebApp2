@@ -15,6 +15,7 @@ namespace WebApp.Common.Entities
         public int Quantity { get; set; }
         public double Price { get; set; }
         public int QuantityDelivered { get; set; }
+        public bool Discarded { get; set; }
         [ForeignKey("SOSId")]
         public SOSEntity SalesOrderSlip { get; set; }
         [ForeignKey("ProductId")]

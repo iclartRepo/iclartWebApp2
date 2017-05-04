@@ -15,6 +15,9 @@ namespace WebApp.Common.Models
         public bool Status { get; set; }
         public bool Pickup { get; set; }
         public bool Exported { get; set; }
+        public double TotalAmount { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime ModifiedDate { get; set; }
         public ClientModel Client { get; set; }
         public List<SOSProductModel> Orders { get; set; }
     }

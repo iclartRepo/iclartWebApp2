@@ -211,6 +211,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SOSController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -319,6 +320,7 @@
     <Content Include="wwwroot\src\productLandingPage\productForm\productForm.component.html" />
     <Content Include="wwwroot\src\productLandingPage\productList\productList.component.html" />
     <Content Include="wwwroot\src\productLandingPage\viewProduct\viewProduct.component.html" />
+    <Content Include="wwwroot\src\sosLandingPage\sosList\sosList.component.html" />
     <Content Include="wwwroot\styles\bootstrap.min.css" />
     <Content Include="wwwroot\styles\font-awesome.css" />
     <Content Include="wwwroot\styles\fonts.css" />
@@ -354,12 +356,14 @@
     <Content Include="wwwroot\src\accountManagement\accountForgotPassword\accountForgotPassword.component.scss" />
     <Content Include="wwwroot\src\accountManagement\accountResetPassword\accountResetPassword.component.scss" />
     <Content Include="wwwroot\src\accountManagement\accountResetExpired\accountResetExpired.component.scss" />
+    <Content Include="wwwroot\src\sosLandingPage\sosList\sosList.component.scss" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Client\" />
     <Folder Include="Views\Competitor\" />
     <Folder Include="Views\Products\" />
+    <Folder Include="Views\SOS\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -405,6 +409,9 @@
     <TypeScriptCompile Include="wwwroot\src\productLandingPage\viewProduct\viewProduct.component.ts" />
     <TypeScriptCompile Include="wwwroot\src\routeGuards\authGuard.ts" />
     <TypeScriptCompile Include="wwwroot\src\shared\shared.module.ts" />
+    <TypeScriptCompile Include="wwwroot\src\sosLandingPage\sos.module.ts" />
+    <TypeScriptCompile Include="wwwroot\src\sosLandingPage\sos.service.ts" />
+    <TypeScriptCompile Include="wwwroot\src\sosLandingPage\sosList\sosList.component.ts" />
     <TypeScriptCompile Include="wwwroot\src\universal\localStorageService.service.ts" />
   </ItemGroup>
   <ItemGroup>

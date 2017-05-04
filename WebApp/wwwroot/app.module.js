@@ -27,6 +27,7 @@ var client_module_1 = require('./src/clientLandingPage/client.module');
 var admin_module_1 = require('./src/adminLandingPage/admin.module');
 var product_module_1 = require('./src/productLandingPage/product.module');
 var account_module_1 = require('./src/accountManagement/account.module');
+var sos_module_1 = require('./src/sosLandingPage/sos.module');
 var authService_service_1 = require('./src/accountServices/authService.service');
 var localStorageService_service_1 = require('./src/universal/localStorageService.service');
 var authGuard_1 = require('./src/routeGuards/authGuard');
@@ -48,7 +49,8 @@ var AppModule = (function () {
                 client_module_1.ClientModule,
                 admin_module_1.AdminModule,
                 product_module_1.ProductModule,
-                account_module_1.AccountManagementModule],
+                account_module_1.AccountManagementModule,
+                sos_module_1.SOSModule],
             declarations: [app_component_1.AppComponent,
                 header_component_1.HeaderComponent,
                 login_component_1.LoginComponent,

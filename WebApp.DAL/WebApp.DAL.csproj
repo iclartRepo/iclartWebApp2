@@ -112,6 +112,18 @@
     <Compile Include="Migrations\201705031325042_AddedFix.Designer.cs">
       <DependentUpon>201705031325042_AddedFix.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705041237480_UpdatedSOSTables.cs" />
+    <Compile Include="Migrations\201705041237480_UpdatedSOSTables.Designer.cs">
+      <DependentUpon>201705041237480_UpdatedSOSTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705041321251_UpdatedSOSTableDates.cs" />
+    <Compile Include="Migrations\201705041321251_UpdatedSOSTableDates.Designer.cs">
+      <DependentUpon>201705041321251_UpdatedSOSTableDates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705041350368_AddedDiscardedandTotalAmountinSOSTables.cs" />
+    <Compile Include="Migrations\201705041350368_AddedDiscardedandTotalAmountinSOSTables.Designer.cs">
+      <DependentUpon>201705041350368_AddedDiscardedandTotalAmountinSOSTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -170,6 +182,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705031325042_AddedFix.resx">
       <DependentUpon>201705031325042_AddedFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705041237480_UpdatedSOSTables.resx">
+      <DependentUpon>201705041237480_UpdatedSOSTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705041321251_UpdatedSOSTableDates.resx">
+      <DependentUpon>201705041321251_UpdatedSOSTableDates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705041350368_AddedDiscardedandTotalAmountinSOSTables.resx">
+      <DependentUpon>201705041350368_AddedDiscardedandTotalAmountinSOSTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -16,6 +16,9 @@ namespace WebApp.Common.Entities
         public bool Status { get; set; }
         public bool Pickup { get; set; }
         public bool Exported { get; set; }
+        public double TotalAmount { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
         [ForeignKey("ClientId")]
         public ClientEntity Client { get; set; }
         public virtual ICollection<SOSProductEntity> Orders { get; set; }

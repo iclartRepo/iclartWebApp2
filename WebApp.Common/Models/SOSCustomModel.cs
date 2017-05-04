@@ -10,13 +10,12 @@ namespace WebApp.Common.Models
     {
         public int Id { get; set; }
         public int SOSId { get; set; }
-        public int ClientId { get; set; }
         public string ItemDescription { get; set; }
         public int Quantity { get; set; }
         public string Unit { get; set; }
         public double Price { get; set; }
         public int QuantityDelivered { get; set; }
+        public bool Discarded { get; set; }
         public SOSModel SalesOrderSlip { get; set; }
-        public ClientModel Client { get; set; }
     }
 }
