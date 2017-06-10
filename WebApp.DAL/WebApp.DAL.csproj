@@ -124,6 +124,10 @@
     <Compile Include="Migrations\201705041350368_AddedDiscardedandTotalAmountinSOSTables.Designer.cs">
       <DependentUpon>201705041350368_AddedDiscardedandTotalAmountinSOSTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706051353545_AdjustedSOSTable.cs" />
+    <Compile Include="Migrations\201706051353545_AdjustedSOSTable.Designer.cs">
+      <DependentUpon>201706051353545_AdjustedSOSTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -191,6 +195,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705041350368_AddedDiscardedandTotalAmountinSOSTables.resx">
       <DependentUpon>201705041350368_AddedDiscardedandTotalAmountinSOSTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706051353545_AdjustedSOSTable.resx">
+      <DependentUpon>201706051353545_AdjustedSOSTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

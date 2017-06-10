@@ -62,7 +62,7 @@ namespace WebApp.Controllers
                 {
                     var productRepository = new GenericRepository<ProductEntity>(context);
 
-                    var productEntities = productRepository.Get(i => i.IsDeleted == false).OrderBy(i => i.ProductCategory.Name).ThenBy(i => i.Name).Select(x => new ProductModel { Id = x.Id, Name = x.Name, ProductCategory = new ProductCategoryModel { Name = x.ProductCategory.Name } }).ToList();
+                    var productEntities = productRepository.Get(i => i.IsDeleted == false).OrderBy(i => i.ProductCategory.Name).ThenBy(i => i.Name).Select(x => new ProductModel { Id = x.Id, Name = x.Name, ProductCategory = new ProductCategoryModel { Name = x.ProductCategory.Name, Id = x.ProductCategory.Id } }).ToList();
 
              
 

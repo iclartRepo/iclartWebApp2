@@ -67,7 +67,7 @@ export class HeaderComponent {
                         {
                             this.isAdmin = true;
                         }
-                        if (this.rolesOfUser.ResultList.some(x => x == "Secreatry")) {
+                        if (this.rolesOfUser.ResultList.some(x => x == "Secretary")) {
                             this.isSecretary = true;
                         }
                         if (this.rolesOfUser.ResultList.some(x => x == "Sales Manager")) {

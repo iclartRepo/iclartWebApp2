@@ -20,5 +20,6 @@ namespace WebApp.Common.Models
         public DateTime ModifiedDate { get; set; }
         public ClientModel Client { get; set; }
         public List<SOSProductModel> Orders { get; set; }
+        public List<SOSCustomModel> CustomOrders { get; set; }
     }
 }

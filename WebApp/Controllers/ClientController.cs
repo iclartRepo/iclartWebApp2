@@ -25,7 +25,7 @@ namespace WebApp.Controllers
                 {
                     var clientRepository = new GenericRepository<ClientEntity>(context);
 
-                    var clients = clientRepository.Get(i => i.IsDeleted == false).OrderBy(i => i.Name).Select(x => new ClientModel { Id = x.Id, Name = x.Name, Telephone_Number = x.Telephone_Number, Email = x.Email }).ToList();
+                    var clients = clientRepository.Get(i => i.IsDeleted == false).OrderBy(i => i.Name).Select(x => new ClientModel { Id = x.Id, Name = x.Name, Telephone_Number = x.Telephone_Number, Email = x.Email, Office_Address = x.Office_Address }).ToList();
 
                     var message = new MessageResult<ClientModel>
                     {

@@ -22,5 +22,6 @@ namespace WebApp.Common.Entities
         [ForeignKey("ClientId")]
         public ClientEntity Client { get; set; }
         public virtual ICollection<SOSProductEntity> Orders { get; set; }
+        public virtual ICollection<SOSCustomEntity> CustomOrders { get; set; }
     }
 }

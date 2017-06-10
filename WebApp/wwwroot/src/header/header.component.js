@@ -61,7 +61,7 @@ var HeaderComponent = (function () {
                     if (_this.rolesOfUser.ResultList.some(function (x) { return x == "Admin"; })) {
                         _this.isAdmin = true;
                     }
-                    if (_this.rolesOfUser.ResultList.some(function (x) { return x == "Secreatry"; })) {
+                    if (_this.rolesOfUser.ResultList.some(function (x) { return x == "Secretary"; })) {
                         _this.isSecretary = true;
                     }
                     if (_this.rolesOfUser.ResultList.some(function (x) { return x == "Sales Manager"; })) {

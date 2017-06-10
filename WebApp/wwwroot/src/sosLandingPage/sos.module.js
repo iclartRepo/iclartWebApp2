@@ -13,8 +13,11 @@ var router_1 = require('@angular/router');
 var shared_module_1 = require('../shared/shared.module');
 //Components
 var sosList_component_1 = require('./sosList/sosList.component');
+var sosForm_component_1 = require('./sosForm/sosForm.component');
 //Services
 var sos_service_1 = require('./sos.service');
+var clientService_service_1 = require('../clientLandingPage/clientService.service');
+var productService_service_1 = require('../productLandingPage/productService.service');
 var authGuard_1 = require('../routeGuards/authGuard');
 var SOSModule = (function () {
     function SOSModule() {
@@ -22,10 +25,11 @@ var SOSModule = (function () {
     SOSModule = __decorate([
         core_1.NgModule({
             imports: [router_1.RouterModule.forChild([
-                    { path: 'sos-list', component: sosList_component_1.SOSListComponent, canActivate: [authGuard_1.AuthAccessGuard] }
+                    { path: 'sos-list', component: sosList_component_1.SOSListComponent, canActivate: [authGuard_1.AuthAccessGuard] },
+                    { path: 'sos-form', component: sosForm_component_1.SOSFormComponent }
                 ]), shared_module_1.SharedModule],
-            declarations: [sosList_component_1.SOSListComponent],
-            providers: [sos_service_1.SosService, authGuard_1.AuthAccessGuard]
+            declarations: [sosList_component_1.SOSListComponent, sosForm_component_1.SOSFormComponent],
+            providers: [sos_service_1.SosService, clientService_service_1.ClientService, productService_service_1.ProductService, authGuard_1.AuthAccessGuard]
         }), 
         __metadata('design:paramtypes', [])
     ], SOSModule);

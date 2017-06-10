@@ -17,7 +17,7 @@ namespace WebApp.Common.Models
         public DateTime? ModifiedDate { get; set; }
         public ProductCategoryModel ProductCategory { get; set; }
         public List<CompetitorPricesModel> CompetitorPrices { get; set; }
-        public List<SOSProductModel> SOSOrders { get; set; }
+
 
     }
 }
