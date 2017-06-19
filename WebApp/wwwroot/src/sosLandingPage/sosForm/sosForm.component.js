@@ -109,6 +109,12 @@ var SOSFormComponent = (function () {
             }
         }
     };
+    SOSFormComponent.prototype.clearStandardProductFields = function () {
+        this.selectedProductCategory = null;
+        this.selectedProduct = null;
+        this.selectedUnit = null;
+        this.productPrice = null;
+    };
     SOSFormComponent.prototype.getListClients = function () {
         var _this = this;
         this._clientService.getClients()
@@ -139,6 +145,13 @@ var SOSFormComponent = (function () {
     };
     SOSFormComponent.prototype.onBack = function () {
         this._location.back();
+    };
+    SOSFormComponent.prototype.getBestStandardPrice = function () {
+        var _this = this;
+        this._productService.getPrice(this.selectedClient.Id, this.selectedProduct)
+            .subscribe(function (result) {
+            _this.productPrice = result;
+        }, function (error) { return _this.errorMessage = error; });
     };
     /* Initializer and Native Functions */
     SOSFormComponent.prototype.ngOnInit = function () {

@@ -20,6 +20,11 @@ export class ProductService {
             .map((response: Response) => <IMessageResult>response.json())
             .catch(this.handleError);
     }
+    getPrice(clientId: number, productId: number): Observable<number> {
+        return this._http.get(this.baseUrl + "GetPrice?clientId=" + clientId + "&productId=" + productId)
+            .map((response: Response) => <IMessageResult>response.json())
+            .catch(this.handleError);
+    }
     addProductCategory(name: string): Observable<IMessageResult> {
         return this._http.post(this.baseUrl + "AddProductCategory", { name: name })
             .map((response: Response) => <IMessageResult>response.json())

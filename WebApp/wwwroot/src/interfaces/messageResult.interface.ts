@@ -2,5 +2,5 @@
     isError: boolean,
     ResultList: any[],
     Result: any,
-    Message: string   
+    Message: string
 }

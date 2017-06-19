@@ -125,6 +125,7 @@ namespace WebApp.Controllers
                 return Json(message, JsonRequestBehavior.AllowGet);
             }
         }
+
         [HttpGet]
         public ActionResult FilterProducts(string name)
         {
@@ -161,6 +162,7 @@ namespace WebApp.Controllers
                 return Json(message, JsonRequestBehavior.AllowGet);
             }
         }
+
         [HttpGet]
         public ActionResult GetProduct(int id)
         {
@@ -184,6 +186,31 @@ namespace WebApp.Controllers
                     };
                     return Json(message, JsonRequestBehavior.AllowGet);
                 }
+
+            }
+            catch (Exception ex)
+            {
+                var message = new MessageResult<ProductModel>
+                {
+                    isError = true,
+                    ResultList = null,
+                    Message = "Some error occured. Please contact the administrator.",
+                    Result = null
+                };
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult GetPrice(int clientId, int productId)
+        {
+            try
+            {
+                var productBLL = new ProductBLL();
+
+                var leastPrice = productBLL.GetBestPrice(clientId, productId);
+
+                return Json(leastPrice, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception ex)

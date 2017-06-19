@@ -25,6 +25,11 @@ var ProductService = (function () {
             .map(function (response) { return response.json(); })
             .catch(this.handleError);
     };
+    ProductService.prototype.getPrice = function (clientId, productId) {
+        return this._http.get(this.baseUrl + "GetPrice?clientId=" + clientId + "&productId=" + productId)
+            .map(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
     ProductService.prototype.addProductCategory = function (name) {
         return this._http.post(this.baseUrl + "AddProductCategory", { name: name })
             .map(function (response) { return response.json(); })

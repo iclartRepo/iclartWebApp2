@@ -57,6 +57,7 @@ export class SOSFormComponent {
     sosDate: Date;
     pickup: boolean;
     remarks: string;
+    selectedProduct: any;
 
     /* Form Validations */
     sosForm: NgForm;
@@ -132,6 +133,13 @@ export class SOSFormComponent {
 
     }
 
+    clearStandardProductFields(): void {
+        this.selectedProductCategory = null;
+        this.selectedProduct = null;
+        this.selectedUnit = null;
+        this.productPrice = null;
+    }
+    
     getListClients(): void {
         this._clientService.getClients()
             .subscribe(peoples => this.resultClients = peoples,
@@ -164,6 +172,14 @@ export class SOSFormComponent {
     }
     onBack(): void {
         this._location.back();
+    }
+
+    getBestStandardPrice(): void {
+        this._productService.getPrice(this.selectedClient.Id, this.selectedProduct)
+            .subscribe(result => {
+                this.productPrice = result;
+            },
+            error => this.errorMessage = <any>error);
     }
 
     /* Initializer and Native Functions */

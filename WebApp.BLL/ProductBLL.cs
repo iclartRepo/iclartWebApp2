@@ -17,6 +17,7 @@ namespace WebApp.BLL
         private GenericRepository<ProductEntity> _productRepository;
         private GenericRepository<CompetitorEntity> _competitorRepository;
         private GenericRepository<CompetitorPricesEntity> _competitorPricesRepository;
+        private GenericRepository<ClientEntity> _clientRepository;
         private DBContext context;
 
         public ProductBLL()
@@ -26,6 +27,7 @@ namespace WebApp.BLL
             _productRepository = new GenericRepository<ProductEntity>(context);
             _competitorPricesRepository = new GenericRepository<CompetitorPricesEntity>(context);
             _competitorRepository = new GenericRepository<CompetitorEntity>(context);
+            _clientRepository = new GenericRepository<ClientEntity>(context);
         }
         #region Product Category
         public void AddProductCategory(string name)
@@ -153,6 +155,34 @@ namespace WebApp.BLL
                 productEntity.ModifiedDate = DateTime.Now;
                 _productRepository.SoftDelete(productEntity);
             }
+        }
+        public double GetBestPrice(int clientId, int productId)
+        {
+            var productEntity = _productRepository.Get(i => i.Id == productId).First();
+            var client = _clientRepository.Get(y => y.Id == clientId).FirstOrDefault();
+
+            var listOfValidCompetitors = productEntity.CompetitorPrices.Select(x => x.CompetitorId).ToList();
+
+            var listOfCompetitorDiscounts = client.CompetitorDiscountSchemes.Where(y => listOfValidCompetitors.Contains(y.CompetitorId)).ToList();
+
+            var leastPrice = productEntity.CompanyPrice * ((100 - client.Discount_Scheme) / 100);
+
+            for (int i = 0; i < listOfCompetitorDiscounts.Count; i++)
+            {
+                var discount = listOfCompetitorDiscounts[i];
+
+                var productPrice = productEntity.CompetitorPrices.FirstOrDefault(x => x.CompetitorId == discount.CompetitorId);
+
+                var discountedPrice = productPrice.Price * ((100 - discount.DiscountScheme) / 100);
+
+                if (discountedPrice < leastPrice)
+                {
+                    leastPrice = discountedPrice;
+                }
+            }
+
+            return Math.Round(leastPrice, 2);
+
         }
         #endregion
 
