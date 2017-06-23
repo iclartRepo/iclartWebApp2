@@ -61,6 +61,7 @@
     <Compile Include="Models\ProductFormModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\SOSCustomModel.cs" />
+    <Compile Include="Models\SOSFormModel.cs" />
     <Compile Include="Models\SOSModel.cs" />
     <Compile Include="Models\SOSProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
