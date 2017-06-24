@@ -122,15 +122,31 @@ export class SOSFormComponent {
 
     filterProducts(): void {
         this.productList = [];
+        var categoryName = "";
         for (let entry of this.resultProducts.ResultList)
-        {
+        {           
             if (entry.ProductCategory.Id == this.selectedProductCategory)
             {
+                categoryName = entry.ProductCategory.Name;
                 this.productList.push(entry);
             }
         }
-
-
+        if (categoryName == "Continuous Form")
+        {
+            this.selectedUnit = 'Box';
+        }
+        else if (categoryName == "Paper Bag")
+        {
+            this.selectedUnit = 'Bundle';
+        }
+        else if (categoryName == "POS Rolls")
+        {
+            this.selectedUnit = "Roll";
+        }
+        else
+        {
+            this.selectedUnit = "Roll";
+        }
     }
 
     clearStandardProductFields(): void {

@@ -102,11 +102,25 @@ var SOSFormComponent = (function () {
     //};
     SOSFormComponent.prototype.filterProducts = function () {
         this.productList = [];
+        var categoryName = "";
         for (var _i = 0, _a = this.resultProducts.ResultList; _i < _a.length; _i++) {
             var entry = _a[_i];
             if (entry.ProductCategory.Id == this.selectedProductCategory) {
+                categoryName = entry.ProductCategory.Name;
                 this.productList.push(entry);
             }
+        }
+        if (categoryName == "Continuous Form") {
+            this.selectedUnit = 'Box';
+        }
+        else if (categoryName == "Paper Bag") {
+            this.selectedUnit = 'Bundle';
+        }
+        else if (categoryName == "POS Rolls") {
+            this.selectedUnit = "Roll";
+        }
+        else {
+            this.selectedUnit = "Roll";
         }
     };
     SOSFormComponent.prototype.clearStandardProductFields = function () {

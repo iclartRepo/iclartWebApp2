@@ -1,4 +1,5 @@
-﻿using Nelibur.ObjectMapper;
+﻿using AutoMapper;
+using Nelibur.ObjectMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace WebApp.BLL
         private GenericRepository<SOSEntity> _repository;
         private GenericRepository<ProductEntity> _productRepository;
         private GenericRepository<ClientEntity> _clientRepository;
+        private GenericRepository<SOSProductEntity> _orderRepository;
+        private GenericRepository<SOSCustomEntity> _customOrderRepository;
         private DBContext context;
 
         public SosBLL()
@@ -23,6 +26,8 @@ namespace WebApp.BLL
             _repository = new GenericRepository<SOSEntity>(context);
             _productRepository = new GenericRepository<ProductEntity>(context);
             _clientRepository = new GenericRepository<ClientEntity>(context);
+            _orderRepository = new GenericRepository<SOSProductEntity>(context);
+            _customOrderRepository = new GenericRepository<SOSCustomEntity>(context);
         }
 
         public void AddSos(SOSFormModel model)
@@ -92,6 +97,86 @@ namespace WebApp.BLL
             sosEntity.Status = false;
             
             _repository.Insert(sosEntity);
+        }
+
+        public void UpdateSOS(SOSFormModel model) 
+        {
+            var sosEntity = _repository.Get(i => i.Id == model.Sos.Id).FirstOrDefault();
+
+            if (sosEntity == null)
+            {
+                throw new Exception("SOS not found.");
+            }
+            else
+            {
+                //Standard Orders
+                for (int i=0; i<sosEntity.Orders.Count; i++)
+                {
+                    var order = sosEntity.Orders.ToList()[i];
+                    sosEntity.Orders.Remove(order);
+                    _orderRepository.HardDelete(order);
+                }
+
+                //Custom Orders
+                for (int j = 0; j < sosEntity.CustomOrders.Count; j++)
+                {
+                    var order = sosEntity.CustomOrders.ToList()[j];
+                    sosEntity.CustomOrders.Remove(order);
+                    _customOrderRepository.HardDelete(order);
+                }
+
+                Mapper.Initialize(cfg => cfg.CreateMap<SOSModel, SOSEntity>().ForMember(x => x.CreatedDate, opt => opt.Ignore()).ForMember(x => x.Orders, opt => opt.Ignore()).ForMember(x => x.CustomOrders, opt => opt.Ignore()));
+                Mapper.Map(model.Sos, sosEntity);
+                sosEntity.ModifiedDate = DateTime.Now;
+
+                double total_amount = 0;
+
+                TinyMapper.Bind<SOSProductModel, SOSProductEntity>();
+                if (model.StandardOrders != null)
+                {
+                    for (int i = 0; i < model.StandardOrders.Count; i++)
+                    {
+                        var order = model.StandardOrders[i];
+                        var orderEntity = TinyMapper.Map<SOSProductEntity>(order);
+                        order.QuantityDelivered = 0;
+                        order.Discarded = false;
+
+                        total_amount += (orderEntity.Price * orderEntity.Quantity);
+
+                        var product = _productRepository.Get(y => y.Id == orderEntity.ProductId).FirstOrDefault();
+                        if (product == null)
+                        {
+                            throw new Exception("Product not found.");
+                        }
+                        else
+                        {
+                            orderEntity.Product = product;
+                        }
+                        orderEntity.SalesOrderSlip = sosEntity;
+                        sosEntity.Orders.Add(orderEntity);
+                    }
+                }
+
+                TinyMapper.Bind<SOSCustomModel, SOSCustomEntity>();
+                if (model.CustomOrders != null)
+                {
+                    for (int j = 0; j < model.CustomOrders.Count; j++)
+                    {
+                        var order = model.CustomOrders[j];
+                        var orderEntity = TinyMapper.Map<SOSCustomEntity>(order);
+                        orderEntity.QuantityDelivered = 0;
+                        orderEntity.Discarded = false;
+
+                        total_amount += (orderEntity.Price * orderEntity.Quantity);
+
+                        orderEntity.SalesOrderSlip = sosEntity;
+                        sosEntity.CustomOrders.Add(orderEntity);
+                    }
+                }
+                sosEntity.TotalAmount = total_amount;
+
+                _repository.Update(sosEntity);
+            }
         }
     }
 }
