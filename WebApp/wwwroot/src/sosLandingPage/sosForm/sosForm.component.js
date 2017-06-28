@@ -45,9 +45,13 @@ var SOSFormComponent = (function () {
         };
         this.productList = [];
         this.unitOptions = [];
+        this.pointerMarker = 0;
         this.selectedClient = {
-            Office_Address: ''
+            Office_Address: '',
+            Combine_Items: false
         };
+        this.productsView = [];
+        this.standardProducts = [];
     }
     //@ViewChild('sosForm') currentForm: NgForm;
     //ngAfterViewChecked() {
@@ -162,10 +166,53 @@ var SOSFormComponent = (function () {
     };
     SOSFormComponent.prototype.getBestStandardPrice = function () {
         var _this = this;
-        this._productService.getPrice(this.selectedClient.Id, this.selectedProduct)
+        this._productService.getPrice(this.selectedClient.Id, this.selectedProduct.Id)
             .subscribe(function (result) {
             _this.productPrice = result;
         }, function (error) { return _this.errorMessage = error; });
+    };
+    SOSFormComponent.prototype.addStandardProduct = function () {
+        this.pointerMarker += 1;
+        var standardProduct = {
+            "Id": this.pointerMarker,
+            "ProductId": this.selectedProduct.Id,
+            "Quantity": this.productQuantity,
+            "Price": this.productPrice
+        };
+        this.standardProducts.push(standardProduct);
+        var productView = {
+            "Id": this.pointerMarker,
+            "Quantity": this.productQuantity,
+            "ItemDescription": this.selectedProduct.Name,
+            "Price": this.productPrice,
+            "TotalPrice": this.productQuantity * this.productPrice,
+            "Custom": false
+        };
+        this.productsView.push(productView);
+    };
+    SOSFormComponent.prototype.addQuantity = function (id, custom) {
+        var searchResult = this.productsView.filter(function (item) { return item.Id == id; })[0];
+        searchResult.Quantity += 1;
+        searchResult.TotalPrice = searchResult.Quantity * searchResult.Price;
+        if (custom == false) {
+            var realProductSearch = this.standardProducts.filter(function (item) { return item.Id == id; })[0];
+            realProductSearch.Quantity += 1;
+        }
+    };
+    SOSFormComponent.prototype.subtractQuantity = function (id, custom) {
+        var searchResult = this.productsView.filter(function (item) { return item.Id == id; })[0];
+        searchResult.Quantity -= 1;
+        searchResult.TotalPrice = searchResult.Quantity * searchResult.Price;
+        if (custom == false) {
+            var realProductSearch = this.standardProducts.filter(function (item) { return item.Id == id; })[0];
+            realProductSearch.Quantity -= 1;
+        }
+    };
+    SOSFormComponent.prototype.removeProduct = function (id, custom) {
+        this.productsView = this.productsView.filter(function (item) { return item.Id !== id; });
+        if (custom == false) {
+            this.standardProducts = this.standardProducts.filter(function (item) { return item.Id != id; });
+        }
     };
     /* Initializer and Native Functions */
     SOSFormComponent.prototype.ngOnInit = function () {

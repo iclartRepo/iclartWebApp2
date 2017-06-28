@@ -44,20 +44,24 @@ export class SOSFormComponent {
 
     productList: any[] = [];
     unitOptions: any[] = [];
-
+    pointerMarker: number = 0;
     errorMessage: string;
     selectedClient: any = {
-        Office_Address : ''
+        Office_Address: '',
+        Combine_Items: false
     };
+    productsView: any[] = [];
     selectedProductCategory: any;
     selectedUnit: any;
     productPrice: any;
+    selectedProduct: any;
+    productQuantity: any;
 
     /* Form Object Values */
     sosDate: Date;
     pickup: boolean;
     remarks: string;
-    selectedProduct: any;
+    standardProducts: any[] = [];
 
     /* Form Validations */
     sosForm: NgForm;
@@ -191,11 +195,66 @@ export class SOSFormComponent {
     }
 
     getBestStandardPrice(): void {
-        this._productService.getPrice(this.selectedClient.Id, this.selectedProduct)
+        this._productService.getPrice(this.selectedClient.Id, this.selectedProduct.Id)
             .subscribe(result => {
                 this.productPrice = result;
             },
             error => this.errorMessage = <any>error);
+    }
+
+    addStandardProduct(): void {
+        this.pointerMarker += 1;
+        var standardProduct = {
+            "Id": this.pointerMarker,
+            "ProductId": this.selectedProduct.Id,
+            "Quantity": this.productQuantity,
+            "Price": this.productPrice
+        };
+        this.standardProducts.push(standardProduct);
+
+        var productView = {
+            "Id": this.pointerMarker,
+            "Quantity": this.productQuantity,
+            "ItemDescription": this.selectedProduct.Name,
+            "Price": this.productPrice,
+            "TotalPrice": this.productQuantity * this.productPrice,
+            "Custom": false
+        }
+
+        this.productsView.push(productView);
+    }
+
+    addQuantity(id: number, custom:boolean): void {
+        
+        let searchResult = this.productsView.filter(item => item.Id == id)[0];
+        searchResult.Quantity += 1;
+        searchResult.TotalPrice = searchResult.Quantity * searchResult.Price;
+
+        if (custom == false)
+        {
+            let realProductSearch = this.standardProducts.filter(item => item.Id == id)[0];
+            realProductSearch.Quantity += 1;
+        }
+    }
+
+    subtractQuantity(id: number, custom:boolean): void {
+        let searchResult = this.productsView.filter(item => item.Id == id)[0];
+        searchResult.Quantity -= 1;
+        searchResult.TotalPrice = searchResult.Quantity * searchResult.Price;
+
+        if (custom == false) {
+            let realProductSearch = this.standardProducts.filter(item => item.Id == id)[0];
+            realProductSearch.Quantity -= 1;
+        }
+    }
+
+    removeProduct(id: number, custom: boolean): void {
+        this.productsView = this.productsView.filter(item => item.Id !== id);
+
+        if (custom == false) {
+            this.standardProducts = this.standardProducts.filter(item => item.Id != id);
+        }
+
     }
 
     /* Initializer and Native Functions */
