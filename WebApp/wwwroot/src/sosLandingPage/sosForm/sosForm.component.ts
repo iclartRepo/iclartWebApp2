@@ -41,6 +41,12 @@ export class SOSFormComponent {
         ResultList: null,
         Message: ''
     };
+    resultOperation: IMessageResult = {
+        isError: false,
+        Result: null,
+        ResultList: null,
+        Message: ''
+    };
 
     productList: any[] = [];
     unitOptions: any[] = [];
@@ -58,10 +64,11 @@ export class SOSFormComponent {
     productQuantity: any;
 
     /* Form Object Values */
-    sosDate: Date;
-    pickup: boolean;
-    remarks: string;
+    sosDate: Date = new Date();
+    pickup: boolean = false;
+    remarks: string = "";
     standardProducts: any[] = [];
+    customProducts: any[] = [];
 
     /* Form Validations */
     sosForm: NgForm;
@@ -254,6 +261,36 @@ export class SOSFormComponent {
         if (custom == false) {
             this.standardProducts = this.standardProducts.filter(item => item.Id != id);
         }
+
+    }
+
+
+    //Saving and updating Functionalities
+    saveSos(): void {
+
+        var sosModel = {
+            "ClientId": this.selectedClient.Id,
+            "Sos_Date": this.sosDate,
+            "Remarks": this.remarks,
+            "Status": false,
+            "Pickup": this.pickup,
+            "Exported": false
+        };
+        var dataModel = {
+            "Sos": sosModel,
+            "StandardOrders": this.standardProducts,
+            "CustomOrders": this.customProducts
+        };
+
+        this._sosService.addSos(dataModel)
+            .subscribe(result => {
+                this.resultOperation = result;
+                if (this.resultOperation.isError == false)
+                {
+                    this._location.back();
+                }
+            },
+            error => this.errorMessage = <any>error);
 
     }
 

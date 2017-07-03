@@ -60,6 +60,7 @@ namespace WebApp.BLL
                     else
                     {
                         orderEntity.Product = product;
+                        product.SOSOrders.Add(orderEntity);
                     }
                     orderEntity.SalesOrderSlip = sosEntity;
                     sosEntity.Orders.Add(orderEntity);
@@ -92,10 +93,12 @@ namespace WebApp.BLL
             }
             else
             {
-                sosEntity.Client = client;
-            }         
-            sosEntity.Status = false;
-            
+                sosEntity.Status = false;
+                sosEntity.ModifiedDate = DateTime.Now;
+                sosEntity.ClientEntity = client;
+                client.SalesOrderSlips.Add(sosEntity);
+            }                
+           
             _repository.Insert(sosEntity);
         }
 

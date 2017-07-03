@@ -20,7 +20,7 @@ namespace WebApp.Common.Entities
         public DateTime CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
         [ForeignKey("ClientId")]
-        public ClientEntity Client { get; set; }
+        public virtual ClientEntity ClientEntity { get; set; }
         public virtual ICollection<SOSProductEntity> Orders { get; set; }
         public virtual ICollection<SOSCustomEntity> CustomOrders { get; set; }
     }

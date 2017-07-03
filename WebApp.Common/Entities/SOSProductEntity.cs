@@ -17,9 +17,9 @@ namespace WebApp.Common.Entities
         public int QuantityDelivered { get; set; }
         public bool Discarded { get; set; }
         [ForeignKey("SOSId")]
-        public SOSEntity SalesOrderSlip { get; set; }
+        public virtual SOSEntity SalesOrderSlip { get; set; }
         [ForeignKey("ProductId")]
-        public ProductEntity Product { get; set; }
+        public virtual ProductEntity Product { get; set; }
 
     }
 }

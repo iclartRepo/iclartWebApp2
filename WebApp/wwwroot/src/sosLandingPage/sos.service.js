@@ -25,6 +25,14 @@ var SosService = (function () {
             .map(function (response) { return response.json(); })
             .catch(this.handleError);
     };
+    SosService.prototype.addSos = function (sos) {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this._http.post(this.baseUrl + "AddSos", { model: sos }, options)
+            .map(function (response) { return response.json(); })
+            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
+            .catch(this.handleError);
+    };
     SosService.prototype.handleError = function (error) {
         // in a real world app, we may send the server to some remote logging infrastructure
         // instead of just logging it to the console

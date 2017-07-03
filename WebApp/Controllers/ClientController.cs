@@ -24,7 +24,6 @@ namespace WebApp.Controllers
                 using (var context = new DBContext())
                 {
                     var clientRepository = new GenericRepository<ClientEntity>(context);
-
                     var clients = clientRepository.Get(i => i.IsDeleted == false).OrderBy(i => i.Name).Select(x => new ClientModel { Id = x.Id, Name = x.Name, Telephone_Number = x.Telephone_Number, Email = x.Email, Office_Address = x.Office_Address, Combine_Items = x.Combine_Items }).ToList();
 
                     var message = new MessageResult<ClientModel>

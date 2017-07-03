@@ -43,6 +43,12 @@ var SOSFormComponent = (function () {
             ResultList: null,
             Message: ''
         };
+        this.resultOperation = {
+            isError: false,
+            Result: null,
+            ResultList: null,
+            Message: ''
+        };
         this.productList = [];
         this.unitOptions = [];
         this.pointerMarker = 0;
@@ -51,7 +57,12 @@ var SOSFormComponent = (function () {
             Combine_Items: false
         };
         this.productsView = [];
+        /* Form Object Values */
+        this.sosDate = new Date();
+        this.pickup = false;
+        this.remarks = "";
         this.standardProducts = [];
+        this.customProducts = [];
     }
     //@ViewChild('sosForm') currentForm: NgForm;
     //ngAfterViewChecked() {
@@ -213,6 +224,30 @@ var SOSFormComponent = (function () {
         if (custom == false) {
             this.standardProducts = this.standardProducts.filter(function (item) { return item.Id != id; });
         }
+    };
+    //Saving and updating Functionalities
+    SOSFormComponent.prototype.saveSos = function () {
+        var _this = this;
+        var sosModel = {
+            "ClientId": this.selectedClient.Id,
+            "Sos_Date": this.sosDate,
+            "Remarks": this.remarks,
+            "Status": false,
+            "Pickup": this.pickup,
+            "Exported": false
+        };
+        var dataModel = {
+            "Sos": sosModel,
+            "StandardOrders": this.standardProducts,
+            "CustomOrders": this.customProducts
+        };
+        this._sosService.addSos(dataModel)
+            .subscribe(function (result) {
+            _this.resultOperation = result;
+            if (_this.resultOperation.isError == false) {
+                _this._location.back();
+            }
+        }, function (error) { return _this.errorMessage = error; });
     };
     /* Initializer and Native Functions */
     SOSFormComponent.prototype.ngOnInit = function () {
