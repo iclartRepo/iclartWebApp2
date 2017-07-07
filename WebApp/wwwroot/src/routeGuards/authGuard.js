@@ -25,7 +25,7 @@ var AuthAccessGuard = (function () {
                 return true;
             }
             else {
-                _this.router.navigate([""]);
+                _this.router.navigate(['']);
                 return false;
             }
         });

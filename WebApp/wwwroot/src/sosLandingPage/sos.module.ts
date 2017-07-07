@@ -1,6 +1,6 @@
 ﻿import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 
 //Components
@@ -11,6 +11,7 @@ import { SOSFormComponent } from './sosForm/sosForm.component';
 import { SosService } from './sos.service';
 import { ClientService } from '../clientLandingPage/clientService.service';
 import { ProductService } from '../productLandingPage/productService.service';
+import { UtilitiesService } from '../utilities/utilities.service';
 
 import { AuthAccessGuard } from '../routeGuards/authGuard';
 
@@ -20,6 +21,6 @@ import { AuthAccessGuard } from '../routeGuards/authGuard';
         { path: 'sos-form', component: SOSFormComponent }
     ]), SharedModule],
     declarations: [SOSListComponent, SOSFormComponent],
-    providers: [SosService, ClientService, ProductService, AuthAccessGuard]
+    providers: [SosService, ClientService, ProductService, UtilitiesService, AuthAccessGuard, { provide: LocationStrategy, useClass: HashLocationStrategy }]
 })
 export class SOSModule { }

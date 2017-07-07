@@ -54,6 +54,8 @@ export class LoginComponent {
         this.formChanged();
     }
 
+    
+
     formChanged() {
         if (this.currentForm === this.loginForm) { return; }
         this.loginForm = this.currentForm;

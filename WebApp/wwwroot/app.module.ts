@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 /* Main Components */
 import { AppComponent }  from './src/app/app.component';
 import { HeaderComponent } from './src/header/header.component';
@@ -23,6 +23,8 @@ import { AuthService } from './src/accountServices/authService.service';
 import { LocalStorageService } from './src/universal/localStorageService.service';
 
 import { AuthAccessGuard } from './src/routeGuards/authGuard';
+
+
 
 @NgModule({
     imports: [BrowserModule,

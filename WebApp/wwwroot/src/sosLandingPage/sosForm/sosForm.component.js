@@ -13,12 +13,14 @@ var common_1 = require('@angular/common');
 var sos_service_1 = require('../sos.service');
 var clientService_service_1 = require('../../clientLandingPage/clientService.service');
 var productService_service_1 = require('../../productLandingPage/productService.service');
+var utilities_service_1 = require('../../utilities/utilities.service');
 var SOSFormComponent = (function () {
-    function SOSFormComponent(_sosService, _location, _clientService, _productService) {
+    function SOSFormComponent(_sosService, _location, _clientService, _productService, _utlitiesService) {
         this._sosService = _sosService;
         this._location = _location;
         this._clientService = _clientService;
         this._productService = _productService;
+        this._utlitiesService = _utlitiesService;
         this.result = {
             isError: false,
             Result: null,
@@ -58,7 +60,7 @@ var SOSFormComponent = (function () {
         };
         this.productsView = [];
         /* Form Object Values */
-        this.sosDate = new Date();
+        this.sosDate = this._utlitiesService.formatDate(new Date());
         this.pickup = false;
         this.remarks = "";
         this.standardProducts = [];
@@ -262,7 +264,7 @@ var SOSFormComponent = (function () {
             selector: 'web-sos-form',
             templateUrl: 'wwwroot/src/sosLandingPage/sosForm/sosForm.component.html'
         }), 
-        __metadata('design:paramtypes', [sos_service_1.SosService, common_1.Location, clientService_service_1.ClientService, productService_service_1.ProductService])
+        __metadata('design:paramtypes', [sos_service_1.SosService, common_1.Location, clientService_service_1.ClientService, productService_service_1.ProductService, utilities_service_1.UtilitiesService])
     ], SOSFormComponent);
     return SOSFormComponent;
 }());

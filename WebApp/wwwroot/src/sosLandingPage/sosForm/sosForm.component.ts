@@ -8,6 +8,7 @@ import { IMessageResult } from '../../interfaces/messageResult.interface';
 import { SosService } from '../sos.service';
 import { ClientService } from '../../clientLandingPage/clientService.service';
 import { ProductService } from '../../productLandingPage/productService.service';
+import { UtilitiesService } from '../../utilities/utilities.service';
 
 @Component({
     selector: 'web-sos-form',
@@ -15,10 +16,10 @@ import { ProductService } from '../../productLandingPage/productService.service'
 })
 export class SOSFormComponent {
 
-    constructor(private _sosService: SosService, private _location: Location, private _clientService: ClientService, private _productService: ProductService) { }
+    constructor(private _sosService: SosService, private _location: Location, private _clientService: ClientService, private _productService: ProductService, private _utlitiesService: UtilitiesService) { }
 
     result: IMessageResult = {
-        isError: false,
+        isError: false, 
         Result: null,
         ResultList: null,
         Message: ''
@@ -64,7 +65,7 @@ export class SOSFormComponent {
     productQuantity: any;
 
     /* Form Object Values */
-    sosDate: Date = new Date();
+    sosDate: string = this._utlitiesService.formatDate(new Date());
     pickup: boolean = false;
     remarks: string = "";
     standardProducts: any[] = [];

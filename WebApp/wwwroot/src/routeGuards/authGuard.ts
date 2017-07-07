@@ -17,7 +17,7 @@ export class AuthAccessGuard implements CanActivate {
                 }
                 else
                 {
-                    this.router.navigate([""]);
+                    this.router.navigate(['']);
                     return false;
                 }
            }); 
